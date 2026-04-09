@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CSG Design System — SenseCraft AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+/* ── Design tokens ─────────────────────────────────────── */
+:root {
+  --primary-50:#F5FCE8;--primary-100:#E8F8C8;--primary-200:#D4F394;
+  --primary-300:#BDED60;--primary-400:#A8E03C;--primary-450:#A3D830;
+  --primary-500:#8FC31F;--primary-600:#76A219;--primary-700:#5D8113;
+  --primary-800:#44600D;--primary-900:#2B3F08;
+  --secondary-50:#E6F1F3;--secondary-100:#CCE3E7;--secondary-200:#99C7CF;
+  --secondary-300:#66ABB7;--secondary-400:#338F9F;--secondary-450:#045E77;
+  --secondary-500:#003A4A;--secondary-600:#002E3B;--secondary-700:#00232C;
+  --secondary-800:#00171E;--secondary-900:#000C0F;
+  --neutral-50:#FAFAFA;--neutral-100:#F5F5F5;--neutral-200:#E5E5E5;
+  --neutral-300:#D4D4D4;--neutral-400:#A3A3A3;--neutral-500:#737373;
+  --neutral-600:#525252;--neutral-700:#404040;--neutral-800:#262626;
+  --neutral-900:#171717;--white:#FFFFFF;--black:#000000;
+  --success:#8FC31F;--success-light:#A8E03C;--success-dark:#76A219;
+  --warning:#FF9500;--warning-light:#FFB340;--warning-dark:#CC7700;
+  --error:#DC2626;--error-light:#EF4444;--error-dark:#B91C1C;
+  --info:#003A4A;--info-light:#338F9F;--info-dark:#002E3B;
+  --border-light:#F5F5F5;--border:#E5E5E5;--border-regular:#D9D9D9;
+  --border-medium:#D4D4D4;--border-dark:#A3A3A3;
+  --border-primary:#8FC31F;--border-secondary:#003A4A;
+  --border-success:#8FC31F;--border-warning:#FF9500;--border-error:#DC2626;
+  --radius-none:0;--radius-sm:4px;--radius-md:8px;--radius-lg:12px;
+  --radius-xl:16px;--radius-2xl:24px;--radius-full:9999px;
+  --shadow-2xl:0px 10px 24px -6px rgba(0,0,0,0.15);
+  --font-family-en:'Space Grotesk',ui-sans-serif,system-ui;
+  --font-family-cn:'Noto Sans SC',sans-serif;
+  --font-family-code:'Space Mono',ui-monospace,monospace;
+  --sidebar-w:260px;
+}
+
+/* ── Reset & base ──────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--font-family-en);
+  background:var(--white);
+  color:var(--neutral-700);
+  line-height:1.6;
+  display:flex;
+  min-height:100vh;
+}
+
+/* ── Sidebar ───────────────────────────────────────────── */
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;
+  width:var(--sidebar-w);
+  background:var(--neutral-50);
+  border-right:1px solid var(--border);
+  overflow-y:auto;
+  padding:0 0 2rem;
+  z-index:100;
+}
+.sidebar-header{
+  padding:1.5rem 1.25rem 1rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:0.5rem;
+}
+.sidebar-header h1{
+  font-size:0.875rem;font-weight:700;color:var(--secondary-500);
+  letter-spacing:0.05em;text-transform:uppercase;
+}
+.sidebar-header p{
+  font-size:0.75rem;color:var(--neutral-500);margin-top:2px;
+}
+.nav-link{
+  display:block;padding:0.3rem 1.25rem;
+  font-size:0.8125rem;color:var(--neutral-600);
+  text-decoration:none;border-left:2px solid transparent;
+  transition:color .15s,background .15s,border-color .15s;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.nav-link:hover{color:var(--neutral-900);background:var(--neutral-100);border-left-color:var(--border-medium)}
+.nav-link.nav-d2{font-weight:500;font-size:0.8125rem;color:var(--neutral-700);margin-top:0.25rem}
+.nav-link.nav-d3{padding-left:2rem;font-size:0.75rem}
+
+/* ── Main content ──────────────────────────────────────── */
+.main{
+  margin-left:var(--sidebar-w);
+  flex:1;
+  max-width:calc(100% - var(--sidebar-w));
+  padding:3rem 4rem 6rem;
+}
+.main > * + *{margin-top:1rem}
+
+h1{font-size:3rem;font-weight:800;letter-spacing:-0.03rem;color:var(--neutral-900);margin-top:0;line-height:1.1}
+h2.section-heading{
+  font-size:1.875rem;font-weight:600;letter-spacing:-0.01rem;
+  color:var(--secondary-500);margin-top:3rem;padding-top:3rem;
+  border-top:1px solid var(--border);
+}
+h3{font-size:1.375rem;font-weight:500;letter-spacing:-0.01rem;color:var(--neutral-900);margin-top:2rem}
+h4{font-size:1rem;font-weight:600;color:var(--neutral-800);margin-top:1.5rem}
+p{color:var(--neutral-700);font-size:0.9375rem;line-height:1.7}
+code{
+  font-family:var(--font-family-code);font-size:0.8125rem;
+  background:var(--neutral-100);color:var(--secondary-500);
+  padding:0.125rem 0.375rem;border-radius:var(--radius-sm);
+}
+pre{
+  background:var(--neutral-100);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:1rem;overflow-x:auto;
+  font-family:var(--font-family-code);font-size:0.8125rem;
+  color:var(--neutral-900);
+}
+pre code{background:none;padding:0;color:inherit}
+blockquote{
+  border-left:3px solid var(--primary-500);
+  padding:0.75rem 1rem;margin:1rem 0;
+  background:var(--primary-50);border-radius:0 var(--radius-md) var(--radius-md) 0;
+  color:var(--neutral-700);font-size:0.9rem;
+}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+ul,ol{padding-left:1.5rem;color:var(--neutral-700);font-size:0.9375rem}
+li{margin-top:0.25rem}
+strong{color:var(--neutral-900)}
+
+/* ── Tables ────────────────────────────────────────────── */
+.table-wrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:0.875rem}
+th{
+  text-align:left;padding:0.5rem 0.75rem;
+  background:var(--neutral-50);color:var(--neutral-600);
+  font-weight:600;font-size:0.8rem;letter-spacing:0.03em;text-transform:uppercase;
+  border-bottom:2px solid var(--border);
+}
+td{
+  padding:0.5rem 0.75rem;border-bottom:1px solid var(--border-light);
+  color:var(--neutral-700);vertical-align:top;line-height:1.5;
+}
+tr:hover td{background:var(--neutral-50)}
+
+/* ── Color swatches ────────────────────────────────────── */
+.swatch-grid{display:flex;flex-direction:column;gap:0.375rem;margin:1rem 0}
+.swatch-row{
+  display:grid;grid-template-columns:40px 220px 120px 1fr;
+  align-items:center;gap:0.75rem;padding:0.375rem 0;
+  border-bottom:1px solid var(--border-light);
+}
+.swatch{
+  width:36px;height:36px;border-radius:var(--radius-md);
+  border:1px solid var(--border-medium);flex-shrink:0;
+}
+.token-name{font-family:var(--font-family-code);font-size:0.8rem;color:var(--secondary-500);background:transparent;padding:0}
+.token-value{font-family:var(--font-family-code);font-size:0.8rem;color:var(--neutral-600)}
+.token-role{font-size:0.8rem;color:var(--neutral-500)}
+
+/* ── Typography specimens ──────────────────────────────── */
+.type-scale{display:flex;flex-direction:column;gap:1.5rem;margin:1.5rem 0}
+.type-specimen{border-bottom:1px solid var(--border-light);padding-bottom:1.25rem}
+.specimen-text{font-family:var(--font-family-en);color:var(--neutral-900);line-height:1.2;margin:0 0 0.5rem}
+.specimen-meta{display:flex;gap:1rem;flex-wrap:wrap}
+.specimen-meta code{font-size:0.75rem}
+.specimen-meta span{font-size:0.75rem;color:var(--neutral-500)}
+
+.type-hierarchy{display:flex;flex-direction:column;gap:1.25rem;margin:1.5rem 0}
+.hierarchy-row{display:flex;align-items:baseline;gap:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-light)}
+.hierarchy-specimen{flex:0 0 auto;max-width:55%;color:var(--neutral-900);line-height:1.15}
+.hierarchy-meta{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center}
+.hierarchy-meta code{font-size:0.75rem}
+.hierarchy-meta span{font-size:0.75rem;color:var(--neutral-500)}
+
+/* ── Component demos ───────────────────────────────────── */
+.component-demo{
+  background:var(--neutral-50);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:1.5rem;margin:1.25rem 0;
+  display:flex;align-items:center;justify-content:center;
+}
+.demo-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.demo-strip.demo-col{flex-direction:column;align-items:flex-start}
+
+/* Buttons */
+.demo-btn-primary{
+  height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
+  background:var(--primary-500);color:#fff;font-family:var(--font-family-en);
+  font-size:14px;font-weight:500;cursor:pointer;
+}
+.demo-btn-primary:hover{background:var(--primary-400)}
+.demo-btn-default{
+  height:36px;padding:0 16px;border-radius:var(--radius-md);
+  background:var(--neutral-50);border:1px solid var(--border-regular);
+  color:var(--neutral-700);font-family:var(--font-family-en);
+  font-size:14px;font-weight:500;cursor:pointer;
+}
+.demo-btn-default:hover{border-color:var(--border-dark)}
+.demo-btn-destructive{
+  height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
+  background:var(--error);color:#fff;font-family:var(--font-family-en);
+  font-size:14px;font-weight:500;cursor:pointer;
+}
+.demo-btn-ghost{
+  height:36px;padding:0 16px;border-radius:var(--radius-md);
+  background:transparent;border:1px solid var(--border-regular);
+  color:var(--neutral-700);font-family:var(--font-family-en);
+  font-size:14px;font-weight:500;cursor:pointer;
+}
+.demo-btn-link{
+  height:36px;padding:0 4px;border:none;background:transparent;
+  color:var(--primary-500);font-family:var(--font-family-en);
+  font-size:14px;font-weight:500;cursor:pointer;text-decoration:underline;
+}
+
+/* Text input */
+.demo-input{
+  height:42px;width:270px;background:var(--neutral-50);
+  border:1px solid var(--border-regular);border-radius:var(--radius-md);
+  padding:0 12px;font-family:var(--font-family-en);font-size:14px;
+  color:var(--neutral-700);outline:none;
+}
+.demo-input-focus{border-color:var(--primary-500);box-shadow:0 0 0 2px rgba(143,195,31,0.15)}
+.demo-input-error{border-color:var(--error)}
+
+/* Toggle */
+.demo-toggle{display:flex;align-items:center;gap:10px;cursor:pointer}
+.demo-track{
+  display:flex;align-items:center;width:52px;height:26px;
+  border-radius:var(--radius-full);padding:2px;transition:background .2s;
+}
+.demo-track-on{background:var(--primary-500)}
+.demo-track-off{background:var(--secondary-500)}
+.demo-thumb{
+  width:22px;height:22px;border-radius:50%;background:#fff;
+  margin-left:auto;transition:margin .2s;
+}
+.demo-thumb-off{margin-left:0;background:var(--neutral-500)}
+
+/* Checkbox */
+.demo-checkbox-row{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--neutral-700);cursor:pointer}
+.demo-check{
+  width:18px;height:18px;border-radius:4px;border:1px solid var(--border-medium);
+  display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;
+}
+.demo-check-on{background:var(--primary-500);border-color:var(--primary-500);color:#fff}
+
+/* Cards */
+.demo-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:20px;min-width:180px;max-width:220px;transition:border-color .2s;
+}
+.demo-card:hover{border-color:var(--primary-500)}
+.demo-card-featured{border-color:var(--primary-500)}
+.demo-badge-type{
+  font-size:11px;font-weight:500;color:var(--secondary-500);
+  background:var(--secondary-50);border:1px solid var(--secondary-100);
+  border-radius:var(--radius-full);padding:2px 8px;
+}
+
+/* Badges */
+.demo-badge{
+  font-size:12px;font-weight:500;border-radius:var(--radius-full);
+  padding:4px 10px;border:1px solid;
+  font-family:var(--font-family-en);
+}
+.demo-badge-running{color:var(--primary-500);border-color:var(--primary-500);background:rgba(143,195,31,0.1)}
+.demo-badge-warning{color:var(--warning);border-color:var(--warning);background:rgba(255,149,0,0.1)}
+.demo-badge-error{color:var(--error);border-color:var(--error);background:rgba(220,38,38,0.1)}
+.demo-badge-inactive{color:var(--neutral-400);border-color:var(--neutral-700);background:rgba(163,163,163,0.1)}
+.demo-badge-info{color:var(--info-light);border-color:var(--secondary-500);background:rgba(51,143,159,0.1)}
+
+/* Code block demo */
+.demo-code{
+  background:var(--neutral-100);border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:16px;font-family:var(--font-family-code);font-size:14px;
+  color:var(--neutral-900);line-height:1.6;
+}
+
+/* Popup demo */
+.demo-popup{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-2xl);width:360px;overflow:hidden;
+}
+.demo-popup-top{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--neutral-50);border-bottom:1px solid var(--border-regular);
+  height:36px;padding:4px;
+}
+.demo-close{
+  width:28px;height:28px;border:none;background:transparent;
+  cursor:pointer;border-radius:var(--radius-sm);font-size:12px;
+  color:var(--neutral-500);display:flex;align-items:center;justify-content:center;
+}
+.demo-close:hover{background:var(--neutral-100)}
+.demo-popup-content{padding:20px}
+.demo-popup-bottom{
+  padding:8px;display:flex;justify-content:flex-end;gap:8px;
+  background:var(--neutral-50);border-top:1px solid var(--border-light);
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media(max-width:900px){
+  .sidebar{display:none}
+  .main{margin-left:0;max-width:100%;padding:2rem 1.5rem 4rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <h1>CSG Design System</h1>
+    <p>SenseCraft AI</p>
+  </div>
+  <a href="#design-system-sensecraft-ai" class="nav-link nav-d1">Design System — SenseCraft AI</a>
+<a href="#1-visual-theme-atmosphere" class="nav-link nav-d2">1. Visual Theme &amp; Atmosphere</a>
+<a href="#2-color-palette-roles" class="nav-link nav-d2">2. Color Palette &amp; Roles</a>
+<a href="#primary-lime-green-action-status" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Primary (Lime Green — Action &amp; Status)</a>
+<a href="#secondary-deep-teal-accents-dark-text" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Secondary (Deep Teal — Accents &amp; Dark Text)</a>
+<a href="#neutral-pure-gray-surfaces-text" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Neutral (Pure Gray — Surfaces &amp; Text)</a>
+<a href="#semantic-colors" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Semantic Colors</a>
+<a href="#border-colors" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Border Colors</a>
+<a href="#semantic-surface-colors" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Semantic Surface Colors</a>
+<a href="#3-typography-rules" class="nav-link nav-d2">3. Typography Rules</a>
+<a href="#font-families" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Font Families</a>
+<a href="#font-weights" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Font Weights</a>
+<a href="#type-scale" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Type Scale</a>
+<a href="#type-hierarchy" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Type Hierarchy</a>
+<a href="#principles" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Principles</a>
+<a href="#4-component-stylings" class="nav-link nav-d2">4. Component Stylings</a>
+<a href="#41-text-button-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.1 Text Button (文字按钮)</a>
+<a href="#42-icon-button-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.2 Icon Button (图标按钮)</a>
+<a href="#43-text-input-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.3 Text Input (文字输入框)</a>
+<a href="#44-dropdown-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.4 Dropdown (下拉菜单)</a>
+<a href="#45-radio-button-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.5 Radio Button (单选框)</a>
+<a href="#46-toggle-switch-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.6 Toggle Switch (开关)</a>
+<a href="#47-checkbox-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.7 Checkbox (复选框)</a>
+<a href="#48-cards-containers" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.8 Cards &amp; Containers</a>
+<a href="#49-badges-status-indicators" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.9 Badges &amp; Status Indicators</a>
+<a href="#410-navigation-bar" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.10 Navigation Bar</a>
+<a href="#412-nav-button-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.12 Nav Button (导航按钮)</a>
+<a href="#413-nav-icon-button-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.13 Nav Icon Button (导航图标按钮)</a>
+<a href="#414-icons" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.14 Icons</a>
+<a href="#415-pop-up-" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.15 Pop-up (弹窗)</a>
+<a href="#411-code-blocks-terminal-output" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">4.11 Code Blocks / Terminal Output</a>
+<a href="#5-layout-principles" class="nav-link nav-d2">5. Layout Principles</a>
+<a href="#spacing-system" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Spacing System</a>
+<a href="#grid-container" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Grid &amp; Container</a>
+<a href="#border-radius-scale" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Border Radius Scale</a>
+<a href="#6-depth-elevation" class="nav-link nav-d2">6. Depth &amp; Elevation</a>
+<a href="#7-dos-and-donts" class="nav-link nav-d2">7. Do's and Don'ts</a>
+<a href="#do" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Do</a>
+<a href="#dont" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Don't</a>
+<a href="#8-responsive-behavior" class="nav-link nav-d2">8. Responsive Behavior</a>
+<a href="#breakpoints" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Breakpoints</a>
+<a href="#collapsing-strategy" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Collapsing Strategy</a>
+<a href="#9-agent-prompt-guide" class="nav-link nav-d2">9. Agent Prompt Guide</a>
+<a href="#quick-color-reference" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Quick Color Reference</a>
+<a href="#example-component-prompts" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Example Component Prompts</a>
+<a href="#iteration-guide" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Iteration Guide</a>
+
+</nav>
+
+<main class="main">
+  <h1 id="design-system-sensecraft-ai" class="section-heading">Design System — SenseCraft AI</h1>
+<h2 id="1-visual-theme-atmosphere" class="section-heading">1. Visual Theme &amp; Atmosphere</h2>
+<blockquote>**This design system defines the light mode theme only.** Dark mode is not currently in scope.</blockquote>
+<p>SenseCraft AI presents a clean, precise aesthetic on a light neutral foundation. The interface sits on white (<code>#FFFFFF</code>) and near-white (<code>#FAFAFA</code>) surfaces that keep content legible and professional without clinical coldness. The deep teal secondary palette (<code>#003A4A</code>) provides typographic weight and structural accents, while the lime-green primary (<code>#8FC31F</code>) acts as the activation signal — used selectively for CTAs, active states, and status indicators.</p>
+<p>The primary font is <strong>Space Grotesk</strong>, a geometric sans-serif with a technical edge and subtle character. <strong>Noto Sans SC</strong> serves all Chinese-language content at identical scale and weight. <strong>Space Mono</strong> handles all code, terminal output, and model identifiers.</p>
+<p>Surface hierarchy is built with neutral grays: <code>#FFFFFF</code> for cards and containers, <code>#FAFAFA</code> for recessed chrome (nav bars, input backgrounds, modal headers/footers), with <code>#E5E5E5</code>–<code>#D9D9D9</code> borders to separate them. Shadows are reserved exclusively for floating layers (dropdowns, modals).</p>
+<p><strong>Key Characteristics:</strong></p>
+<ul><li><strong>Light mode only</strong> — page background <code>#FFFFFF</code>, recessed chrome <code>#FAFAFA</code></li><li>Lime-green primary (<code>#8FC31F</code>) as the activation color — CTAs, active states, status</li><li>Deep teal secondary (<code>#003A4A</code>) for headings, structural accents, dark text elements</li><li>Space Grotesk for EN, Noto Sans SC for CN, Space Mono for code/terminal</li><li>Neutral gray scale (<code>#FAFAFA</code>–<code>#171717</code>) for surface and text hierarchy</li><li>Border-defined surfaces — <code>#E5E5E5</code>/<code>#D9D9D9</code> borders carry containment; shadows only for floating UI</li><li>Border radius system from <code>4px</code> (tight chrome) to <code>9999px</code> (tags/pills)</li><li>Semantic color set: green success, amber warning, red error, teal info</li><li><strong>All icons use the <a href="https://www.mingcute.com/">MingCute icon pack</a></strong> — no other icon library</li></ul>
+<hr/>
+<h2 id="2-color-palette-roles" class="section-heading">2. Color Palette &amp; Roles</h2>
+<h3 id="primary-lime-green-action-status">Primary (Lime Green — Action &amp; Status)</h3>
+<div class="swatch-grid">
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div></div><h3 id="secondary-deep-teal-accents-dark-text">Secondary (Deep Teal — Accents &amp; Dark Text)</h3>
+<div class="swatch-grid">
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div></div><h3 id="neutral-pure-gray-surfaces-text">Neutral (Pure Gray — Surfaces &amp; Text)</h3>
+<div class="swatch-grid">
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div></div><h3 id="semantic-colors">Semantic Colors</h3>
+<div class="swatch-grid">
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div></div><h3 id="border-colors">Border Colors</h3>
+<div class="swatch-grid">
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div></div><h3 id="semantic-surface-colors">Semantic Surface Colors</h3>
+<div class="swatch-grid">
+      <div class="swatch-row">
+        <div class="swatch" style="background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);" title="no color"></div>
+        <code class="token-name">[object Object]</code>
+        <span class="token-value">[object Object]</span>
+        <span class="token-role">[object Object]</span>
+      </div></div><hr/>
+<h2 id="3-typography-rules" class="section-heading">3. Typography Rules</h2>
+<h3 id="font-families">Font Families</h3>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h3 id="font-weights">Font Weights</h3>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h3 id="type-scale">Type Scale</h3>
+<div class="type-scale">
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div>
+      <div class="type-specimen">
+        <p class="specimen-text" style="font-size:1rem;letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          The quick brown fox jumps
+        </p>
+        <div class="specimen-meta">
+          <code>[object Object]</code>
+          <span>[object Object]</span>
+          <span>letter-spacing: [object Object]</span>
+        </div>
+      </div></div><h3 id="type-hierarchy">Type Hierarchy</h3>
+<div class="type-hierarchy">
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-specimen" style="font-size:[object Object];font-weight:[object Object];letter-spacing:[object Object];font-family:'Space Grotesk',ui-sans-serif,system-ui">
+          [object Object]
+        </div>
+        <div class="hierarchy-meta">
+          <code>[object Object]</code>
+          <span>[object Object] ([object Object])</span>
+          <span>[object Object]</span>
+        </div>
+      </div></div><h3 id="principles">Principles</h3>
+<ul><li><strong>Space Grotesk at scale</strong>: Apply negative letter-spacing at heading sizes (<code>-0.01rem</code> at 22px, scaling to <code>-0.03rem</code> at 48px) for tight, confident editorial weight.</li><li><strong>Space Mono for machine identity</strong>: All model slugs, inference metrics, version strings, and terminal output use Space Mono — it signals precision and separates data from UI.</li><li><strong>Bilingual parity</strong>: Noto Sans SC mirrors Space Grotesk at identical sizes and weights. Never reduce CN text size to compensate for perceived density.</li><li><strong>Weight range is wide</strong>: Unlike warm lifestyle brands, SenseCraft AI uses the full range from <code>300</code> to <code>800</code> — heavier weights signal system output, lighter weights signal ambient info.</li></ul>
+<hr/>
+<h2 id="4-component-stylings" class="section-heading">4. Component Stylings</h2>
+<p>Components are sourced from the CSG Design System (Figma). All sizes are exact from the Figma spec.</p>
+<hr/>
+<h3 id="41-text-button-">4.1 Text Button (文字按钮)</h3>
+<h4 id="sizes">Sizes</h4>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="types-states">Types &amp; States</h4>
+<p>All button types share the same size system and support: <strong>Default</strong>, <strong>Hover</strong>, <strong>Pressed</strong>, <strong>Disabled</strong> states, and optional <strong>Icon Left</strong> / <strong>Icon Right</strong> layouts.</p>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="disabled-state-all-types">Disabled State (all types)</h4>
+<ul><li>Opacity: <code>0.4</code></li><li><code>cursor: not-allowed</code></li><li>No hover/pressed response</li></ul>
+<hr/>
+<h3 id="42-icon-button-">4.2 Icon Button (图标按钮)</h3>
+<h4 id="sizes">Sizes</h4>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="types-states">Types &amp; States</h4>
+<p>Supports same states as Text Button (Default / Hover / Pressed / Disabled).</p>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><ul><li>Radius: <code>--radius-md</code> (<code>8px</code>) for Default/Large; <code>--radius-sm</code> (<code>4px</code>) for Small</li><li>Icon color inherits from the type&#39;s text/icon token</li></ul>
+<hr/>
+<h3 id="43-text-input-">4.3 Text Input (文字输入框)</h3>
+<h4 id="dimensions">Dimensions</h4>
+<ul><li>Height: <code>42px</code> (all variants)</li><li>Standard width: <code>270px</code>; wide: <code>502px</code>; narrow: <code>162px</code>–<code>245px</code></li><li>Multiline (description): <code>502×114px</code></li></ul>
+<h4 id="variants">Variants</h4>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="states">States</h4>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="specs">Specs</h4>
+<ul><li>Background: <code>#FAFAFA</code></li><li>Radius: <code>--radius-md</code> (<code>8px</code>)</li><li>Padding: <code>0 12px</code> (horizontal)</li><li>Label: <code>14px</code> Space Grotesk <code>400</code>, above input, gap <code>8px</code></li><li>Character counter (e.g. <code>2/16</code>): <code>12px</code> <code>#737373</code>, trailing right</li><li>Gap between stacked inputs: <code>12px</code></li><li>Gap between label and input: <code>8px</code></li><li>Gap between button and input group: <code>24px</code></li><li>Use <code>Space Mono</code> for inputs accepting model names, slugs, IDs, or commands</li></ul>
+<hr/>
+<h3 id="44-dropdown-">4.4 Dropdown (下拉菜单)</h3>
+<h4 id="trigger-box">Trigger Box</h4>
+<ul><li>Height: <code>42px</code>, width: <code>270px</code> standard / <code>480px</code> wide (e.g. device picker)</li><li>Same visual style as Text Input (Default state)</li><li>Trailing chevron icon; optional leading icon variant</li></ul>
+<h4 id="states">States</h4>
+<p>Same as Text Input: Default / Placeholder / Focus / Error / Disabled</p>
+<h4 id="menu-items">Menu Items</h4>
+<ul><li>Height per item: <code>36px</code></li><li>Width: <code>197px</code> standard</li></ul>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="menu-container">Menu Container</h4>
+<ul><li>Background: <code>#FFFFFF</code></li><li>Border: <code>1px solid #E5E5E5</code></li><li>Radius: <code>--radius-md</code> (<code>8px</code>)</li><li>Shadow: <code>--shadow-md</code> (floating surface)</li><li>Padding: <code>4px</code> top/bottom</li></ul>
+<hr/>
+<h3 id="45-radio-button-">4.5 Radio Button (单选框)</h3>
+<ul><li>Container row: <code>344×41px</code></li><li>Radio control: <code>71×17px</code></li><li>Label: <code>14px</code> Space Grotesk <code>400</code>, <code>8px</code> gap from control</li></ul>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><hr/>
+<h3 id="46-toggle-switch-">4.6 Toggle Switch (开关)</h3>
+<ul><li>Container row: <code>472×50px</code></li><li>Toggle control: <code>103×26px</code></li><li>Track: <code>--radius-full</code> pill; thumb: circular</li></ul>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><hr/>
+<h3 id="47-checkbox-">4.7 Checkbox (复选框)</h3>
+<ul><li>Container row: <code>368×44px</code></li><li>Checkbox control: <code>77×20px</code></li><li>Label: <code>14px</code> Space Grotesk <code>400</code>, <code>8px</code> gap from box</li></ul>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><hr/>
+<h3 id="48-cards-containers">4.8 Cards &amp; Containers</h3>
+<p><strong>Standard Card</strong></p>
+<ul><li>Background: <code>#FFFFFF</code></li><li>Border: <code>1px solid #E5E5E5</code></li><li>Radius: <code>12px</code></li><li>Inner padding: <code>24px</code></li><li>Hover: border <code>1px solid #D4D4D4</code></li></ul>
+<p><strong>Model Card (Domain-Specific)</strong></p>
+<ul><li>Background: <code>#FFFFFF</code></li><li>Border: <code>1px solid #E5E5E5</code></li><li>Radius: <code>12px</code></li><li>Type badge: pill <code>9999px</code>, <code>#003A4A</code> text, <code>#E6F1F3</code> bg, <code>1px solid #CCE3E7</code> border</li><li>Title: <code>1.125rem</code> Space Grotesk <code>500</code>, <code>#171717</code></li><li>Meta (params, file size, format): <code>0.75rem</code> Space Mono <code>400</code>, <code>#737373</code></li><li>Hover: border <code>1px solid #8FC31F</code></li><li>Featured: border <code>1px solid #8FC31F</code></li></ul>
+<p><strong>Featured Card</strong></p>
+<ul><li>Radius: <code>16px</code></li><li>Background: <code>#FFFFFF</code></li><li>Border: <code>1px solid #8FC31F</code></li></ul>
+<hr/>
+<h3 id="49-badges-status-indicators">4.9 Badges &amp; Status Indicators</h3>
+<ul><li>Shape: pill (<code>9999px</code>), padding <code>4px 10px</code>, font <code>12px</code> Space Grotesk <code>500</code></li></ul>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><div class="component-demo demo-injected-49-badges-status-indicators" aria-label="Visual demo">
+    <div class="demo-strip">
+      <span class="demo-badge demo-badge-running">Running</span>
+      <span class="demo-badge demo-badge-warning">Warning</span>
+      <span class="demo-badge demo-badge-error">Error</span>
+      <span class="demo-badge demo-badge-inactive">Inactive</span>
+      <span class="demo-badge demo-badge-info">Info</span>
+    </div></div><hr/>
+<h3 id="410-navigation-bar">4.10 Navigation Bar</h3>
+<ul><li>Background: <code>#FFFFFF</code></li><li>Border-bottom: <code>1px solid #E5E5E5</code></li><li>Nav links: use <strong>Nav Button</strong> components (see 4.12 below)</li><li>Active link: Primary type Nav Button (<code>#8FC31F</code> text, <code>rgba(143,195,31,0.1)</code> bg)</li><li>CTA: Primary text button (Large, <code>42px</code>), right-aligned</li><li>Mobile: hamburger Nav Icon Button (Default size, <code>36×36px</code>); full-screen overlay on <code>#FFFFFF</code></li></ul>
+<hr/>
+<h3 id="412-nav-button-">4.12 Nav Button (导航按钮)</h3>
+<p>Navigation-specific text buttons used in sidebars, top nav, and breadcrumbs. Shares the same size system as Text Button but with an additional <strong>Center</strong> icon layout and intended for navigation-context interactions.</p>
+<h4 id="sizes">Sizes</h4>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><p>Width in styles matrix: <code>197px</code> (standard nav item width)</p>
+<h4 id="types-icon-positions-states">Types, Icon Positions &amp; States</h4>
+<p>All types support icon positions <strong>Left</strong>, <strong>Right</strong>, and <strong>Center</strong>, and all four states: <strong>Default</strong>, <strong>Hover</strong>, <strong>Pressed</strong>, <strong>Disabled</strong>.</p>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="icon-layout">Icon Layout</h4>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="disabled-state">Disabled State</h4>
+<ul><li>Opacity: <code>0.4</code>; <code>cursor: not-allowed</code>; no hover/pressed response</li></ul>
+<hr/>
+<h3 id="413-nav-icon-button-">4.13 Nav Icon Button (导航图标按钮)</h3>
+<p>Icon-only buttons used within navigation chrome — toolbars, collapsed sidebars, action rails, and mobile headers.</p>
+<h4 id="sizes">Sizes</h4>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h4 id="types-states">Types &amp; States</h4>
+<p>All types support: <strong>Default</strong>, <strong>Hover</strong>, <strong>Pressed</strong>, <strong>Disabled</strong>.</p>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><blockquote>**Nav Icon Button vs Icon Button (4.2):** Nav Icon Button is designed for navigation chrome contexts. It gains a **Secondary** type (for toolbar chrome) and drops the **Sensitive** type. Use Nav Icon Button for anything inside nav bars, sidebars, or toolbars; use Icon Button for actions within content areas.</blockquote>
+<hr/>
+<h3 id="414-icons">4.14 Icons</h3>
+<p><strong>Icon pack: <a href="https://www.mingcute.com/">MingCute</a> — exclusively.</strong></p>
+<p>All icons across the entire SenseCraft AI interface must come from the MingCute icon library. Do not use Heroicons, Lucide, Phosphor, or any other icon set.</p>
+<h4 id="usage-rules">Usage rules</h4>
+<ul><li>Import as React components via <code>@iconify/react</code> with the <code>mingcute:</code> prefix, or use MingCute&#39;s own React package</li><li>Size icons to match the button/context they appear in:</li></ul>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><ul><li>Icon color always inherits from the surrounding text/button token — never hard-code a hex on an icon</li><li><strong>Always use <code>*-line</code> (outline) variants by default.</strong> Only use <code>*-fill</code> when there is a strong semantic reason — e.g. a warning icon inside a destructive dialog, or an explicitly filled/selected state. When in doubt, use <code>-line</code>.</li><li>Common icons referenced in this design system:- `close-line` — dismiss, close pop-up
+- `warning-line` — inline validation error
+- `warning-fill` — destructive confirmation dialog</li></ul>
+<hr/>
+<h3 id="415-pop-up-">4.15 Pop-up (弹窗)</h3>
+<p>Pop-ups are modal dialogs that appear centered over the page. They are used for confirmations, destructive actions, and multi-step flows requiring focused user input.</p>
+<h4 id="container">Container</h4>
+<ul><li>Background: <code>white</code> (<code>#FFFFFF</code>) — pop-ups always use a <strong>light surface</strong>, regardless of page theme</li><li>Border: <code>1px solid #E5E5E5</code></li><li>Border radius: <code>12px</code> (<code>--round-corner/md</code>)</li><li>Shadow: <code>0px 10px 24px -6px rgba(0,0,0,0.15)</code> (Shadow/2XL)</li><li>Width: <code>422px</code> standard; scales to full-width on mobile</li><li>Overflow: <code>hidden</code> (clips children to radius)</li><li>Structure: <strong>Top Bar</strong> (optional) → <strong>Content</strong> → <strong>Bottom Bar</strong> (optional)</li></ul>
+<hr/>
+<h4 id="top-bar-">Top Bar (顶栏)</h4>
+<p>Two styles, both <code>h-[36px]</code>, full width, <code>p-[4px]</code>.</p>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><p><strong>Specs:</strong></p>
+<ul><li>Background: <code>#FAFAFA</code> (<code>--neutral-50</code>)</li><li>Border-bottom: <code>1px solid #D9D9D9</code> (<code>--border-regular</code>) — Style 1 only</li><li>Title: Space Grotesk Medium, <code>13px</code> (<code>--size-sm</code>), <code>#525252</code> (<code>--neutral-600</code>), <code>8px</code> horizontal padding</li><li>Close button (Style 1 only): Nav Icon Button Default (<code>28×28px</code>), <code>close-line</code> MingCute icon, <code>14×14px</code></li></ul>
+<hr/>
+<h4 id="content-area-">Content Area (弹窗内容)</h4>
+<ul><li>Padding: <code>24px</code></li><li>Gap between elements: <code>16px</code></li><li>Body text: Space Grotesk Regular, <code>13px</code>, <code>#000000</code> or <code>#404040</code>; mixed weight allowed (Regular for context, Medium for key phrases)</li></ul>
+<p><strong>Inline validation alert:</strong></p>
+<ul><li>Background: <code>#FFF1F1</code> (<code>--semantic-error-bg-light</code>)</li><li>Border: <code>1px solid #DC2626</code> (<code>--border-error</code>)</li><li>Border radius: <code>12px</code></li><li>Padding: <code>10px</code></li><li>Icon: <code>warning-line</code> MingCute, <code>20×20px</code></li><li>Text: Space Grotesk Regular, <code>12px</code>, <code>#DC2626</code></li></ul>
+<hr/>
+<h4 id="bottom-bar-">Bottom Bar (底栏)</h4>
+<p>Three styles, all full width, <code>p-[8px]</code>, button height <code>32px</code>, button radius <code>10px</code> (<code>--round-corner</code>).</p>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><p><strong>Button specs inside Bottom Bar:</strong></p>
+<ul><li>Cancel button: <code>bg-[#FAFAFA]</code>, <code>border 1px solid #D9D9D9</code>, text <code>#404040</code> (<code>--neutral-700</code>), Space Grotesk Medium <code>16px</code></li><li>Confirm button: <code>bg-[#8FC31F]</code> (<code>--primary-500</code>), text white, Space Grotesk Medium <code>16px</code></li><li>Delete button: <code>bg-[#DC2626]</code> (<code>--semantic-error</code>), text white, Space Grotesk Medium <code>16px</code></li><li>Disabled Confirm: <code>bg-[#D4D4D4]</code> (<code>--neutral-300</code>), text <code>#A3A3A3</code> (<code>--neutral-400</code>) — used when required fields are incomplete</li></ul>
+<hr/>
+<h4 id="use-cases">Use Cases</h4>
+<p><strong>Use Case 1 — Confirmation with form content (e.g. Publish)</strong></p>
+<pre><code>Top Bar Style 1 (title + close)
+  Content:
+    Body text (Regular + Medium mixed)
+    Checkbox with agreement terms
+    Inline validation alert (if errors present)
+Bottom Bar Style 1 (Cancel 72px | Confirm/Publish 72px, right-aligned)
+  → Confirm disabled (#D4D4D4) until checkbox checked</code></pre>
+<p><strong>Use Case 2 — Destructive confirmation (e.g. Delete)</strong></p>
+<pre><code>No Top Bar
+  Content (centered):
+    warning-fill icon 28×28px
+    Title: Space Grotesk Medium 13px, black
+    Subtitle: Space Grotesk Regular 13px, #DC2626
+Bottom Bar Style 2-1 (Cancel 128px | Delete 128px, centered)</code></pre>
+<p><strong>Use Case 3 — Single action confirmation (e.g. Continue)</strong></p>
+<pre><code>Top Bar Style 2 (centered title only)
+  Content area (custom)
+Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)</code></pre>
+<hr/>
+<h3 id="411-code-blocks-terminal-output">4.11 Code Blocks / Terminal Output</h3>
+<ul><li>Background: <code>#F5F5F5</code></li><li>Text: <code>#171717</code> (Space Mono <code>14px</code>)</li><li>Border: <code>1px solid #E5E5E5</code></li><li>Radius: <code>8px</code></li><li>Padding: <code>16px</code></li><li>Keyword/value accent: <code>#003A4A</code></li><li>Comment: <code>#A3A3A3</code></li></ul>
+<hr/>
+<h2 id="5-layout-principles" class="section-heading">5. Layout Principles</h2>
+<h3 id="spacing-system">Spacing System</h3>
+<ul><li>Base unit: <code>4px</code></li><li>Scale: <code>4px</code>, <code>8px</code>, <code>12px</code>, <code>16px</code>, <code>20px</code>, <code>24px</code>, <code>32px</code>, <code>40px</code>, <code>48px</code>, <code>64px</code>, <code>80px</code>, <code>96px</code>, <code>128px</code></li></ul>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h3 id="grid-container">Grid &amp; Container</h3>
+<ul><li>Max content width: <code>1280px</code> (centered)</li><li>Sidebar layouts: fixed <code>240px</code> nav + fluid content</li><li>Model card grid: 3–4 columns on desktop, 2 on tablet, 1 on mobile</li><li>Hero: full-width with <code>96px</code> vertical padding</li><li>Section padding: <code>64px</code> vertical desktop, <code>40px</code> mobile</li></ul>
+<h3 id="border-radius-scale">Border Radius Scale</h3>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><hr/>
+<h2 id="6-depth-elevation" class="section-heading">6. Depth &amp; Elevation</h2>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><p><strong>Confirmed shadow value from Figma:</strong> <code>--shadow-2xl: 0px 10px 24px -6px rgba(0,0,0,0.15)</code> — used for pop-up / modal containers.</p>
+<p><strong>Shadow Philosophy</strong>: On light surfaces, elevation is expressed first through background tone (<code>#FFFFFF</code> vs <code>#FAFAFA</code>) and border presence, then through shadow for floating layers. Reserve shadow for dropdowns and modals only — cards and panels use borders alone.</p>
+<hr/>
+<h2 id="7-dos-and-donts" class="section-heading">7. Do's and Don'ts</h2>
+<h3 id="do">Do</h3>
+<ul><li>Use MingCute icon pack exclusively — default to <code>*-line</code>; only use <code>*-fill</code> when semantically necessary</li><li>Use <code>#FFFFFF</code> for page and card surfaces; <code>#FAFAFA</code> for recessed chrome (inputs, nav bars, modal header/footer)</li><li>Use <code>#8FC31F</code> (primary-500) sparingly — it&#39;s the activation signal, not a fill color</li><li>Use Space Mono for all model identifiers, metrics, benchmark values, and code</li><li>Use border color changes (<code>--border-primary: #8FC31F</code>) to show selected/active card state</li><li>Apply negative letter-spacing at heading sizes (<code>-0.03rem</code> at <code>3rem</code>)</li><li>Use semantic color tokens (<code>--success</code>, <code>--error</code>, <code>--warning</code>) for all status indicators</li><li>Use <code>9999px</code> radius for tag pills and category filters only</li><li>Express elevation through surface tone (<code>#FFFFFF</code> vs <code>#FAFAFA</code>) before reaching for shadows</li></ul>
+<h3 id="dont">Don't</h3>
+<ul><li>Don&#39;t use Heroicons, Lucide, Phosphor, or any icon set other than MingCute</li><li>Don&#39;t use <code>*-fill</code> icons by default — only when <code>-line</code> is semantically insufficient</li><li>Don&#39;t use <code>#8FC31F</code> as a large fill or background color — buttons and active states only</li><li>Don&#39;t use dark secondary tones (<code>#003A4A</code>, <code>#00171E</code>, <code>#000C0F</code>) as surface backgrounds — these are text and accent colors in light mode</li><li>Don&#39;t use Space Grotesk for code, model names, or terminal output — Space Mono only</li><li>Don&#39;t mix CN and EN fonts in the same line — use one family per text run</li><li>Don&#39;t add shadows to cards or panels — borders (<code>#E5E5E5</code>) carry containment</li><li>Don&#39;t use <code>font-weight-extrabold</code> (<code>800</code>) for body or UI text — reserve it for hero numbers</li></ul>
+<hr/>
+<h2 id="8-responsive-behavior" class="section-heading">8. Responsive Behavior</h2>
+<h3 id="breakpoints">Breakpoints</h3>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h3 id="collapsing-strategy">Collapsing Strategy</h3>
+<ul><li>Model card grid: 4-col → 3-col → 2-col → 1-col</li><li>Hero heading: <code>3rem</code> → <code>2.25rem</code> → <code>1.875rem</code></li><li>Navigation: full horizontal → icon-only sidebar → hamburger overlay</li><li>Section spacing: <code>96px</code> → <code>64px</code> → <code>40px</code></li></ul>
+<hr/>
+<h2 id="9-agent-prompt-guide" class="section-heading">9. Agent Prompt Guide</h2>
+<h3 id="quick-color-reference">Quick Color Reference</h3>
+<div class="table-wrap"><table><thead><tr><th>[object Object]<th>[object Object]<th>[object Object]</tr></thead><tbody><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr><tr><td>[object Object]</td><td>[object Object]</td><td>[object Object]</td></tr></tbody></table></div><h3 id="example-component-prompts">Example Component Prompts</h3>
+<ul><li><strong>Model Card</strong>: &quot;White card (<code>#FFFFFF</code>), border <code>1px solid #E5E5E5</code>, radius <code>12px</code>. Title <code>1.125rem</code> Space Grotesk weight <code>500</code>, color <code>#171717</code>. Type badge: pill <code>9999px</code>, <code>#003A4A</code> text, <code>#E6F1F3</code> bg, <code>1px solid #CCE3E7</code> border. Metric row: <code>0.75rem</code> Space Mono <code>#737373</code>. Hover: border <code>1px solid #8FC31F</code>.&quot;</li><li><strong>Hero Section</strong>: &quot;Full-width section on <code>#FFFFFF</code>. Headline <code>3rem</code> Space Grotesk weight <code>800</code>, letter-spacing <code>-0.03rem</code>, color <code>#171717</code>. Subhead <code>1.125rem</code> weight <code>400</code>, color <code>#737373</code>. CTA: <code>#8FC31F</code> bg, <code>#FFFFFF</code> text, <code>8px</code> radius, <code>8px 20px</code> padding.&quot;</li><li><strong>Status Badge</strong>: &quot;Pill badge, <code>9999px</code> radius, <code>4px 10px</code> padding. Running: <code>#8FC31F</code> text + border, <code>rgba(143,195,31,0.1)</code> background. Error: <code>#DC2626</code> text + border, <code>rgba(220,38,38,0.1)</code> background.&quot;</li><li><strong>Code Block</strong>: &quot;<code>#F5F5F5</code> background, <code>1px solid #E5E5E5</code> border, <code>8px</code> radius, <code>16px</code> padding. Text <code>0.875rem</code> Space Mono <code>#171717</code>. Keyword accent: <code>#003A4A</code>.&quot;</li><li><strong>Navigation</strong>: &quot;Sticky nav on <code>#FFFFFF</code>, <code>1px solid #E5E5E5</code> bottom border. Logo left. Nav items use Nav Button Default type (<code>197×42px</code>): text <code>#737373</code>, transparent bg, hover text <code>#171717</code> + <code>#F5F5F5</code> bg. Active: Nav Button Primary type, text <code>#8FC31F</code>, bg <code>rgba(143,195,31,0.1)</code>. Right-aligned CTA: Primary text button Large (<code>42px</code>).&quot;</li><li><strong>Sidebar</strong>: &quot;Fixed sidebar on <code>#FAFAFA</code>, <code>1px solid #E5E5E5</code> right border. Nav items: Nav Button Default Left-icon (<code>197×42px</code>). Active: Nav Button Primary Left-icon, text <code>#8FC31F</code>, bg <code>rgba(143,195,31,0.1)</code>. Toolbar icons: Nav Icon Button Default or Secondary (<code>36×36px</code>).&quot;</li><li><strong>Confirm Pop-up</strong>: &quot;White pop-up (<code>422px</code>, <code>12px</code> radius, shadow <code>0px 10px 24px -6px rgba(0,0,0,0.15)</code>, border <code>1px solid #E5E5E5</code>). Top Bar Style 1 (<code>36px</code>, <code>#FAFAFA</code> bg, border-bottom <code>#D9D9D9</code>, title Space Grotesk Medium <code>13px</code> <code>#525252</code>, close MingCute <code>close-line</code> <code>28×28px</code>). Content <code>24px</code> padding. Bottom Bar Style 1 (<code>48px</code>, <code>justify-end</code>, Cancel <code>72px</code> <code>#FAFAFA</code>/border, Confirm <code>72px</code> <code>#8FC31F</code>/white, both <code>32px</code> height <code>10px</code> radius).&quot;</li><li><strong>Destructive Pop-up</strong>: &quot;White pop-up, no top bar. Content centered: MingCute <code>warning-line</code> <code>28×28px</code> <code>#DC2626</code>, title Medium <code>13px</code> <code>#171717</code>, subtitle Regular <code>13px</code> <code>#DC2626</code>. Bottom Bar Style 2-1 (<code>72px</code>, centered, Cancel <code>128px</code> neutral, Delete <code>128px</code> <code>#DC2626</code>/white).&quot;</li></ul>
+<h3 id="iteration-guide">Iteration Guide</h3>
+<ol><li>Page and card base is <code>#FFFFFF</code>; use <code>#FAFAFA</code> for recessed chrome (inputs, sidebar, modal bars)</li><li>Borders do the work: <code>#E5E5E5</code> for cards, <code>#D9D9D9</code> for inputs and modal chrome</li><li><code>#8FC31F</code> activates the page — one CTA, one active state, one status indicator at a time</li><li><code>#003A4A</code> (secondary-500) is your dark accent for headings and teal-branded text elements</li><li>Every model identifier, metric, or version string uses Space Mono</li><li>Letter-spacing tightens with size: <code>-0.03rem</code> at <code>48px</code>, <code>-0.02rem</code> at <code>36px</code>, <code>-0.01rem</code> at <code>22–30px</code>, normal below</li><li>Status colors are semantic tokens — never hard-code <code>#DC2626</code> for error; use <code>--error</code></li><li>For bilingual pages: Space Grotesk and Noto Sans SC at matching sizes — no size reduction for CN</li></ol>
+
+</main>
+
+<script>
+// Highlight active nav link on scroll
+const links = document.querySelectorAll('.nav-link');
+const headings = document.querySelectorAll('h1,h2,h3,h4');
+const observer = new IntersectionObserver(entries => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => {
+        l.style.borderLeftColor = l.getAttribute('href') === '#' + id
+          ? 'var(--primary-500)' : '';
+        l.style.color = l.getAttribute('href') === '#' + id
+          ? 'var(--secondary-500)' : '';
+      });
+    }
+  }
+}, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+headings.forEach(h => { if (h.id) observer.observe(h); });
+</script>
+</body>
+</html>
