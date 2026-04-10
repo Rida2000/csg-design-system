@@ -183,7 +183,7 @@ All button types share the same size system and support: **Default**, **Hover**,
 |------|----------|---------------------|
 | **Primary** | Main CTA — Deploy, Run, Save | `#8FC31F` bg, `#FFFFFF` text; hover `#A8E03C`; pressed `#76A219` |
 | **Default** | General action — Edit, View, Filter | `#FAFAFA` bg, `1px solid #D9D9D9` border, `#404040` text; hover border `#A3A3A3` |
-| **Highlight** | Contextual emphasis — Upgrade, Featured | Teal accent bg/text; hover `#338F9F` |
+| **Highlight** | Contextual emphasis — Upgrade, Featured | `#F5FCE8` bg, `1px solid #8FC31F` border, `#003A4A` text; hover bg `#E8F8C8` |
 | **Sensitive** | Confirmation step — Apply, Confirm | Neutral fill; requires user acknowledgement flow |
 | **Destructive** | Delete, Remove, Wipe | `#DC2626` bg, `#FFFFFF` text; hover `#B91C1C`; pressed `#991B1B` |
 | **Ghost** | Tertiary / minimal chrome | Transparent, `1px solid #D9D9D9` border; hover border `#A3A3A3` |
@@ -212,7 +212,7 @@ Supports same states as Text Button (Default / Hover / Pressed / Disabled).
 |------|-------|
 | **Default** | `#FAFAFA` bg, `1px solid #D9D9D9` border, icon `#404040`; hover border `#A3A3A3` |
 | **Primary** | `#8FC31F` bg, icon `#FFFFFF`; hover `#A8E03C` |
-| **Highlight** | Teal accent bg, icon `#FFFFFF`; hover `#338F9F` |
+| **Highlight** | `#F5FCE8` bg, `1px solid #8FC31F` border, icon `#003A4A`; hover bg `#E8F8C8` |
 | **Secondary** | `#F5F5F5` bg, no border, icon `#737373`; hover icon `#404040` |
 | **Sensitive** | Neutral fill; requires confirmation |
 | **Destructive** | `#DC2626` bg, icon `#FFFFFF`; hover `#B91C1C` |
@@ -406,7 +406,7 @@ All types support icon positions **Left**, **Right**, and **Center**, and all fo
 | Type | Use in Navigation | Style Guidance |
 |------|-------------------|---------------|
 | **Default** | Standard nav item (inactive) | Transparent bg; text `#737373`; hover text `#171717` + `#F5F5F5` bg tint |
-| **Highlight** | Contextual call-to-action in nav (e.g. "Upgrade", "New") | Teal accent; `#003A4A` text; hover `#E6F1F3` bg tint |
+| **Highlight** | Contextual call-to-action in nav (e.g. "Upgrade", "New") | `#F5FCE8` bg, `1px solid #8FC31F` border, `#003A4A` text; hover bg `#E8F8C8` |
 | **Primary** | Active / selected nav item | `#8FC31F` text; `rgba(143,195,31,0.1)` bg tint |
 | **Sensitive** | Confirmation-required nav action | Neutral fill; requires confirmation before navigating away |
 | **Destructive** | Dangerous nav action (e.g. "Delete Workspace") | `#DC2626` text; hover `rgba(220,38,38,0.06)` bg |
@@ -442,7 +442,7 @@ All types support: **Default**, **Hover**, **Pressed**, **Disabled**.
 | Type | Style Guidance |
 |------|---------------|
 | **Default** | Transparent bg; icon `#737373`; hover `#F5F5F5` bg + icon `#404040` |
-| **Highlight** | `#E6F1F3` bg; icon `#003A4A`; hover `#CCE3E7` bg |
+| **Highlight** | `#F5FCE8` bg, `1px solid #8FC31F` border; icon `#003A4A`; hover bg `#E8F8C8` |
 | **Primary** | `#8FC31F` bg; icon `#FFFFFF`; hover `#A8E03C` bg |
 | **Secondary** | `#F5F5F5` bg; icon `#737373`; hover icon `#404040` — used for secondary nav chrome |
 | **Destructive** | Icon `#DC2626`; hover `rgba(220,38,38,0.06)` bg |

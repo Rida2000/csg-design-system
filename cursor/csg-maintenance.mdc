@@ -1,0 +1,40 @@
+---
+description: Updates design tokens, components, and sections in DESIGN.md following the exact table format and naming conventions. Activate when editing or extending the design system spec.
+globs: ["DESIGN.md"]
+alwaysApply: false
+---
+
+# CSG Design System Maintainer
+
+Make precise, structured edits to `DESIGN.md` — the single source of truth.
+
+## What you can do
+- Add/update color tokens in the palette tables
+- Update component specs (dimensions, colors, states)
+- Add new component sections (4.16+)
+- Update typography, spacing, or elevation specs
+
+## Table format (must match exactly)
+Color token tables:
+```
+| Token | Value | Role |
+|-------|-------|------|
+| `--token-name` | `#HEXCODE` | Description |
+```
+
+## Token naming conventions
+- Primary: `--primary-50` through `--primary-900`
+- Secondary: `--secondary-50` through `--secondary-900`
+- Neutral: `--neutral-50` through `--neutral-900`
+- Semantic: `--success`, `--warning`, `--error`, `--info` (each with `-light`, `-dark`)
+- Border: `--border-light`, `--border`, `--border-regular`, `--border-medium`, `--border-dark`
+- Radius: `--radius-none`, `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`, `--radius-2xl`, `--radius-full`
+
+## Safety rules
+- NEVER delete existing tokens or sections
+- NEVER rename existing tokens
+- NEVER change section numbering (1-9)
+- New components get next subsection number (4.16+)
+- Each new component needs: title (EN + CN), Sizes table, Types & States table, Specs section
+- Always show a diff before editing
+- Always read DESIGN.md before making changes

@@ -30,13 +30,13 @@ function extractColor(raw) {
   return null;
 }
 
-/** Convert a marked token's raw text to plain string */
+/** Convert a marked table cell to plain string */
 function cellText(cell) {
-  // cell is an array of inline tokens in marked v12
-  if (Array.isArray(cell)) {
-    return cell.map(t => t.raw || t.text || '').join('');
-  }
-  return String(cell || '');
+  if (!cell) return '';
+  // marked v12: cell is { text, tokens[] }
+  if (typeof cell === 'object' && cell.text != null) return cell.text;
+  if (typeof cell === 'string') return cell;
+  return String(cell);
 }
 
 /** Slugify a heading for anchor IDs */
@@ -46,7 +46,7 @@ function slugify(text) {
     .replace(/[^\w\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
-    .trim();
+    .replace(/^-+|-+$/g, '');
 }
 
 // ─── section-aware renderer ───────────────────────────────────────────────────
@@ -63,9 +63,9 @@ function isComponentSection(h2) { return /^4\./.test(h2); }
 function renderColorTable(headers, rows) {
   let html = '<div class="swatch-grid">';
   for (const row of rows) {
-    const token = cellText(row[0]);
-    const value = cellText(row[1]);
-    const role  = cellText(row[2] || []);
+    const token = cellText(row[0]).replace(/`/g, '');
+    const value = cellText(row[1]).replace(/`/g, '');
+    const role  = cellText(row[2]).replace(/`/g, '');
     const color = extractColor(value);
     const swatchStyle = color
       ? `background:${color};`
@@ -74,8 +74,8 @@ function renderColorTable(headers, rows) {
       <div class="swatch-row">
         <div class="swatch" style="${escapeHtml(swatchStyle)}" title="${escapeHtml(color || 'no color')}"></div>
         <code class="token-name">${escapeHtml(token)}</code>
-        <span class="token-value">${escapeHtml(color || value.replace(/`/g,''))}</span>
-        <span class="token-role">${escapeHtml(role.replace(/`/g,''))}</span>
+        <span class="token-value">${escapeHtml(color || value)}</span>
+        <span class="token-role">${escapeHtml(role)}</span>
       </div>`;
   }
   html += '</div>';
@@ -315,8 +315,12 @@ function build() {
     }
 
     if (tok.type === 'blockquote') {
-      const inner = tok.tokens.map(t => t.text || '').join(' ');
-      bodyHtml += `<blockquote>${escapeHtml(inner)}</blockquote>\n`;
+      const inner = tok.tokens.map(t => {
+        if (t.type === 'paragraph' && t.text) return marked.parseInline(t.text);
+        if (t.text) return escapeHtml(t.text);
+        return '';
+      }).join(' ');
+      bodyHtml += `<blockquote>${inner}</blockquote>\n`;
       continue;
     }
 

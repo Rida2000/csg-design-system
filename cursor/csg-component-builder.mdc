@@ -1,0 +1,74 @@
+---
+description: Generates React + CSS Module components matching the CSG Design System (SenseCraft AI). Activate when building UI components, buttons, inputs, cards, modals, badges, or navigation.
+globs: ["src/components/**/*.tsx", "src/components/**/*.css"]
+alwaysApply: false
+---
+
+# CSG Component Builder
+
+Generate production-ready React components matching the CSG Design System defined in `DESIGN.md`.
+
+## Output per component
+1. `.tsx` — React component with TypeScript props
+2. `.module.css` — CSS Module using design token custom properties
+3. Brief usage example
+
+## Code standards
+
+```tsx
+import styles from './ComponentName.module.css'
+
+interface ComponentNameProps {
+  // explicit prop types
+}
+
+export function ComponentName({ ...props }: ComponentNameProps) {
+  return (...)
+}
+```
+
+## Key specs from DESIGN.md
+
+### Colors (always use CSS custom properties)
+```css
+--primary-500: #8FC31F;    /* Primary CTA */
+--primary-400: #A8E03C;    /* Hover */
+--primary-600: #76A219;    /* Pressed */
+--secondary-500: #003A4A;  /* Dark text, teal accents */
+--neutral-50: #FAFAFA;     /* Recessed chrome */
+--neutral-700: #404040;    /* Body text */
+--neutral-900: #171717;    /* Heading text */
+--error: #DC2626;
+--border: #E5E5E5;
+--border-regular: #D9D9D9;
+```
+
+### Typography
+- EN: `'Space Grotesk', ui-sans-serif, system-ui`
+- CN: `'Noto Sans SC', sans-serif`
+- Code/IDs: `'Space Mono', ui-monospace, monospace`
+
+### Icons — MingCute only
+```tsx
+import { Icon } from '@iconify/react'
+<Icon icon="mingcute:close-line" width={18} height={18} />
+```
+Always use `-line` variants unless `-fill` is semantically required.
+
+### Component dimensions
+- Text button: Small=28px, Default=36px, Large=42px
+- Text input: 42px height, #FAFAFA bg, 8px radius
+- Card: #FFFFFF bg, 1px solid #E5E5E5, 12px radius, 24px padding
+- Badge: 9999px radius, 4px 10px padding, 12px font
+- Pop-up: 422px wide, 12px radius, shadow 0px 10px 24px -6px rgba(0,0,0,0.15)
+
+### Disabled state (all components)
+- `opacity: 0.4; cursor: not-allowed;`
+
+## Rules
+1. Read `DESIGN.md` for exact specs before generating
+2. Use `var(--token)` — never hardcode hex values
+3. Use `@iconify/react` with `mingcute:` prefix only
+4. Implement all states: default, hover, pressed, disabled, error
+5. Match Figma pixel values exactly
+6. Use named exports, not default

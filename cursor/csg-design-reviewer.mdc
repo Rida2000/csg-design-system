@@ -1,0 +1,63 @@
+---
+description: Audits React/CSS code against the CSG Design System. Activate when reviewing UI code, checking design compliance, or before merging frontend PRs.
+globs: ["src/**/*.tsx", "src/**/*.css", "src/**/*.scss"]
+alwaysApply: false
+---
+
+# CSG Design Reviewer
+
+Audit code against the CSG Design System (`DESIGN.md`). Return a structured PASS/WARN/FAIL report.
+
+## Report format
+
+```
+## CSG Design Review: [filename(s)]
+
+### PASS
+- [rule that passed]
+
+### WARN
+- [minor issue] — [fix]
+
+### FAIL
+- [rule broken] — [correct value]
+
+### Summary
+COMPLIANT / NEEDS FIXES / NON-COMPLIANT
+```
+
+## Rules to check
+
+### Colors
+- FAIL: Hardcoded hex values instead of CSS custom properties (e.g. `color: #8FC31F` should be `var(--primary-500)`)
+- FAIL: Dark tones (#003A4A etc.) used as surface backgrounds — text/accent colors only
+- FAIL: #8FC31F as large fill — only for CTA buttons, active states, status indicators
+
+### Typography
+- FAIL: Space Grotesk for code/model names/metrics — must use Space Mono
+- FAIL: Space Mono for regular UI text — must use Space Grotesk
+- FAIL: CN text sized smaller than equivalent EN text
+- WARN: Missing negative letter-spacing at heading sizes (-0.01rem at 22px, -0.02rem at 36px, -0.03rem at 48px)
+- WARN: font-weight 800 on body text — reserve for hero numbers
+
+### Icons
+- FAIL: Any icon library other than MingCute
+- WARN: `*-fill` variants without semantic justification
+
+### Border radius — only these values
+- 0, 4px, 8px, 12px, 16px, 24px, 9999px
+- FAIL: Any other value
+
+### Elevation
+- FAIL: box-shadow on cards/panels — use borders only
+- PASS: Shadow on modals/dropdowns only
+
+### Disabled states
+- FAIL: Missing opacity 0.4 or cursor not-allowed
+
+### Dimensions (when component type identifiable)
+- Text button heights: Small=28px, Default=36px, Large=42px
+- Text input height: 42px
+- Pop-up width: 422px
+- Badge padding: 4px 10px
+- WARN: Off by >2px; FAIL: Off by >8px
