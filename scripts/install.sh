@@ -145,6 +145,41 @@ case "$choice" in
     ;;
 esac
 
+# ── Add installed files to .gitignore ─────────────────────────────────────────
+
+add_to_gitignore() {
+  local entry="$1"
+  if [ -f ".gitignore" ]; then
+    # Skip if already present
+    grep -qxF "$entry" .gitignore 2>/dev/null && return
+  fi
+  echo "$entry" >> .gitignore
+}
+
+if [ -f ".git/HEAD" ] || [ -f ".git" ]; then
+  echo "Updating .gitignore..."
+  # Always added
+  add_to_gitignore "DESIGN.md"
+
+  # Tool-specific
+  case "$choice" in
+    1) ;; # Claude agents go to ~/.claude, nothing in project to ignore
+    2)
+      add_to_gitignore ".cursorrules"
+      add_to_gitignore ".cursor/rules/csg-*.mdc"
+      ;;
+    3)
+      add_to_gitignore "AGENTS.md"
+      ;;
+    4)
+      add_to_gitignore ".cursorrules"
+      add_to_gitignore ".cursor/rules/csg-*.mdc"
+      add_to_gitignore "AGENTS.md"
+      ;;
+  esac
+  echo "  Done: .gitignore updated"
+fi
+
 echo ""
 echo "Done! DESIGN.md is your single source of truth."
 echo "View the visual spec: https://rida2000.github.io/csg-design-system/"

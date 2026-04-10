@@ -10,23 +10,13 @@ The single source of truth for **SenseCraft AI** — bridging what designers bui
 
 ## Get Started
 
-### Option A — Clone and install (recommended)
-
-```bash
-git clone https://github.com/Rida2000/csg-design-system.git
-cd csg-design-system
-bash scripts/install.sh
-```
-
-### Option B — One-liner with GitHub CLI
-
-If you have `gh` installed and authenticated (`gh auth login`):
+Run this in your project root (requires [GitHub CLI](https://cli.github.com) — `gh auth login` first):
 
 ```bash
 bash <(gh api repos/Rida2000/csg-design-system/contents/scripts/install.sh?ref=main --jq '.content' | base64 -d)
 ```
 
-The installer asks which tool you use and sets up the right files:
+It asks which tool you use and installs the right files:
 
 | You pick | What gets installed |
 |----------|-------------------|
@@ -35,13 +25,11 @@ The installer asks which tool you use and sets up the right files:
 | **Codex** | `DESIGN.md` + `AGENTS.md` |
 | **All** | Everything above |
 
+Downloaded files are automatically added to your `.gitignore` — they're fetched from the source repo, not authored in your project.
+
 ### Update to the latest version
 
-Re-run the install, or add a shortcut to your project's `package.json`:
-
-```json
-{ "scripts": { "design:update": "cd csg-design-system && git pull && bash scripts/install.sh" } }
-```
+Run the same command again. All files are overwritten with the latest version.
 
 ---
 
@@ -157,30 +145,34 @@ Run `/mcp` in Claude Code, select `figma`, authenticate. Or add manually:
 <details>
 <summary><strong>Claude Code</strong></summary>
 
-From a cloned copy of this repo:
 ```bash
-cp DESIGN.md /path/to/your/project/
-bash scripts/install-agents.sh
-```
-
-Or with `gh` CLI (no clone needed):
-```bash
+# Download DESIGN.md
 gh api repos/Rida2000/csg-design-system/contents/DESIGN.md?ref=main --jq '.content' | base64 -d > DESIGN.md
+
+# Install all 7 agents
 gh api repos/Rida2000/csg-design-system/contents/scripts/install-agents.sh?ref=main --jq '.content' | base64 -d | bash
 ```
 
-Restart Claude Code. Type `/agents` to see all 7 agents.
+Restart Claude Code. Type `/agents` to see them.
 
 </details>
 
 <details>
 <summary><strong>Cursor</strong></summary>
 
-From a cloned copy of this repo:
 ```bash
-cp DESIGN.md .cursorrules /path/to/your/project/
-mkdir -p /path/to/your/project/.cursor/rules
-cp cursor/*.mdc /path/to/your/project/.cursor/rules/
+REPO="Rida2000/csg-design-system"
+
+# Download DESIGN.md + .cursorrules
+for f in DESIGN.md .cursorrules; do
+  gh api "repos/$REPO/contents/$f?ref=main" --jq '.content' | base64 -d > "$f"
+done
+
+# Download modular rules
+mkdir -p .cursor/rules
+for rule in csg-component-builder csg-design-reviewer csg-maintenance csg-figma-sync; do
+  gh api "repos/$REPO/contents/cursor/${rule}.mdc?ref=main" --jq '.content' | base64 -d > ".cursor/rules/${rule}.mdc"
+done
 ```
 
 Restart Cursor. `.cursorrules` loads automatically. Modular rules activate on matching files:
@@ -197,9 +189,11 @@ Restart Cursor. `.cursorrules` loads automatically. Modular rules activate on ma
 <details>
 <summary><strong>Codex (OpenAI)</strong></summary>
 
-From a cloned copy of this repo:
 ```bash
-cp DESIGN.md AGENTS.md /path/to/your/project/
+REPO="Rida2000/csg-design-system"
+for f in DESIGN.md AGENTS.md; do
+  gh api "repos/$REPO/contents/$f?ref=main" --jq '.content' | base64 -d > "$f"
+done
 ```
 
 Codex reads `AGENTS.md` automatically from the project root.
