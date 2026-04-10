@@ -20,7 +20,7 @@ It asks which tool you use and installs the right files:
 
 | You pick | What gets installed |
 |----------|-------------------|
-| **Claude Code** | `DESIGN.md` + 4 agents in `~/.claude/agents/` |
+| **Claude Code** | `DESIGN.md` + 7 agents in `~/.claude/agents/` |
 | **Cursor** | `DESIGN.md` + `.cursorrules` + `.cursor/rules/*.mdc` |
 | **Codex** | `DESIGN.md` + `AGENTS.md` |
 | **All** | Everything above |
@@ -82,46 +82,26 @@ When `DESIGN.md` is in your project root, your AI tool automatically:
 
 ## AI Agents
 
-Four specialized agents ship with the design system. They work the same across Claude Code, Cursor, and Codex.
+Seven agents ship with the design system. The first four are CSG-specific (design system rules baked in). The last three are general-purpose agents from [VoltAgent](https://github.com/VoltAgent/awesome-claude-code-subagents) that pair well with any design system workflow.
 
-### Component Builder
+### Design System Agents
 
-Generates production-ready React components from the spec.
+| Agent | What it does | Example prompt |
+|-------|-------------|----------------|
+| **Component Builder** | Generates `.tsx` + `.module.css` pairs matching the exact Figma spec. CSS custom properties only, MingCute icons, all states. | *"Build a Primary button in all three sizes"* |
+| **Design Reviewer** | Audits code against the spec. Returns a PASS / WARN / FAIL report for colors, icons, fonts, radius, shadows, disabled states. | *"Review Button.tsx for design compliance"* |
+| **Maintenance** | Safely edits `DESIGN.md` — adds tokens, adds component sections, never breaks the table format. | *"Add a Date Picker component as section 4.16"* |
+| **Figma Sync** | Pulls latest tokens and component specs from the Figma file into `DESIGN.md`. Works via MCP or REST API. | *"Sync DESIGN.md with the latest Figma file"* |
 
-- Outputs `.tsx` + `.module.css` pairs with TypeScript types
-- CSS custom properties only — never hardcoded hex
-- MingCute icons via `@iconify/react`
-- All states implemented (default, hover, pressed, disabled, error)
+### General-Purpose Agents (from VoltAgent)
 
-```
-"Build a Primary button in all three sizes"
-"Build a Model Card matching section 4.8 of DESIGN.md"
-"Build the destructive confirmation pop-up from section 4.15"
-```
+| Agent | What it does | Example prompt |
+|-------|-------------|----------------|
+| **Design Bridge** | Translates `DESIGN.md` into polished build instructions for any UI framework. Bridges the gap between design spec and implementation. | *"Translate DESIGN.md into Tailwind setup instructions"* |
+| **Frontend Developer** | Full frontend development across React, Vue, and Angular. Multi-framework expertise with full-stack integration. | *"Build the model cards grid page with filtering"* |
+| **UI Designer** | Visual interface design, component libraries, interaction patterns, and accessibility. Expert at refining aesthetics. | *"Design an empty state illustration for the model library"* |
 
-### Design Reviewer
-
-Audits code against the design system. Returns a **PASS / WARN / FAIL** report.
-
-Checks: hardcoded colors, wrong icons, wrong fonts, off-spec radius, shadows on cards, missing disabled states, dimension mismatches.
-
-```
-"Review Button.tsx and Button.module.css for design compliance"
-"Audit the sidebar component against the design system"
-```
-
-### Maintenance
-
-Safely edits `DESIGN.md` — adds tokens, adds component sections, never breaks the table format.
-
-```
-"Add a Date Picker component as section 4.16"
-"Add a --primary-475 token between 450 and 500"
-```
-
-### Figma Sync
-
-Pulls the latest design tokens and component specs from the Figma source file and updates `DESIGN.md` to match.
+### Figma Sync Details
 
 **With Figma MCP** (Claude Code / Cursor) — reads directly from Figma, no API token needed:
 
@@ -225,10 +205,13 @@ scripts/
   install.sh                     Multi-tool installer
   install-agents.sh              Claude Code agent installer
 agents/                          Claude Code agents
-  csg-component-builder.md
-  csg-design-reviewer.md
-  csg-maintenance.md
-  csg-figma-sync.md
+  csg-component-builder.md       Design system component generator
+  csg-design-reviewer.md         Design compliance auditor
+  csg-maintenance.md             DESIGN.md editor
+  csg-figma-sync.md              Figma -> DESIGN.md sync
+  design-bridge.md               DESIGN.md -> build instructions (VoltAgent)
+  frontend-developer.md          Multi-framework frontend dev (VoltAgent)
+  ui-designer.md                 Visual design + accessibility (VoltAgent)
 cursor/                          Cursor modular rules (.mdc)
   csg-component-builder.mdc
   csg-design-reviewer.mdc
