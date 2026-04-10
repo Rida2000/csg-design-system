@@ -4,6 +4,8 @@
   "description": "CSG Design System — SenseCraft AI visual design spec, team commands, and Claude Code agents",
   "scripts": {
     "build": "node scripts/build.js",
+    "figma:sync": "node scripts/figma-sync.js",
+    "figma:update": "node scripts/figma-sync.js --update",
     "install-agents": "bash scripts/install-agents.sh",
     "preview": "npx serve docs"
   },

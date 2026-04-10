@@ -70,7 +70,7 @@ install_cursor() {
 
   # Install modular rules to .cursor/rules/
   mkdir -p .cursor/rules
-  local rules=("csg-component-builder.mdc" "csg-design-reviewer.mdc" "csg-maintenance.mdc")
+  local rules=("csg-component-builder.mdc" "csg-design-reviewer.mdc" "csg-maintenance.mdc" "csg-figma-sync.mdc")
   for name in "${rules[@]}"; do
     if [ "$HAS_LOCAL_REPO" = true ]; then
       cp "$REPO_ROOT/cursor/$name" ".cursor/rules/$name"

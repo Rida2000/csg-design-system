@@ -114,6 +114,50 @@ Helps safely edit `DESIGN.md` without breaking the structure:
 - *"Add a Date Picker component as section 4.16"*
 - *"Add a --primary-475 token between 450 and 500"*
 
+### Figma Sync
+
+Pulls the latest design tokens, components, and specs from the Figma source file and updates `DESIGN.md` to match. Works two ways:
+
+**With Figma MCP connected** (Claude Code / Cursor) — the agent reads directly from Figma using MCP tools. No token needed.
+
+**Without MCP** — uses the Figma REST API:
+```bash
+FIGMA_TOKEN=<your-token> npm run figma:update
+```
+
+This generates a `FIGMA_SYNC_REPORT.md` showing everything extracted from Figma and a diff against the current DESIGN.md. Review it, then let the agent apply the changes.
+
+**Example prompts:**
+- *"Sync DESIGN.md with the latest Figma file"*
+- *"Check if any colors changed in Figma since the last update"*
+- *"A new component was added in Figma — pull it into DESIGN.md"*
+
+<details>
+<summary>Setting up Figma MCP in Claude Code</summary>
+
+Run `/mcp` in Claude Code, select `figma`, authenticate. Or add manually to your settings:
+
+```json
+{
+  "mcpServers": {
+    "figma": {
+      "url": "https://mcp.figma.com/mcp"
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Getting a Figma API token (for the script method)</summary>
+
+1. Go to [figma.com/developers/api#access-tokens](https://www.figma.com/developers/api#access-tokens)
+2. Create a personal access token with **File content** read access
+3. Set it as an environment variable: `export FIGMA_TOKEN=fig_...`
+
+</details>
+
 ---
 
 ## Tool-Specific Setup (Manual)

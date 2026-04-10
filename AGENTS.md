@@ -103,6 +103,29 @@ Rules for editing the design spec:
 - New components get subsection 4.16+ with EN + CN title, Sizes table, Types & States table
 - Always read current DESIGN.md first, show diff before editing
 
+### Figma Sync
+**When:** The Figma file has been updated and `DESIGN.md` needs to catch up
+
+Figma file: `https://www.figma.com/design/QMSCzUBQ5hrq9Z3DNifY6Q/CSG-Design-System?m=dev` (key: `QMSCzUBQ5hrq9Z3DNifY6Q`)
+
+**With Figma MCP connected:**
+1. Use `get_variable_defs` with the file URL to extract all design tokens
+2. Use `get_design_context` per page/frame to extract component specs
+3. Use `use_figma` to inspect the full document tree
+
+**Without MCP:**
+```bash
+FIGMA_TOKEN=<token> node scripts/figma-sync.js --update
+```
+Generates `FIGMA_SYNC_REPORT.md` with all extracted data and a diff against DESIGN.md.
+
+Rules:
+- Show a diff summary before editing DESIGN.md
+- Never delete existing tokens — only add or update
+- Preserve exact table format and column names
+- Use exact hex values from Figma
+- After editing, run `npm run build` to regenerate the website
+
 ---
 
 ## Don'ts
