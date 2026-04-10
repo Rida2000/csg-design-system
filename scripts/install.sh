@@ -3,10 +3,13 @@ set -e
 
 # CSG Design System — Multi-Tool Installer
 # Installs DESIGN.md + tool-specific agent/rule configs
+# Works with both public and private repos (uses gh CLI for private)
 
-REPO_RAW="https://raw.githubusercontent.com/Rida2000/csg-design-system/main"
+REPO="Rida2000/csg-design-system"
+BRANCH="main"
+REPO_RAW="https://raw.githubusercontent.com/$REPO/$BRANCH"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
-# If run via curl (no local repo), SCRIPT_DIR may not be useful
 HAS_LOCAL_REPO=false
 if [ -f "$SCRIPT_DIR/../DESIGN.md" ] 2>/dev/null; then
   HAS_LOCAL_REPO=true
@@ -18,6 +21,34 @@ echo "CSG Design System — Installer"
 echo "=============================="
 echo ""
 
+# ── Download helper (works for private repos via gh CLI) ──────────────────────
+
+download_file() {
+  local remote_path="$1"
+  local local_path="$2"
+
+  if [ "$HAS_LOCAL_REPO" = true ]; then
+    cp "$REPO_ROOT/$remote_path" "$local_path"
+    return 0
+  fi
+
+  # Try raw URL first (works for public repos)
+  if curl -fsSL -o "$local_path" "$REPO_RAW/$remote_path" 2>/dev/null; then
+    return 0
+  fi
+
+  # Fall back to gh CLI (works for private repos)
+  if command -v gh &>/dev/null; then
+    gh api "repos/$REPO/contents/$remote_path?ref=$BRANCH" --jq '.content' 2>/dev/null \
+      | base64 -d > "$local_path" && return 0
+  fi
+
+  echo "  Error: Could not download $remote_path"
+  echo "  If the repo is private, install the GitHub CLI: https://cli.github.com"
+  echo "  Then run: gh auth login"
+  return 1
+}
+
 # ── Step 1: Install DESIGN.md ─────────────────────────────────────────────────
 
 install_design_md() {
@@ -26,12 +57,7 @@ install_design_md() {
   else
     echo "  Installing DESIGN.md..."
   fi
-
-  if [ "$HAS_LOCAL_REPO" = true ]; then
-    cp "$REPO_ROOT/DESIGN.md" ./DESIGN.md
-  else
-    curl -fsSL -o DESIGN.md "$REPO_RAW/DESIGN.md"
-  fi
+  download_file "DESIGN.md" "./DESIGN.md"
   echo "  Done: DESIGN.md"
 }
 
@@ -43,14 +69,18 @@ install_claude() {
   AGENTS_DIR="$HOME/.claude/agents"
   mkdir -p "$AGENTS_DIR"
 
-  local agents=("csg-maintenance.md" "csg-component-builder.md" "csg-design-reviewer.md")
+  local agents=(
+    "csg-maintenance.md"
+    "csg-component-builder.md"
+    "csg-design-reviewer.md"
+    "csg-figma-sync.md"
+    "design-bridge.md"
+    "frontend-developer.md"
+    "ui-designer.md"
+  )
   for name in "${agents[@]}"; do
-    if [ "$HAS_LOCAL_REPO" = true ]; then
-      cp "$REPO_ROOT/agents/$name" "$AGENTS_DIR/$name"
-    else
-      curl -fsSL -o "$AGENTS_DIR/$name" "$REPO_RAW/agents/$name"
-    fi
-    echo "  Installed: $name → $AGENTS_DIR/"
+    download_file "agents/$name" "$AGENTS_DIR/$name"
+    echo "  Installed: $name"
   done
   echo ""
   echo "  Restart Claude Code, then type /agents to see them."
@@ -60,23 +90,18 @@ install_cursor() {
   echo ""
   echo "Installing Cursor rules..."
 
-  # Install .cursorrules to project root
-  if [ "$HAS_LOCAL_REPO" = true ]; then
-    cp "$REPO_ROOT/.cursorrules" ./.cursorrules
-  else
-    curl -fsSL -o .cursorrules "$REPO_RAW/.cursorrules"
-  fi
+  download_file ".cursorrules" "./.cursorrules"
   echo "  Installed: .cursorrules"
 
-  # Install modular rules to .cursor/rules/
   mkdir -p .cursor/rules
-  local rules=("csg-component-builder.mdc" "csg-design-reviewer.mdc" "csg-maintenance.mdc" "csg-figma-sync.mdc")
+  local rules=(
+    "csg-component-builder.mdc"
+    "csg-design-reviewer.mdc"
+    "csg-maintenance.mdc"
+    "csg-figma-sync.mdc"
+  )
   for name in "${rules[@]}"; do
-    if [ "$HAS_LOCAL_REPO" = true ]; then
-      cp "$REPO_ROOT/cursor/$name" ".cursor/rules/$name"
-    else
-      curl -fsSL -o ".cursor/rules/$name" "$REPO_RAW/cursor/$name"
-    fi
+    download_file "cursor/$name" ".cursor/rules/$name"
     echo "  Installed: .cursor/rules/$name"
   done
   echo ""
@@ -86,12 +111,7 @@ install_cursor() {
 install_codex() {
   echo ""
   echo "Installing Codex agents file..."
-
-  if [ "$HAS_LOCAL_REPO" = true ]; then
-    cp "$REPO_ROOT/AGENTS.md" ./AGENTS.md
-  else
-    curl -fsSL -o AGENTS.md "$REPO_RAW/AGENTS.md"
-  fi
+  download_file "AGENTS.md" "./AGENTS.md"
   echo "  Installed: AGENTS.md"
   echo ""
   echo "  Codex reads AGENTS.md automatically from project root."
