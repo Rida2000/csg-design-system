@@ -1,268 +1,262 @@
 # CSG Design System
 
-The single source of truth for **SenseCraft AI** — bridging what designers create in Figma with what developers build in code.
+The single source of truth for **SenseCraft AI** — bridging what designers build in Figma with what developers ship in code.
 
-`DESIGN.md` is the spec. It defines every color, font, spacing value, and component in one portable file that lives in your project root and powers your AI coding tool.
+`DESIGN.md` is a portable, AI-readable spec that defines every color, font, spacing value, and component. Drop it into any project and your AI coding tool (Claude Code, Cursor, or Codex) instantly knows how to build pixel-perfect SenseCraft UI.
 
-**[View the visual design system](https://rida2000.github.io/csg-design-system/)**
-
----
-
-## What's inside DESIGN.md
-
-| Section | What it covers |
-|---------|---------------|
-| Colors | 57 tokens across primary (lime green), secondary (deep teal), neutral, and semantic palettes |
-| Typography | Space Grotesk for UI, Noto Sans SC for Chinese, Space Mono for code — with a full type scale |
-| Components | 15 component types with pixel-exact specs from Figma: buttons, inputs, dropdowns, cards, badges, modals, nav, toggles, and more |
-| Layout | 4px spacing system, border radius scale, responsive breakpoints (mobile to large desktop) |
-| Elevation | Shadow philosophy — when to use borders vs. shadows, with exact Figma shadow values |
-| Do's & Don'ts | Guard rails so the AI never strays from the design language |
+**[Browse the live design system](https://rida2000.github.io/csg-design-system/)** -- color swatches, type specimens, component demos — auto-generated from `DESIGN.md`.
 
 ---
 
-## For Designers
+## Get Started
 
-### Browse the live spec
-
-Open **[rida2000.github.io/csg-design-system](https://rida2000.github.io/csg-design-system/)** to see the design system rendered with actual color swatches, live typography specimens, and interactive component demos. This page auto-updates whenever `DESIGN.md` changes — no manual deploys needed.
-
-### How to update the spec
-
-Edit `DESIGN.md` directly (or ask a developer to). The format is plain Markdown tables — easy to read, easy to diff in pull requests. When merged to `main`, the website rebuilds automatically.
-
-If you use Claude Code, Cursor, or Codex, the **Maintenance** agent can help you add tokens or components safely without breaking the table format.
-
----
-
-## For Developers
-
-### 1. Add the design system to your project
-
-One command installs `DESIGN.md` + the right config for your AI coding tool:
+Run this in your project root:
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh)
 ```
 
-It asks which tool you use and sets up everything:
+It asks which tool you use and installs the right files:
 
 | You pick | What gets installed |
 |----------|-------------------|
-| **Claude Code** | `DESIGN.md` + 3 agents in `~/.claude/agents/` |
+| **Claude Code** | `DESIGN.md` + 4 agents in `~/.claude/agents/` |
 | **Cursor** | `DESIGN.md` + `.cursorrules` + `.cursor/rules/*.mdc` |
-| **Codex** | `DESIGN.md` + `AGENTS.md` in project root |
+| **Codex** | `DESIGN.md` + `AGENTS.md` |
 | **All** | Everything above |
 
-### 2. Update to the latest version
-
-Run the same command again. Or add a shortcut to your `package.json`:
+To update later, run the same command again — or add `npm run design:update` to your project:
 
 ```json
-{
-  "scripts": {
-    "design:update": "bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh)"
-  }
-}
+{ "scripts": { "design:update": "bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh)" } }
 ```
-
-Then teammates just run `npm run design:update`.
 
 ---
 
-## What the AI Agents Do
+## For Designers
 
-Three specialized behaviors ship with the design system. They work the same way across Claude Code, Cursor, and Codex — just adapted to each tool's format.
+### Browse the spec visually
+
+**[rida2000.github.io/csg-design-system](https://rida2000.github.io/csg-design-system/)** renders the full design system with:
+
+- Live color swatches for all 57 tokens (primary, secondary, neutral, semantic)
+- Typography specimens using the actual fonts (Space Grotesk, Noto Sans SC, Space Mono)
+- Interactive component demos (buttons, inputs, toggles, cards, badges, modals)
+
+The page rebuilds automatically whenever `DESIGN.md` is updated — no manual deploy needed.
+
+### Update the spec
+
+Edit `DESIGN.md` directly — it's plain Markdown tables, easy to read and review in PRs. Or use the **Maintenance** agent in your AI tool to add tokens and components without breaking the format.
+
+### Sync from Figma
+
+When the Figma file changes, use the **Figma Sync** agent to pull the latest tokens and component specs into `DESIGN.md` automatically. See [Figma Sync](#figma-sync) below.
+
+---
+
+## For Developers
+
+### What's inside DESIGN.md
+
+| Section | What it covers |
+|---------|---------------|
+| **Colors** | 57 tokens — primary (lime green `#8FC31F`), secondary (deep teal `#003A4A`), neutral, semantic, border |
+| **Typography** | Space Grotesk (UI), Noto Sans SC (Chinese), Space Mono (code) — full type scale with letter-spacing |
+| **Components** | 15 types from Figma: buttons, inputs, dropdowns, cards, badges, modals, nav, toggles, radio, checkbox, code blocks |
+| **Layout** | 4px base spacing, border radius scale, 4 responsive breakpoints |
+| **Elevation** | When to use borders vs shadows, exact Figma shadow values |
+| **Do's & Don'ts** | Guard rails so the AI never strays from the design language |
+| **Agent Prompts** | Ready-to-use prompts for common components |
+
+### How the AI uses it
+
+When `DESIGN.md` is in your project root, your AI tool automatically:
+- Uses CSS custom properties (`var(--primary-500)`) instead of hardcoded hex
+- Uses MingCute icons exclusively via `@iconify/react`
+- Matches pixel-exact component dimensions from the Figma spec
+- Applies correct fonts (Space Mono for code/IDs, Space Grotesk for UI)
+- Implements all states: default, hover, pressed, disabled, error
+
+---
+
+## AI Agents
+
+Four specialized agents ship with the design system. They work the same across Claude Code, Cursor, and Codex.
 
 ### Component Builder
 
-Tell your AI tool to build a component, and it will follow the exact Figma spec:
-- Outputs `.tsx` + `.module.css` pairs
-- Uses CSS custom properties (`var(--primary-500)`) — never hardcoded hex
-- Icons from MingCute only, via `@iconify/react`
-- Matches pixel-exact dimensions from the component tables
-- Implements all states: default, hover, pressed, disabled, error
+Generates production-ready React components from the spec.
 
-**Example prompts:**
-- *"Build a Primary button in all three sizes"*
-- *"Build a Model Card matching section 4.8 of DESIGN.md"*
-- *"Build the destructive confirmation pop-up from section 4.15"*
+- Outputs `.tsx` + `.module.css` pairs with TypeScript types
+- CSS custom properties only — never hardcoded hex
+- MingCute icons via `@iconify/react`
+- All states implemented (default, hover, pressed, disabled, error)
+
+```
+"Build a Primary button in all three sizes"
+"Build a Model Card matching section 4.8 of DESIGN.md"
+"Build the destructive confirmation pop-up from section 4.15"
+```
 
 ### Design Reviewer
 
-Ask your AI tool to review code, and it checks every rule from the spec:
-- Hardcoded hex values (should be CSS custom properties)
-- Wrong icon libraries (must be MingCute)
-- Wrong fonts (Space Mono for code, Space Grotesk for UI)
-- Off-spec border radius, shadows on cards, missing disabled states
+Audits code against the design system. Returns a **PASS / WARN / FAIL** report.
 
-Returns a structured **PASS / WARN / FAIL** report.
+Checks: hardcoded colors, wrong icons, wrong fonts, off-spec radius, shadows on cards, missing disabled states, dimension mismatches.
 
-**Example prompts:**
-- *"Review Button.tsx and Button.module.css for design compliance"*
-- *"Audit the sidebar component against the design system"*
+```
+"Review Button.tsx and Button.module.css for design compliance"
+"Audit the sidebar component against the design system"
+```
 
 ### Maintenance
 
-Helps safely edit `DESIGN.md` without breaking the structure:
-- Adds new color tokens following the naming convention (`--primary-N`)
-- Adds new component sections with the correct table format
-- Never deletes existing tokens or sections
-- Shows a diff before applying changes
+Safely edits `DESIGN.md` — adds tokens, adds component sections, never breaks the table format.
 
-**Example prompts:**
-- *"Add a Date Picker component as section 4.16"*
-- *"Add a --primary-475 token between 450 and 500"*
+```
+"Add a Date Picker component as section 4.16"
+"Add a --primary-475 token between 450 and 500"
+```
 
 ### Figma Sync
 
-Pulls the latest design tokens, components, and specs from the Figma source file and updates `DESIGN.md` to match. Works two ways:
+Pulls the latest design tokens and component specs from the Figma source file and updates `DESIGN.md` to match.
 
-**With Figma MCP connected** (Claude Code / Cursor) — the agent reads directly from Figma using MCP tools. No token needed.
+**With Figma MCP** (Claude Code / Cursor) — reads directly from Figma, no API token needed:
 
-**Without MCP** — uses the Figma REST API:
+```
+"Sync DESIGN.md with the latest Figma file"
+"Check if any colors changed in Figma since the last update"
+```
+
+**Without MCP** — uses the Figma REST API script:
+
 ```bash
 FIGMA_TOKEN=<your-token> npm run figma:update
 ```
 
-This generates a `FIGMA_SYNC_REPORT.md` showing everything extracted from Figma and a diff against the current DESIGN.md. Review it, then let the agent apply the changes.
-
-**Example prompts:**
-- *"Sync DESIGN.md with the latest Figma file"*
-- *"Check if any colors changed in Figma since the last update"*
-- *"A new component was added in Figma — pull it into DESIGN.md"*
+Generates `FIGMA_SYNC_REPORT.md` with everything extracted from Figma + a diff against current `DESIGN.md`.
 
 <details>
-<summary>Setting up Figma MCP in Claude Code</summary>
+<summary>Set up Figma MCP in Claude Code</summary>
 
-Run `/mcp` in Claude Code, select `figma`, authenticate. Or add manually to your settings:
+Run `/mcp` in Claude Code, select `figma`, authenticate. Or add manually:
 
 ```json
-{
-  "mcpServers": {
-    "figma": {
-      "url": "https://mcp.figma.com/mcp"
-    }
-  }
-}
+{ "mcpServers": { "figma": { "url": "https://mcp.figma.com/mcp" } } }
 ```
 
 </details>
 
 <details>
-<summary>Getting a Figma API token (for the script method)</summary>
+<summary>Get a Figma API token (for the script method)</summary>
 
 1. Go to [figma.com/developers/api#access-tokens](https://www.figma.com/developers/api#access-tokens)
 2. Create a personal access token with **File content** read access
-3. Set it as an environment variable: `export FIGMA_TOKEN=fig_...`
+3. `export FIGMA_TOKEN=fig_...`
 
 </details>
 
 ---
 
-## Tool-Specific Setup (Manual)
+## Manual Setup by Tool
 
 <details>
-<summary><strong>Claude Code</strong> — manual steps</summary>
+<summary><strong>Claude Code</strong></summary>
 
 ```bash
-# Get the design spec
 curl -o DESIGN.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/DESIGN.md
-
-# Install agents
 bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install-agents.sh)
 ```
 
-Restart Claude Code. Type `/agents` to see the three agents.
+Restart Claude Code. Type `/agents` to see them.
 
 </details>
 
 <details>
-<summary><strong>Cursor</strong> — manual steps</summary>
+<summary><strong>Cursor</strong></summary>
 
 ```bash
-# Get the design spec
 curl -o DESIGN.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/DESIGN.md
-
-# Project-level rules (auto-loads when Cursor opens the project)
 curl -o .cursorrules https://raw.githubusercontent.com/Rida2000/csg-design-system/main/.cursorrules
-
-# Modular rules (activate on matching file patterns)
 mkdir -p .cursor/rules
-curl -o .cursor/rules/csg-component-builder.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-component-builder.mdc
-curl -o .cursor/rules/csg-design-reviewer.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-design-reviewer.mdc
-curl -o .cursor/rules/csg-maintenance.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-maintenance.mdc
+for rule in csg-component-builder csg-design-reviewer csg-maintenance csg-figma-sync; do
+  curl -o .cursor/rules/${rule}.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/${rule}.mdc
+done
 ```
 
-Restart Cursor. Rules activate automatically based on which files you're editing:
+Restart Cursor. `.cursorrules` loads automatically. Modular rules activate on matching files:
 
 | Rule | Activates on |
 |------|-------------|
 | Component Builder | `src/components/**/*.tsx` |
 | Design Reviewer | `src/**/*.tsx`, `src/**/*.css` |
 | Maintenance | `DESIGN.md` |
+| Figma Sync | `DESIGN.md`, `FIGMA_SYNC_REPORT.md` |
 
 </details>
 
 <details>
-<summary><strong>Codex (OpenAI)</strong> — manual steps</summary>
+<summary><strong>Codex (OpenAI)</strong></summary>
 
 ```bash
-# Get the design spec
 curl -o DESIGN.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/DESIGN.md
-
-# Agent instructions (Codex reads this automatically)
 curl -o AGENTS.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/AGENTS.md
 ```
 
-Codex picks up `AGENTS.md` from the project root. It contains the full design reference and all three agent behaviors.
+Codex reads `AGENTS.md` automatically from the project root.
 
 </details>
 
 ---
 
-## Contributing to the Design System
-
-### Rebuild the website locally
-
-```bash
-npm install
-npm run build        # generates docs/index.html from DESIGN.md
-npm run preview      # serves docs/ on localhost
-```
-
-### How it works
-
-`DESIGN.md` is the only file you edit. Everything else is derived from it:
-
-```
-DESIGN.md                        you edit this
-  +--> docs/index.html           auto-generated website (npm run build)
-  +--> .cursorrules              references DESIGN.md
-  +--> AGENTS.md                 references DESIGN.md
-  +--> agents/*.md               reference DESIGN.md
-```
-
-GitHub Actions auto-rebuilds `docs/` on every push to `main` that touches `DESIGN.md`.
+## Contributing
 
 ### Project structure
 
 ```
-DESIGN.md                        Single source of truth
-.cursorrules                     Cursor project rules
+DESIGN.md                        Single source of truth (edit this)
+.cursorrules                     Cursor project-level rules
 AGENTS.md                        Codex agent instructions
 scripts/
   build.js                       DESIGN.md -> docs/index.html
+  figma-sync.js                  Figma REST API extractor
   install.sh                     Multi-tool installer
   install-agents.sh              Claude Code agent installer
 agents/                          Claude Code agents
-  csg-maintenance.md
   csg-component-builder.md
   csg-design-reviewer.md
-cursor/                          Cursor modular rules
+  csg-maintenance.md
+  csg-figma-sync.md
+cursor/                          Cursor modular rules (.mdc)
   csg-component-builder.mdc
   csg-design-reviewer.mdc
   csg-maintenance.mdc
-docs/                            Auto-generated (do not edit)
+  csg-figma-sync.mdc
+docs/                            Auto-generated website (do not edit)
   index.html
 ```
+
+### Build the website locally
+
+```bash
+npm install
+npm run build        # DESIGN.md -> docs/index.html
+npm run preview      # serve on localhost
+```
+
+### How everything connects
+
+```
+Figma (source of truth for design)
+  |
+  +--> figma-sync agent ------> DESIGN.md (source of truth for code)
+                                    |
+                                    +--> docs/index.html    (auto-generated website)
+                                    +--> .cursorrules       (references DESIGN.md)
+                                    +--> AGENTS.md          (references DESIGN.md)
+                                    +--> agents/*.md        (reference DESIGN.md)
+```
+
+GitHub Actions auto-rebuilds `docs/` on every push to `main` that touches `DESIGN.md`.
