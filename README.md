@@ -1,101 +1,62 @@
 # CSG Design System
 
-**SenseCraft AI** design system — the single source of truth bridging Figma design and development.
+The single source of truth for **SenseCraft AI** — bridging what designers create in Figma with what developers build in code.
 
-- **DESIGN.md** — the spec (colors, typography, 15 component types)
-- **Website** — [visual preview](https://rida2000.github.io/csg-design-system/) of the design system
-- **Multi-tool** — works with Claude Code, Cursor, and Codex out of the box
+`DESIGN.md` is the spec. It defines every color, font, spacing value, and component in one portable file that lives in your project root and powers your AI coding tool.
+
+**[View the visual design system](https://rida2000.github.io/csg-design-system/)**
 
 ---
 
-## Quick Start — One Command
+## What's inside DESIGN.md
 
-Run this in your project root. It installs `DESIGN.md` + the right config for your AI tool:
+| Section | What it covers |
+|---------|---------------|
+| Colors | 57 tokens across primary (lime green), secondary (deep teal), neutral, and semantic palettes |
+| Typography | Space Grotesk for UI, Noto Sans SC for Chinese, Space Mono for code — with a full type scale |
+| Components | 15 component types with pixel-exact specs from Figma: buttons, inputs, dropdowns, cards, badges, modals, nav, toggles, and more |
+| Layout | 4px spacing system, border radius scale, responsive breakpoints (mobile to large desktop) |
+| Elevation | Shadow philosophy — when to use borders vs. shadows, with exact Figma shadow values |
+| Do's & Don'ts | Guard rails so the AI never strays from the design language |
+
+---
+
+## For Designers
+
+### Browse the live spec
+
+Open **[rida2000.github.io/csg-design-system](https://rida2000.github.io/csg-design-system/)** to see the design system rendered with actual color swatches, live typography specimens, and interactive component demos. This page auto-updates whenever `DESIGN.md` changes — no manual deploys needed.
+
+### How to update the spec
+
+Edit `DESIGN.md` directly (or ask a developer to). The format is plain Markdown tables — easy to read, easy to diff in pull requests. When merged to `main`, the website rebuilds automatically.
+
+If you use Claude Code, Cursor, or Codex, the **Maintenance** agent can help you add tokens or components safely without breaking the table format.
+
+---
+
+## For Developers
+
+### 1. Add the design system to your project
+
+One command installs `DESIGN.md` + the right config for your AI coding tool:
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh)
 ```
 
-It will ask which tool you use (Claude Code / Cursor / Codex / all) and install accordingly.
+It asks which tool you use and sets up everything:
 
----
+| You pick | What gets installed |
+|----------|-------------------|
+| **Claude Code** | `DESIGN.md` + 3 agents in `~/.claude/agents/` |
+| **Cursor** | `DESIGN.md` + `.cursorrules` + `.cursor/rules/*.mdc` |
+| **Codex** | `DESIGN.md` + `AGENTS.md` in project root |
+| **All** | Everything above |
 
-## Manual Setup by Tool
+### 2. Update to the latest version
 
-### Get DESIGN.md (all tools)
-
-```bash
-curl -o DESIGN.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/DESIGN.md
-```
-
-Update anytime with the same command.
-
----
-
-### Claude Code
-
-Installs 3 agents to `~/.claude/agents/`:
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install-agents.sh)
-```
-
-Restart Claude Code, then type `/agents` to see them.
-
-| Agent | What it does |
-|-------|-------------|
-| `csg-maintenance` | Updates tokens, adds components to `DESIGN.md` |
-| `csg-component-builder` | Generates React + CSS Module components from spec |
-| `csg-design-reviewer` | Audits code against the design system (PASS/WARN/FAIL) |
-
----
-
-### Cursor
-
-Installs `.cursorrules` + modular rules to `.cursor/rules/`:
-
-```bash
-# .cursorrules (project-level design system context)
-curl -o .cursorrules https://raw.githubusercontent.com/Rida2000/csg-design-system/main/.cursorrules
-
-# Modular rules (activate per-task in Cursor Settings > Rules)
-mkdir -p .cursor/rules
-curl -o .cursor/rules/csg-component-builder.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-component-builder.mdc
-curl -o .cursor/rules/csg-design-reviewer.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-design-reviewer.mdc
-curl -o .cursor/rules/csg-maintenance.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-maintenance.mdc
-```
-
-Restart Cursor to activate. The `.cursorrules` loads automatically; modular rules activate based on file globs or manually in Settings > Rules.
-
-| Rule | Activates on | What it does |
-|------|-------------|-------------|
-| `csg-component-builder` | `src/components/**/*.tsx` | Generates components from design spec |
-| `csg-design-reviewer` | `src/**/*.tsx`, `src/**/*.css` | Design compliance audit |
-| `csg-maintenance` | `DESIGN.md` | Safe editing of the design spec |
-
----
-
-### Codex (OpenAI)
-
-Installs `AGENTS.md` to your project root — Codex reads it automatically:
-
-```bash
-curl -o AGENTS.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/AGENTS.md
-```
-
-`AGENTS.md` contains the full design system reference + all three agent behaviors (component builder, design reviewer, maintainer). Codex picks up the context automatically when working in the repo.
-
----
-
-## Update Everything
-
-Re-run the same install command to update all files to the latest version:
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh)
-```
-
-Or add an npm alias to your project:
+Run the same command again. Or add a shortcut to your `package.json`:
 
 ```json
 {
@@ -105,51 +66,159 @@ Or add an npm alias to your project:
 }
 ```
 
----
-
-## For Designers — View the Design System Website
-
-Open: **[https://rida2000.github.io/csg-design-system/](https://rida2000.github.io/csg-design-system/)**
-
-Auto-updates whenever `DESIGN.md` changes. Shows:
-- Color palettes with live swatches
-- Typography specimens using actual fonts
-- Component specifications with visual demos
+Then teammates just run `npm run design:update`.
 
 ---
 
-## For This Repo — Development
+## What the AI Agents Do
 
-### Rebuild the Website Locally
+Three specialized behaviors ship with the design system. They work the same way across Claude Code, Cursor, and Codex — just adapted to each tool's format.
+
+### Component Builder
+
+Tell your AI tool to build a component, and it will follow the exact Figma spec:
+- Outputs `.tsx` + `.module.css` pairs
+- Uses CSS custom properties (`var(--primary-500)`) — never hardcoded hex
+- Icons from MingCute only, via `@iconify/react`
+- Matches pixel-exact dimensions from the component tables
+- Implements all states: default, hover, pressed, disabled, error
+
+**Example prompts:**
+- *"Build a Primary button in all three sizes"*
+- *"Build a Model Card matching section 4.8 of DESIGN.md"*
+- *"Build the destructive confirmation pop-up from section 4.15"*
+
+### Design Reviewer
+
+Ask your AI tool to review code, and it checks every rule from the spec:
+- Hardcoded hex values (should be CSS custom properties)
+- Wrong icon libraries (must be MingCute)
+- Wrong fonts (Space Mono for code, Space Grotesk for UI)
+- Off-spec border radius, shadows on cards, missing disabled states
+
+Returns a structured **PASS / WARN / FAIL** report.
+
+**Example prompts:**
+- *"Review Button.tsx and Button.module.css for design compliance"*
+- *"Audit the sidebar component against the design system"*
+
+### Maintenance
+
+Helps safely edit `DESIGN.md` without breaking the structure:
+- Adds new color tokens following the naming convention (`--primary-N`)
+- Adds new component sections with the correct table format
+- Never deletes existing tokens or sections
+- Shows a diff before applying changes
+
+**Example prompts:**
+- *"Add a Date Picker component as section 4.16"*
+- *"Add a --primary-475 token between 450 and 500"*
+
+---
+
+## Tool-Specific Setup (Manual)
+
+<details>
+<summary><strong>Claude Code</strong> — manual steps</summary>
+
+```bash
+# Get the design spec
+curl -o DESIGN.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/DESIGN.md
+
+# Install agents
+bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install-agents.sh)
+```
+
+Restart Claude Code. Type `/agents` to see the three agents.
+
+</details>
+
+<details>
+<summary><strong>Cursor</strong> — manual steps</summary>
+
+```bash
+# Get the design spec
+curl -o DESIGN.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/DESIGN.md
+
+# Project-level rules (auto-loads when Cursor opens the project)
+curl -o .cursorrules https://raw.githubusercontent.com/Rida2000/csg-design-system/main/.cursorrules
+
+# Modular rules (activate on matching file patterns)
+mkdir -p .cursor/rules
+curl -o .cursor/rules/csg-component-builder.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-component-builder.mdc
+curl -o .cursor/rules/csg-design-reviewer.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-design-reviewer.mdc
+curl -o .cursor/rules/csg-maintenance.mdc https://raw.githubusercontent.com/Rida2000/csg-design-system/main/cursor/csg-maintenance.mdc
+```
+
+Restart Cursor. Rules activate automatically based on which files you're editing:
+
+| Rule | Activates on |
+|------|-------------|
+| Component Builder | `src/components/**/*.tsx` |
+| Design Reviewer | `src/**/*.tsx`, `src/**/*.css` |
+| Maintenance | `DESIGN.md` |
+
+</details>
+
+<details>
+<summary><strong>Codex (OpenAI)</strong> — manual steps</summary>
+
+```bash
+# Get the design spec
+curl -o DESIGN.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/DESIGN.md
+
+# Agent instructions (Codex reads this automatically)
+curl -o AGENTS.md https://raw.githubusercontent.com/Rida2000/csg-design-system/main/AGENTS.md
+```
+
+Codex picks up `AGENTS.md` from the project root. It contains the full design reference and all three agent behaviors.
+
+</details>
+
+---
+
+## Contributing to the Design System
+
+### Rebuild the website locally
 
 ```bash
 npm install
-npm run build
-npm run preview   # opens docs/index.html in a local server
+npm run build        # generates docs/index.html from DESIGN.md
+npm run preview      # serves docs/ on localhost
 ```
 
-### Project Structure
+### How it works
+
+`DESIGN.md` is the only file you edit. Everything else is derived from it:
 
 ```
-├── DESIGN.md                    # Single source of truth
-├── .cursorrules                 # Cursor project-level rules
-├── AGENTS.md                    # Codex agent instructions
-├── scripts/
-│   ├── build.js                 # Parses DESIGN.md → docs/index.html
-│   ├── install.sh               # Multi-tool installer (Claude/Cursor/Codex)
-│   └── install-agents.sh        # Claude Code agent installer
-├── agents/                      # Claude Code agents
-│   ├── csg-maintenance.md
-│   ├── csg-component-builder.md
-│   └── csg-design-reviewer.md
-├── cursor/                      # Cursor modular rules
-│   ├── csg-component-builder.mdc
-│   ├── csg-design-reviewer.mdc
-│   └── csg-maintenance.mdc
-└── docs/                        # Auto-generated — do not edit
-    └── index.html
+DESIGN.md                        you edit this
+  +--> docs/index.html           auto-generated website (npm run build)
+  +--> .cursorrules              references DESIGN.md
+  +--> AGENTS.md                 references DESIGN.md
+  +--> agents/*.md               reference DESIGN.md
 ```
 
-**Never edit `docs/` by hand.** Edit `DESIGN.md`, then `npm run build`.
+GitHub Actions auto-rebuilds `docs/` on every push to `main` that touches `DESIGN.md`.
 
-GitHub Actions auto-rebuilds `docs/` on every push to `main` that changes `DESIGN.md`.
+### Project structure
+
+```
+DESIGN.md                        Single source of truth
+.cursorrules                     Cursor project rules
+AGENTS.md                        Codex agent instructions
+scripts/
+  build.js                       DESIGN.md -> docs/index.html
+  install.sh                     Multi-tool installer
+  install-agents.sh              Claude Code agent installer
+agents/                          Claude Code agents
+  csg-maintenance.md
+  csg-component-builder.md
+  csg-design-reviewer.md
+cursor/                          Cursor modular rules
+  csg-component-builder.mdc
+  csg-design-reviewer.mdc
+  csg-maintenance.mdc
+docs/                            Auto-generated (do not edit)
+  index.html
+```
