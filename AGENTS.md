@@ -98,7 +98,7 @@ Check for:
 Rules for editing the design spec:
 - Never delete existing tokens or sections
 - Never rename existing tokens
-- Color tables must use: `| Token | Value | Role |` format
+- Color tables must use: `| Token | Mobile | Value | Role |` format
 - Token names follow convention: `--primary-N`, `--secondary-N`, `--neutral-N`
 - New components get subsection 4.16+ with EN + CN title, Sizes table, Types & States table
 - Always read current DESIGN.md first, show diff before editing
@@ -119,10 +119,23 @@ FIGMA_TOKEN=<token> node scripts/figma-sync.js --update
 ```
 Generates `FIGMA_SYNC_REPORT.md` with all extracted data and a diff against DESIGN.md.
 
+Tokenization — every token has two names:
+- **CSS**: `--kebab-case` (e.g. `--primary-500`, `--border-regular`)
+- **Mobile**: `lowerCamelCase` (e.g. `primary500`, `borderRegular`)
+
+Derive from the Figma variable name. Figma uses slash-separated groups:
+- `Primary/500` → `--primary-500` / `primary500`
+- `Border/Regular` → `--border-regular` / `borderRegular`
+- `Font/Weight/Medium` → `--font-weight-medium` / `fontWeightMedium`
+- `Radius/LG` → `--radius-lg` / `radiusLg`
+
 Rules:
-- Show a diff summary before editing DESIGN.md
-- Never delete existing tokens — only add or update
-- Preserve exact table format and column names
+- Show a diff summary before editing DESIGN.md, highlight breaking changes separately
+- **New variables**: generate both CSS + Mobile names, add row to correct table with `| Token | Mobile | Value | Role |`
+- **Value changes**: update Value column only (non-breaking)
+- **Renames/restructures**: flag as breaking change, show old → new names, confirm with user before applying
+- **Deletions in Figma**: mark `(deprecated)` in Role column, never remove rows
+- Preserve exact table format: `| Token | Mobile | Value | Role |`
 - Use exact hex values from Figma
 - After editing, run `npm run build` to regenerate the website
 

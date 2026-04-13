@@ -27,10 +27,25 @@ FIGMA_TOKEN=<token> node scripts/figma-sync.js --update
 
 Generates `FIGMA_SYNC_REPORT.md` with extracted data + diff.
 
+## Tokenization
+
+Every token has two names: **CSS** (`--kebab-case`) and **Mobile** (`lowerCamelCase`).
+
+Derive from Figma variable name (slash-separated):
+- `Primary/500` → CSS: `--primary-500`, Mobile: `primary500`
+- `Border/Regular` → CSS: `--border-regular`, Mobile: `borderRegular`
+- `Font/Weight/Medium` → CSS: `--font-weight-medium`, Mobile: `fontWeightMedium`
+
+**New variables**: generate both token names, add row to correct table with `| Token | Mobile | Value | Role |`
+**Renames/restructures**: flag as breaking change, show old → new names, confirm with user before applying
+**Value changes**: update Value column only (non-breaking)
+**Deletions in Figma**: mark `(deprecated)` in Role column, never remove
+
 ## Sync rules
 - Compare Figma values against DESIGN.md tables (Sections 2-6)
-- Show a diff summary before editing
-- Never delete existing tokens — only add or update values
-- Preserve exact table format and column names
+- Show a diff summary before editing, highlight breaking changes separately
+- Never delete existing tokens — only add, update, or mark deprecated
+- Preserve exact table format: `| Token | Mobile | Value | Role |`
 - Use exact hex values from Figma
+- Generate both CSS and Mobile token names for every new variable
 - After editing, remind to run `npm run build`
