@@ -75,8 +75,8 @@ install_claude() {
     "csg-design-reviewer.md"
     "csg-figma-sync.md"
     "design-bridge.md"
-    "frontend-developer.md"
-    "ui-designer.md"
+    "csg-frontend-developer.md"
+    "csg-ui-designer.md"
   )
   for name in "${agents[@]}"; do
     download_file "agents/$name" "$AGENTS_DIR/$name"

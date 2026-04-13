@@ -82,24 +82,19 @@ When `DESIGN.md` is in your project root, your AI tool automatically:
 
 ## AI Agents
 
-Seven agents ship with the design system. The first four are CSG-specific (design system rules baked in). The last three are general-purpose agents from [VoltAgent](https://github.com/VoltAgent/awesome-claude-code-subagents) that pair well with any design system workflow.
+Seven agents ship with the design system. All are token-first — they read `DESIGN.md` and use CSS variables and Mobile token names instead of hardcoded values.
 
 ### Design System Agents
 
 | Agent | What it does | Example prompt |
 |-------|-------------|----------------|
-| **Component Builder** | Generates `.tsx` + `.module.css` pairs matching the exact Figma spec. CSS custom properties only, MingCute icons, all states. | *"Build a Primary button in all three sizes"* |
-| **Design Reviewer** | Audits code against the spec. Returns a PASS / WARN / FAIL report for colors, icons, fonts, radius, shadows, disabled states. | *"Review Button.tsx for design compliance"* |
-| **Maintenance** | Safely edits `DESIGN.md` — adds tokens, adds component sections, never breaks the table format. | *"Add a Date Picker component as section 4.16"* |
-| **Figma Sync** | Pulls latest tokens and component specs from the Figma file into `DESIGN.md`. Works via MCP or REST API. | *"Sync DESIGN.md with the latest Figma file"* |
-
-### General-Purpose Agents (from VoltAgent)
-
-| Agent | What it does | Example prompt |
-|-------|-------------|----------------|
-| **Design Bridge** | Translates `DESIGN.md` into polished build instructions for any UI framework. Bridges the gap between design spec and implementation. | *"Translate DESIGN.md into Tailwind setup instructions"* |
-| **Frontend Developer** | Full frontend development across React, Vue, and Angular. Multi-framework expertise with full-stack integration. | *"Build the model cards grid page with filtering"* |
-| **UI Designer** | Visual interface design, component libraries, interaction patterns, and accessibility. Expert at refining aesthetics. | *"Design an empty state illustration for the model library"* |
+| **csg-component-builder** | Generates `.tsx` + `.module.css` pairs matching the exact Figma spec. CSS custom properties only, MingCute icons, all states. | *"Build a Primary button in all three sizes"* |
+| **csg-design-reviewer** | Audits code against the spec. Returns a PASS / WARN / FAIL report for colors, icons, fonts, radius, shadows, disabled states. | *"Review Button.tsx for design compliance"* |
+| **csg-maintenance** | Safely edits `DESIGN.md` — adds tokens, adds component sections, never breaks the table format. | *"Add a Date Picker component as section 4.16"* |
+| **csg-figma-sync** | Pulls latest tokens and component specs from the Figma file into `DESIGN.md`. Generates CSS + Mobile token names, flags breaking changes. | *"Sync DESIGN.md with the latest Figma file"* |
+| **csg-frontend-developer** | Full frontend development across React, Vue, Angular, and React Native. Token-first: reads DESIGN.md and uses `var(--token)` / mobile `camelCase` tokens. | *"Build the model cards grid page with filtering"* |
+| **csg-ui-designer** | Visual interface design, interaction patterns, accessibility. Specifies all designs using existing tokens; flags when new tokens are needed. | *"Design an empty state illustration for the model library"* |
+| **design-bridge** | Translates `DESIGN.md` into polished build instructions for any UI framework. Bridges the gap between design spec and implementation. | *"Translate DESIGN.md into Tailwind setup instructions"* |
 
 ### Figma Sync Details
 
@@ -221,8 +216,8 @@ agents/                          Claude Code agents
   csg-maintenance.md             DESIGN.md editor
   csg-figma-sync.md              Figma -> DESIGN.md sync
   design-bridge.md               DESIGN.md -> build instructions (VoltAgent)
-  frontend-developer.md          Multi-framework frontend dev (VoltAgent)
-  ui-designer.md                 Visual design + accessibility (VoltAgent)
+  csg-frontend-developer.md      Multi-framework frontend dev, token-first
+  csg-ui-designer.md             Visual design + accessibility, token-first
 cursor/                          Cursor modular rules (.mdc)
   csg-component-builder.mdc
   csg-design-reviewer.mdc
