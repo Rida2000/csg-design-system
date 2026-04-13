@@ -141,17 +141,30 @@ td{
 tr:hover td{background:var(--neutral-50)}
 
 /* ── Color swatches ────────────────────────────────────── */
-.swatch-grid{display:flex;flex-direction:column;gap:0.375rem;margin:1rem 0}
+.swatch-grid{display:flex;flex-direction:column;gap:0.5rem;margin:1rem 0}
 .swatch-row{
-  display:grid;grid-template-columns:40px 220px 120px 1fr;
-  align-items:center;gap:0.75rem;padding:0.375rem 0;
+  display:grid;grid-template-columns:40px 260px 120px 1fr;
+  align-items:center;gap:0.75rem;padding:0.5rem 0;
   border-bottom:1px solid var(--border-light);
 }
 .swatch{
   width:36px;height:36px;border-radius:var(--radius-md);
   border:1px solid var(--border-medium);flex-shrink:0;
 }
-.token-name{font-family:var(--font-family-code);font-size:0.8rem;color:var(--secondary-500);background:transparent;padding:0}
+.token-names{display:flex;flex-direction:column;gap:2px;min-width:0}
+.token-name{
+  font-family:var(--font-family-code);font-size:0.8rem;
+  color:var(--secondary-500);background:transparent;padding:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.token-mobile{
+  font-family:var(--font-family-code);font-size:0.72rem;
+  color:var(--neutral-500);background:transparent;padding:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.token-mobile::before{
+  content:"mobile: ";color:var(--neutral-400);font-size:0.65rem;
+}
 .token-value{font-family:var(--font-family-code);font-size:0.8rem;color:var(--neutral-600)}
 .token-role{font-size:0.8rem;color:var(--neutral-500)}
 
@@ -159,8 +172,10 @@ tr:hover td{background:var(--neutral-50)}
 .type-scale{display:flex;flex-direction:column;gap:1.5rem;margin:1.5rem 0}
 .type-specimen{border-bottom:1px solid var(--border-light);padding-bottom:1.25rem}
 .specimen-text{font-family:var(--font-family-en);color:var(--neutral-900);line-height:1.2;margin:0 0 0.5rem}
-.specimen-meta{display:flex;gap:1rem;flex-wrap:wrap}
+.specimen-meta{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center}
 .specimen-meta code{font-size:0.75rem}
+.specimen-meta code[title="Mobile"]{color:var(--neutral-500)}
+.specimen-meta code[title="Mobile"]::before{content:"mobile: ";color:var(--neutral-400);font-size:0.65rem}
 .specimen-meta span{font-size:0.75rem;color:var(--neutral-500)}
 
 .type-hierarchy{display:flex;flex-direction:column;gap:1.25rem;margin:1.5rem 0}
@@ -374,348 +389,519 @@ tr:hover td{background:var(--neutral-50)}
 <div class="swatch-grid">
       <div class="swatch-row">
         <div class="swatch" style="background:#F5FCE8;" title="#F5FCE8"></div>
-        <code class="token-name">--primary-50</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-50</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary50</code>
+        </div>
         <span class="token-value">#F5FCE8</span>
         <span class="token-role">Tint backgrounds, success fill</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#E8F8C8;" title="#E8F8C8"></div>
-        <code class="token-name">--primary-100</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-100</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary100</code>
+        </div>
         <span class="token-value">#E8F8C8</span>
         <span class="token-role">Hover backgrounds on light surfaces</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#D4F394;" title="#D4F394"></div>
-        <code class="token-name">--primary-200</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-200</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary200</code>
+        </div>
         <span class="token-value">#D4F394</span>
         <span class="token-role">Active/pressed tints</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#BDED60;" title="#BDED60"></div>
-        <code class="token-name">--primary-300</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-300</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary300</code>
+        </div>
         <span class="token-value">#BDED60</span>
         <span class="token-role">Progress bars, subtle accents</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#A8E03C;" title="#A8E03C"></div>
-        <code class="token-name">--primary-400</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-400</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary400</code>
+        </div>
         <span class="token-value">#A8E03C</span>
         <span class="token-role">Hover state for primary elements</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#A3D830;" title="#A3D830"></div>
-        <code class="token-name">--primary-450</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-450</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary450</code>
+        </div>
         <span class="token-value">#A3D830</span>
         <span class="token-role">Mid-hover</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#8FC31F;" title="#8FC31F"></div>
-        <code class="token-name">--primary-500</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-500</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary500</code>
+        </div>
         <span class="token-value">#8FC31F</span>
         <span class="token-role">**Primary CTA, interactive accent**</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#76A219;" title="#76A219"></div>
-        <code class="token-name">--primary-600</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-600</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary600</code>
+        </div>
         <span class="token-value">#76A219</span>
         <span class="token-role">Active/pressed primary</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#5D8113;" title="#5D8113"></div>
-        <code class="token-name">--primary-700</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-700</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary700</code>
+        </div>
         <span class="token-value">#5D8113</span>
         <span class="token-role">Dark text on light primary bg</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#44600D;" title="#44600D"></div>
-        <code class="token-name">--primary-800</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-800</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary800</code>
+        </div>
         <span class="token-value">#44600D</span>
         <span class="token-role">Deep emphasis</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#2B3F08;" title="#2B3F08"></div>
-        <code class="token-name">--primary-900</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--primary-900</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">primary900</code>
+        </div>
         <span class="token-value">#2B3F08</span>
         <span class="token-role">Near-black green, high-contrast text</span>
       </div></div><h3 id="secondary-deep-teal-accents-dark-text">Secondary (Deep Teal — Accents &amp; Dark Text)</h3>
 <div class="swatch-grid">
       <div class="swatch-row">
         <div class="swatch" style="background:#E6F1F3;" title="#E6F1F3"></div>
-        <code class="token-name">--secondary-50</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-50</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary50</code>
+        </div>
         <span class="token-value">#E6F1F3</span>
         <span class="token-role">Tinted chip/tag backgrounds</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#CCE3E7;" title="#CCE3E7"></div>
-        <code class="token-name">--secondary-100</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-100</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary100</code>
+        </div>
         <span class="token-value">#CCE3E7</span>
         <span class="token-role">Hover tint on teal-accented elements</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#99C7CF;" title="#99C7CF"></div>
-        <code class="token-name">--secondary-200</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-200</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary200</code>
+        </div>
         <span class="token-value">#99C7CF</span>
         <span class="token-role">Inactive chip text, muted teal accents</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#66ABB7;" title="#66ABB7"></div>
-        <code class="token-name">--secondary-300</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-300</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary300</code>
+        </div>
         <span class="token-value">#66ABB7</span>
         <span class="token-role">Decorative borders, secondary icons</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#338F9F;" title="#338F9F"></div>
-        <code class="token-name">--secondary-400</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-400</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary400</code>
+        </div>
         <span class="token-value">#338F9F</span>
         <span class="token-role">Secondary interactive elements, info state</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#045E77;" title="#045E77"></div>
-        <code class="token-name">--secondary-450</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-450</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary450</code>
+        </div>
         <span class="token-value">#045E77</span>
         <span class="token-role">Mid-tier teal accent</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#003A4A;" title="#003A4A"></div>
-        <code class="token-name">--secondary-500</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-500</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary500</code>
+        </div>
         <span class="token-value">#003A4A</span>
         <span class="token-role">**Primary dark text, section headings**</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#002E3B;" title="#002E3B"></div>
-        <code class="token-name">--secondary-600</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-600</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary600</code>
+        </div>
         <span class="token-value">#002E3B</span>
         <span class="token-role">Pressed/active dark text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#00232C;" title="#00232C"></div>
-        <code class="token-name">--secondary-700</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-700</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary700</code>
+        </div>
         <span class="token-value">#00232C</span>
         <span class="token-role">Deep accent text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#00171E;" title="#00171E"></div>
-        <code class="token-name">--secondary-800</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-800</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary800</code>
+        </div>
         <span class="token-value">#00171E</span>
         <span class="token-role">Near-black teal, maximum contrast text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#000C0F;" title="#000C0F"></div>
-        <code class="token-name">--secondary-900</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--secondary-900</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">secondary900</code>
+        </div>
         <span class="token-value">#000C0F</span>
         <span class="token-role">Absolute darkest — use sparingly</span>
       </div></div><h3 id="neutral-pure-gray-surfaces-text">Neutral (Pure Gray — Surfaces &amp; Text)</h3>
 <div class="swatch-grid">
       <div class="swatch-row">
         <div class="swatch" style="background:#FAFAFA;" title="#FAFAFA"></div>
-        <code class="token-name">--neutral-50</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-50</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral50</code>
+        </div>
         <span class="token-value">#FAFAFA</span>
         <span class="token-role">Recessed chrome: nav bars, input bg, modal header/footer</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#F5F5F5;" title="#F5F5F5"></div>
-        <code class="token-name">--neutral-100</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-100</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral100</code>
+        </div>
         <span class="token-value">#F5F5F5</span>
         <span class="token-role">Subtle hover tint on white surfaces</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#E5E5E5;" title="#E5E5E5"></div>
-        <code class="token-name">--neutral-200</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-200</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral200</code>
+        </div>
         <span class="token-value">#E5E5E5</span>
         <span class="token-role">Default border, card dividers</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#D4D4D4;" title="#D4D4D4"></div>
-        <code class="token-name">--neutral-300</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-300</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral300</code>
+        </div>
         <span class="token-value">#D4D4D4</span>
         <span class="token-role">Medium borders, disabled button bg</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#A3A3A3;" title="#A3A3A3"></div>
-        <code class="token-name">--neutral-400</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-400</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral400</code>
+        </div>
         <span class="token-value">#A3A3A3</span>
         <span class="token-role">Placeholder text, disabled text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#737373;" title="#737373"></div>
-        <code class="token-name">--neutral-500</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-500</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral500</code>
+        </div>
         <span class="token-value">#737373</span>
         <span class="token-role">Secondary / meta text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#525252;" title="#525252"></div>
-        <code class="token-name">--neutral-600</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-600</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral600</code>
+        </div>
         <span class="token-value">#525252</span>
         <span class="token-role">Caption text, labels</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#404040;" title="#404040"></div>
-        <code class="token-name">--neutral-700</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-700</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral700</code>
+        </div>
         <span class="token-value">#404040</span>
         <span class="token-role">Body text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#262626;" title="#262626"></div>
-        <code class="token-name">--neutral-800</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-800</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral800</code>
+        </div>
         <span class="token-value">#262626</span>
         <span class="token-role">Strong body text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#171717;" title="#171717"></div>
-        <code class="token-name">--neutral-900</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--neutral-900</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">neutral900</code>
+        </div>
         <span class="token-value">#171717</span>
         <span class="token-role">Primary heading text</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
-        <code class="token-name">--white</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--white</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">white</code>
+        </div>
         <span class="token-value">#FFFFFF</span>
         <span class="token-role">Page background, card surfaces</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#000000;" title="#000000"></div>
-        <code class="token-name">--black</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--black</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">black</code>
+        </div>
         <span class="token-value">#000000</span>
         <span class="token-role">Pure black — avoid in UI, use --neutral-900 instead</span>
       </div></div><h3 id="semantic-colors">Semantic Colors</h3>
 <div class="swatch-grid">
       <div class="swatch-row">
         <div class="swatch" style="background:#8FC31F;" title="#8FC31F"></div>
-        <code class="token-name">--success</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--success</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">success</code>
+        </div>
         <span class="token-value">#8FC31F</span>
         <span class="token-role">Matches primary-500 — model loaded, inference OK</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#A8E03C;" title="#A8E03C"></div>
-        <code class="token-name">--success-light</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--success-light</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">successLight</code>
+        </div>
         <span class="token-value">#A8E03C</span>
         <span class="token-role">Success hover</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#76A219;" title="#76A219"></div>
-        <code class="token-name">--success-dark</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--success-dark</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">successDark</code>
+        </div>
         <span class="token-value">#76A219</span>
         <span class="token-role">Success active/pressed</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#FF9500;" title="#FF9500"></div>
-        <code class="token-name">--warning</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--warning</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">warning</code>
+        </div>
         <span class="token-value">#FF9500</span>
         <span class="token-role">Throttling, resource alerts</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#FFB340;" title="#FFB340"></div>
-        <code class="token-name">--warning-light</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--warning-light</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">warningLight</code>
+        </div>
         <span class="token-value">#FFB340</span>
         <span class="token-role">Warning hover</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#CC7700;" title="#CC7700"></div>
-        <code class="token-name">--warning-dark</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--warning-dark</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">warningDark</code>
+        </div>
         <span class="token-value">#CC7700</span>
         <span class="token-role">Warning active</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#DC2626;" title="#DC2626"></div>
-        <code class="token-name">--error</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--error</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">error</code>
+        </div>
         <span class="token-value">#DC2626</span>
         <span class="token-role">Error state, failed inference</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#EF4444;" title="#EF4444"></div>
-        <code class="token-name">--error-light</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--error-light</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">errorLight</code>
+        </div>
         <span class="token-value">#EF4444</span>
         <span class="token-role">Error hover</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#B91C1C;" title="#B91C1C"></div>
-        <code class="token-name">--error-dark</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--error-dark</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">errorDark</code>
+        </div>
         <span class="token-value">#B91C1C</span>
         <span class="token-role">Error active</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#003A4A;" title="#003A4A"></div>
-        <code class="token-name">--info</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--info</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">info</code>
+        </div>
         <span class="token-value">#003A4A</span>
         <span class="token-role">Matches secondary-500</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#338F9F;" title="#338F9F"></div>
-        <code class="token-name">--info-light</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--info-light</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">infoLight</code>
+        </div>
         <span class="token-value">#338F9F</span>
         <span class="token-role">Info hover</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#002E3B;" title="#002E3B"></div>
-        <code class="token-name">--info-dark</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--info-dark</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">infoDark</code>
+        </div>
         <span class="token-value">#002E3B</span>
         <span class="token-role">Info active</span>
       </div></div><h3 id="border-colors">Border Colors</h3>
 <div class="swatch-grid">
       <div class="swatch-row">
         <div class="swatch" style="background:#F5F5F5;" title="#F5F5F5"></div>
-        <code class="token-name">--border-light</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-light</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderLight</code>
+        </div>
         <span class="token-value">#F5F5F5</span>
         <span class="token-role">Subtle internal dividers</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#E5E5E5;" title="#E5E5E5"></div>
-        <code class="token-name">--border</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">border</code>
+        </div>
         <span class="token-value">#E5E5E5</span>
         <span class="token-role">Default card/container border</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#D9D9D9;" title="#D9D9D9"></div>
-        <code class="token-name">--border-regular</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-regular</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderRegular</code>
+        </div>
         <span class="token-value">#D9D9D9</span>
         <span class="token-role">Modal/pop-up chrome borders, input borders</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#D4D4D4;" title="#D4D4D4"></div>
-        <code class="token-name">--border-medium</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-medium</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderMedium</code>
+        </div>
         <span class="token-value">#D4D4D4</span>
         <span class="token-role">Moderate emphasis borders</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#A3A3A3;" title="#A3A3A3"></div>
-        <code class="token-name">--border-dark</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-dark</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderDark</code>
+        </div>
         <span class="token-value">#A3A3A3</span>
         <span class="token-role">Strong interactive borders</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#8FC31F;" title="#8FC31F"></div>
-        <code class="token-name">--border-primary</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-primary</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderPrimary</code>
+        </div>
         <span class="token-value">#8FC31F</span>
         <span class="token-role">Active/selected/focus state</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#003A4A;" title="#003A4A"></div>
-        <code class="token-name">--border-secondary</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-secondary</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderSecondary</code>
+        </div>
         <span class="token-value">#003A4A</span>
         <span class="token-role">Teal-accented borders</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#8FC31F;" title="#8FC31F"></div>
-        <code class="token-name">--border-success</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-success</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderSuccess</code>
+        </div>
         <span class="token-value">#8FC31F</span>
         <span class="token-role">Success outlined elements</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#FF9500;" title="#FF9500"></div>
-        <code class="token-name">--border-warning</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-warning</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderWarning</code>
+        </div>
         <span class="token-value">#FF9500</span>
         <span class="token-role">Warning outlined elements</span>
       </div>
       <div class="swatch-row">
         <div class="swatch" style="background:#DC2626;" title="#DC2626"></div>
-        <code class="token-name">--border-error</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--border-error</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">borderError</code>
+        </div>
         <span class="token-value">#DC2626</span>
         <span class="token-role">Error outlined elements</span>
       </div></div><h3 id="semantic-surface-colors">Semantic Surface Colors</h3>
 <div class="swatch-grid">
       <div class="swatch-row">
         <div class="swatch" style="background:#FFF1F1;" title="#FFF1F1"></div>
-        <code class="token-name">--semantic-error-bg-light</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">--semantic-error-bg-light</code>
+          <code class="token-mobile" title="Mobile (lowerCamelCase)">semanticErrorBgLight</code>
+        </div>
         <span class="token-value">#FFF1F1</span>
         <span class="token-role">Error/validation inline alert background (light surface only)</span>
       </div></div><hr/>
@@ -730,7 +916,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-xs</code>
+          <code title="CSS">--text-xs</code>
+          <code title="Mobile">textXs</code>
           <span>0.625rem</span>
           <span>letter-spacing: normal</span>
         </div>
@@ -740,7 +927,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-xs</code>
+          <code title="CSS">--text-xs</code>
+          <code title="Mobile">textXs</code>
           <span>0.75rem</span>
           <span>letter-spacing: normal</span>
         </div>
@@ -750,7 +938,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-sm</code>
+          <code title="CSS">--text-sm</code>
+          <code title="Mobile">textSm</code>
           <span>0.875rem</span>
           <span>letter-spacing: normal</span>
         </div>
@@ -760,7 +949,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-base</code>
+          <code title="CSS">--text-base</code>
+          <code title="Mobile">textBase</code>
           <span>1rem</span>
           <span>letter-spacing: normal</span>
         </div>
@@ -770,7 +960,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-lg</code>
+          <code title="CSS">--text-lg</code>
+          <code title="Mobile">textLg</code>
           <span>1.125rem</span>
           <span>letter-spacing: normal</span>
         </div>
@@ -780,7 +971,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-xl</code>
+          <code title="CSS">--text-xl</code>
+          <code title="Mobile">textXl</code>
           <span>1.375rem</span>
           <span>letter-spacing: -0.01rem</span>
         </div>
@@ -790,7 +982,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-2xl</code>
+          <code title="CSS">--text-2xl</code>
+          <code title="Mobile">text2xl</code>
           <span>1.875rem</span>
           <span>letter-spacing: -0.01rem</span>
         </div>
@@ -800,7 +993,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-3xl</code>
+          <code title="CSS">--text-3xl</code>
+          <code title="Mobile">text3xl</code>
           <span>2.25rem</span>
           <span>letter-spacing: -0.02rem</span>
         </div>
@@ -810,7 +1004,8 @@ tr:hover td{background:var(--neutral-50)}
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>--text-4xl</code>
+          <code title="CSS">--text-4xl</code>
+          <code title="Mobile">text4xl</code>
           <span>3rem</span>
           <span>letter-spacing: -0.03rem</span>
         </div>

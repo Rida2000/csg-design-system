@@ -63,21 +63,29 @@ function isComponentSection(h2) { return /^4\./.test(h2); }
 function renderColorTable(headers, rows) {
   // Find columns dynamically (supports Token|Value|Role and Token|Mobile|Value|Role)
   const headerTexts = headers.map(h => cellText(h).toLowerCase().replace(/\*\*/g,''));
+  const mobIdx = headerTexts.indexOf('mobile');
   const valIdx = headerTexts.indexOf('value');
   const roleIdx = headerTexts.indexOf('role');
   let html = '<div class="swatch-grid">';
   for (const row of rows) {
     const token = cellText(row[0]).replace(/`/g, '');
+    const mobile = mobIdx >= 0 ? cellText(row[mobIdx]).replace(/`/g, '') : '';
     const value = cellText(row[valIdx >= 0 ? valIdx : 1]).replace(/`/g, '');
     const role  = cellText(row[roleIdx >= 0 ? roleIdx : row.length - 1]).replace(/`/g, '');
     const color = extractColor(value);
     const swatchStyle = color
       ? `background:${color};`
       : 'background: repeating-linear-gradient(45deg,#ccc 0,#ccc 5px,#fff 5px,#fff 10px);';
+    const mobileBlock = mobile
+      ? `<code class="token-mobile" title="Mobile (lowerCamelCase)">${escapeHtml(mobile)}</code>`
+      : '';
     html += `
       <div class="swatch-row">
         <div class="swatch" style="${escapeHtml(swatchStyle)}" title="${escapeHtml(color || 'no color')}"></div>
-        <code class="token-name">${escapeHtml(token)}</code>
+        <div class="token-names">
+          <code class="token-name" title="CSS custom property">${escapeHtml(token)}</code>
+          ${mobileBlock}
+        </div>
         <span class="token-value">${escapeHtml(color || value)}</span>
         <span class="token-role">${escapeHtml(role)}</span>
       </div>`;
@@ -88,11 +96,13 @@ function renderColorTable(headers, rows) {
 
 function renderTypeScaleTable(headers, rows) {
   const headerTexts = headers.map(h => cellText(h).toLowerCase().replace(/\*\*/g,''));
+  const mobIdx = headerTexts.indexOf('mobile');
   const sizeIdx = headerTexts.indexOf('size');
   const spIdx = headerTexts.findIndex(h => h.includes('spacing'));
   let html = '<div class="type-scale">';
   for (const row of rows) {
     const token   = cellText(row[0]).replace(/`/g, '');
+    const mobile  = mobIdx >= 0 ? cellText(row[mobIdx]).replace(/`/g, '') : '';
     const sizeRaw = cellText(row[sizeIdx >= 0 ? sizeIdx : 1]).replace(/`/g, '');
     const spacing = cellText(row[spIdx >= 0 ? spIdx : 2]).replace(/`/g, '');
     // parse rem or px
@@ -101,13 +111,15 @@ function renderTypeScaleTable(headers, rows) {
     const remVal   = remMatch ? remMatch[1] : (pxMatch ? (parseFloat(pxMatch[1])/16).toFixed(3) : '1');
     const lsVal    = spacing === 'normal' ? 'normal' : spacing;
     const label    = sizeRaw.split('/')[0].trim();
+    const mobileCode = mobile ? `<code title="Mobile">${escapeHtml(mobile)}</code>` : '';
     html += `
       <div class="type-specimen">
         <p class="specimen-text" style="font-size:${remVal}rem;letter-spacing:${lsVal};font-family:'Space Grotesk',ui-sans-serif,system-ui">
           The quick brown fox jumps
         </p>
         <div class="specimen-meta">
-          <code>${escapeHtml(token)}</code>
+          <code title="CSS">${escapeHtml(token)}</code>
+          ${mobileCode}
           <span>${escapeHtml(label)}</span>
           <span>letter-spacing: ${escapeHtml(lsVal)}</span>
         </div>
@@ -510,17 +522,30 @@ td{
 tr:hover td{background:var(--neutral-50)}
 
 /* ── Color swatches ────────────────────────────────────── */
-.swatch-grid{display:flex;flex-direction:column;gap:0.375rem;margin:1rem 0}
+.swatch-grid{display:flex;flex-direction:column;gap:0.5rem;margin:1rem 0}
 .swatch-row{
-  display:grid;grid-template-columns:40px 220px 120px 1fr;
-  align-items:center;gap:0.75rem;padding:0.375rem 0;
+  display:grid;grid-template-columns:40px 260px 120px 1fr;
+  align-items:center;gap:0.75rem;padding:0.5rem 0;
   border-bottom:1px solid var(--border-light);
 }
 .swatch{
   width:36px;height:36px;border-radius:var(--radius-md);
   border:1px solid var(--border-medium);flex-shrink:0;
 }
-.token-name{font-family:var(--font-family-code);font-size:0.8rem;color:var(--secondary-500);background:transparent;padding:0}
+.token-names{display:flex;flex-direction:column;gap:2px;min-width:0}
+.token-name{
+  font-family:var(--font-family-code);font-size:0.8rem;
+  color:var(--secondary-500);background:transparent;padding:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.token-mobile{
+  font-family:var(--font-family-code);font-size:0.72rem;
+  color:var(--neutral-500);background:transparent;padding:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.token-mobile::before{
+  content:"mobile: ";color:var(--neutral-400);font-size:0.65rem;
+}
 .token-value{font-family:var(--font-family-code);font-size:0.8rem;color:var(--neutral-600)}
 .token-role{font-size:0.8rem;color:var(--neutral-500)}
 
@@ -528,8 +553,10 @@ tr:hover td{background:var(--neutral-50)}
 .type-scale{display:flex;flex-direction:column;gap:1.5rem;margin:1.5rem 0}
 .type-specimen{border-bottom:1px solid var(--border-light);padding-bottom:1.25rem}
 .specimen-text{font-family:var(--font-family-en);color:var(--neutral-900);line-height:1.2;margin:0 0 0.5rem}
-.specimen-meta{display:flex;gap:1rem;flex-wrap:wrap}
+.specimen-meta{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center}
 .specimen-meta code{font-size:0.75rem}
+.specimen-meta code[title="Mobile"]{color:var(--neutral-500)}
+.specimen-meta code[title="Mobile"]::before{content:"mobile: ";color:var(--neutral-400);font-size:0.65rem}
 .specimen-meta span{font-size:0.75rem;color:var(--neutral-500)}
 
 .type-hierarchy{display:flex;flex-direction:column;gap:1.25rem;margin:1.5rem 0}
