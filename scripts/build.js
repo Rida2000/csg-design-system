@@ -342,6 +342,14 @@ function build() {
       if (tok.depth === 3) currentH3 = text;
       const cls = tok.depth <= 2 ? ' class="section-heading"' : '';
       bodyHtml += `<${tag} id="${escapeHtml(id)}"${cls}>${escapeHtml(text)}</${tag}>\n`;
+      // Inject metadata banner right after the page title (h1)
+      if (tok.depth === 1) {
+        bodyHtml += `<div class="top-meta">
+          <div class="meta-item"><span class="meta-label">Figma Version</span><code>${escapeHtml(meta.figmaVersion)}</code></div>
+          <div class="meta-item"><span class="meta-label">Last Synced from Figma</span><code>${escapeHtml(meta.figmaSyncedAt)}</code></div>
+          <div class="meta-item"><span class="meta-label">Last Updated</span><code>${escapeHtml(meta.lastUpdate)}</code></div>
+        </div>\n`;
+      }
       if (isComponentSection(text)) componentCount++;
       continue;
     }
@@ -523,7 +531,7 @@ body{
 /* ── Top metadata banner (main content) ────────────────── */
 .top-meta{
   display:flex;gap:2rem;flex-wrap:wrap;
-  padding:0.75rem 1rem;margin:0 0 2rem;
+  padding:0.75rem 1rem;margin:0.75rem 0 2.5rem;
   background:var(--neutral-50);
   border:1px solid var(--border);
   border-radius:var(--radius-md);
@@ -799,11 +807,6 @@ tr:hover td{background:var(--neutral-50)}
 </nav>
 
 <main class="main">
-  <div class="top-meta">
-    <div class="meta-item"><span class="meta-label">Figma Version</span><code>${escapeHtml(meta.figmaVersion)}</code></div>
-    <div class="meta-item"><span class="meta-label">Last Synced from Figma</span><code>${escapeHtml(meta.figmaSyncedAt)}</code></div>
-    <div class="meta-item"><span class="meta-label">Last Updated</span><code>${escapeHtml(meta.lastUpdate)}</code></div>
-  </div>
   ${bodyHtml}
 </main>
 
