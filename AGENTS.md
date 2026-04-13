@@ -126,8 +126,9 @@ Tokenization — every token has two names:
 Derive from the Figma variable name. Figma uses slash-separated groups:
 - `Primary/500` → `--primary-500` / `primary500`
 - `Border/Regular` → `--border-regular` / `borderRegular`
-- `Font/Weight/Medium` → `--font-weight-medium` / `fontWeightMedium`
 - `Radius/LG` → `--radius-lg` / `radiusLg`
+
+**Exception**: font weights are NOT tokenized. Use raw numeric values (`300`–`800`).
 
 Rules:
 - Show a diff summary before editing DESIGN.md, highlight breaking changes separately

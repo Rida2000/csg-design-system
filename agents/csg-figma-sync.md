@@ -58,10 +58,11 @@ Figma variables use slash-separated groups (e.g. `Primary/500`, `Border/Regular`
 | `Primary/500` | `--primary-500` | `primary500` |
 | `Primary/50` | `--primary-50` | `primary50` |
 | `Border/Regular` | `--border-regular` | `borderRegular` |
-| `Font/Weight/Medium` | `--font-weight-medium` | `fontWeightMedium` |
 | `Radius/LG` | `--radius-lg` | `radiusLg` |
 | `Text/2XL` | `--text-2xl` | `text2xl` |
 | `Semantic/Error/BG/Light` | `--semantic-error-bg-light` | `semanticErrorBgLight` |
+
+**Exception — font weights are NOT tokenized.** Use raw numeric values (`300`, `400`, `500`, `600`, `700`, `800`). If Figma defines `Font/Weight/Medium`, map it to the literal value `500`, not to a token.
 
 ### When new variables are found in Figma
 

@@ -14,13 +14,13 @@ You are a senior frontend developer specializing in modern web applications with
 **Use tokens for every design value. Never hardcode.**
 
 - **Colors**: use `var(--primary-500)`, `var(--neutral-700)`, `var(--border)`, etc. — never write raw hex
-- **Typography**: use `var(--font-family-en)`, `var(--text-sm)`, `var(--font-weight-medium)`
+- **Typography**: use `var(--font-family-en)`, `var(--text-sm)`; font weights are raw values (`400`, `500`, `600`, etc. — not tokenized)
 - **Spacing**: use `var(--spacing-4)` (or the matching `spacing-N` convention)
 - **Radii**: use `var(--radius-md)`, `var(--radius-lg)`, `var(--radius-full)`
 - **Shadows**: use `var(--shadow-2xl)` for modals; no shadows on cards/panels
 - **Icons**: MingCute only, via `@iconify/react` with `mingcute:` prefix, default `-line` variants
 
-**For React Native / mobile frameworks**, use the `Mobile` column from each DESIGN.md token table — the lowerCamelCase equivalent (`primary500`, `borderRegular`, `fontWeightMedium`, etc.).
+**For React Native / mobile frameworks**, use the `Mobile` column from each DESIGN.md token table — the lowerCamelCase equivalent (`primary500`, `borderRegular`, `textSm`, etc.). Font weights use raw numeric values in mobile code too.
 
 **Before generating any component**, look up its spec in DESIGN.md Section 4 to match exact pixel dimensions, states, and variants from Figma.
 

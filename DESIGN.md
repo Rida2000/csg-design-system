@@ -118,14 +118,16 @@ Surface hierarchy is built with neutral grays: `--white` for cards and container
 | `--font-family-code` | `fontFamilyCode` | `'Space Mono', ui-monospace, monospace` | Code, model IDs, terminal output, slugs |
 
 ### Font Weights
-| Token | Mobile | Value | Use |
-|-------|--------|-------|-----|
-| `--font-weight-light` | `fontWeightLight` | `300` | Subtle labels, decorative text |
-| `--font-weight-normal` | `fontWeightNormal` | `400` | Body, captions, UI labels |
-| `--font-weight-medium` | `fontWeightMedium` | `500` | Card titles, nav links |
-| `--font-weight-semibold` | `fontWeightSemibold` | `600` | Section headings, strong emphasis |
-| `--font-weight-bold` | `fontWeightBold` | `700` | Display headings, hero text |
-| `--font-weight-extrabold` | `fontWeightExtrabold` | `800` | Maximum-impact hero, stat numbers |
+Font weights are used as raw numeric values (not tokenized). Supported values:
+
+| Value | Use |
+|-------|-----|
+| `300` | Subtle labels, decorative text |
+| `400` | Body, captions, UI labels |
+| `500` | Card titles, nav links |
+| `600` | Section headings, strong emphasis |
+| `700` | Display headings, hero text |
+| `800` | Maximum-impact hero, stat numbers |
 
 ### Type Scale
 | Token | Mobile | Size | Letter Spacing | Use |
@@ -250,7 +252,7 @@ Supports same states as Text Button (Default / Hover / Pressed / Disabled).
 - Background: `--neutral-50`
 - Radius: `--radius-md` (`8px`)
 - Padding: `0` `spacing-3` (`12px`) horizontal
-- Label: `--text-sm` (`14px`) `--font-family-en` `--font-weight-normal`, above input, gap `spacing-2` (`8px`)
+- Label: `--text-sm` (`14px`) `--font-family-en` `400`, above input, gap `spacing-2` (`8px`)
 - Character counter (e.g. `2/16`): `--text-xs` (`12px`) `--neutral-500`, trailing right
 - Gap between stacked inputs: `spacing-3` (`12px`)
 - Gap between label and input: `spacing-2` (`8px`)
@@ -294,7 +296,7 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 
 - Container row: `344×41px`
 - Radio control: `71×17px`
-- Label: `--text-sm` (`14px`) `--font-family-en` `--font-weight-normal`, `spacing-2` (`8px`) gap from control
+- Label: `--text-sm` (`14px`) `--font-family-en` `400`, `spacing-2` (`8px`) gap from control
 
 | State | Appearance |
 |-------|-----------|
@@ -324,7 +326,7 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 
 - Container row: `368×44px`
 - Checkbox control: `77×20px`
-- Label: `--text-sm` (`14px`) `--font-family-en` `--font-weight-normal`, `spacing-2` (`8px`) gap from box
+- Label: `--text-sm` (`14px`) `--font-family-en` `400`, `spacing-2` (`8px`) gap from box
 
 | State | Appearance |
 |-------|-----------|
@@ -349,8 +351,8 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 - Border: `1px solid --border`
 - Radius: `--radius-lg` (`12px`)
 - Type badge: pill `--radius-full`, `--secondary-500` text, `--secondary-50` bg, `1px solid --secondary-100` border
-- Title: `--text-lg` (`1.125rem`) `--font-family-en` `--font-weight-medium`, `--neutral-900`
-- Meta (params, file size, format): `--text-xs` (`0.75rem`) `--font-family-code` `--font-weight-normal`, `--neutral-500`
+- Title: `--text-lg` (`1.125rem`) `--font-family-en` `500`, `--neutral-900`
+- Meta (params, file size, format): `--text-xs` (`0.75rem`) `--font-family-code` `400`, `--neutral-500`
 - Hover: border `1px solid --border-primary`
 - Featured: border `1px solid --border-primary`
 
@@ -363,7 +365,7 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 
 ### 4.9 Badges & Status Indicators
 
-- Shape: pill (`--radius-full`), padding `4px 10px`, font `--text-xs` (`12px`) `--font-family-en` `--font-weight-medium`
+- Shape: pill (`--radius-full`), padding `4px 10px`, font `--text-xs` (`12px`) `--font-family-en` `500`
 
 | Status | Text | Border | Background |
 |--------|------|--------|------------|
@@ -510,7 +512,7 @@ Two styles, both `h-[36px]`, full width, `p-[spacing-1]`.
 **Specs:**
 - Background: `--neutral-50`
 - Border-bottom: `1px solid --border-regular` — Style 1 only
-- Title: `--font-family-en` `--font-weight-medium`, `13px`, `--neutral-600`, `spacing-2` (`8px`) horizontal padding
+- Title: `--font-family-en` `500`, `13px`, `--neutral-600`, `spacing-2` (`8px`) horizontal padding
 - Close button (Style 1 only): Nav Icon Button Default (`28×28px`), `close-line` MingCute icon, `14×14px`
 
 ---
@@ -519,7 +521,7 @@ Two styles, both `h-[36px]`, full width, `p-[spacing-1]`.
 
 - Padding: `spacing-6` (`24px`)
 - Gap between elements: `spacing-4` (`16px`)
-- Body text: `--font-family-en` `--font-weight-normal`, `13px`, `--neutral-700`; mixed weight allowed (`--font-weight-normal` for context, `--font-weight-medium` for key phrases)
+- Body text: `--font-family-en` `400`, `13px`, `--neutral-700`; mixed weight allowed (`400` for context, `500` for key phrases)
 
 **Inline validation alert:**
 - Background: `--semantic-error-bg-light`
@@ -527,7 +529,7 @@ Two styles, both `h-[36px]`, full width, `p-[spacing-1]`.
 - Border radius: `--radius-lg` (`12px`)
 - Padding: `10px`
 - Icon: `warning-line` MingCute, `20×20px`
-- Text: `--font-family-en` `--font-weight-normal`, `--text-xs` (`12px`), `--error`
+- Text: `--font-family-en` `400`, `--text-xs` (`12px`), `--error`
 
 ---
 
@@ -542,9 +544,9 @@ Three styles, all full width, `p-[spacing-2]`, button height `32px`, button radi
 | **Style 2-2** | `72px` | `justify-center` | `128px` single | Single primary action — centered |
 
 **Button specs inside Bottom Bar:**
-- Cancel button: `--neutral-50` bg, `1px solid --border-regular` border, text `--neutral-700`, `--font-family-en` `--font-weight-medium` `--text-base` (`16px`)
-- Confirm button: `--primary-500` bg, text `--white`, `--font-family-en` `--font-weight-medium` `--text-base` (`16px`)
-- Delete button: `--error` bg, text `--white`, `--font-family-en` `--font-weight-medium` `--text-base` (`16px`)
+- Cancel button: `--neutral-50` bg, `1px solid --border-regular` border, text `--neutral-700`, `--font-family-en` `500` `--text-base` (`16px`)
+- Confirm button: `--primary-500` bg, text `--white`, `--font-family-en` `500` `--text-base` (`16px`)
+- Delete button: `--error` bg, text `--white`, `--font-family-en` `500` `--text-base` (`16px`)
 - Disabled Confirm: `--neutral-300` bg, text `--neutral-400` — used when required fields are incomplete
 
 ---
@@ -568,7 +570,7 @@ No Top Bar
   Content (centered):
     warning-fill icon 28×28px
     Title: Space Grotesk Medium 13px, black
-    Subtitle: --font-family-en --font-weight-normal 13px, --error
+    Subtitle: --font-family-en 400 13px, --error
 Bottom Bar Style 2-1 (Cancel 128px | Delete 128px, centered)
 ```
 
@@ -666,7 +668,7 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 - Don't use `--font-family-en` for code, model names, or terminal output — `--font-family-code` only
 - Don't mix CN and EN fonts in the same line — use one family per text run
 - Don't add shadows to cards or panels — borders (`--border`) carry containment
-- Don't use `--font-weight-extrabold` (`800`) for body or UI text — reserve it for hero numbers
+- Don't use `800` (`800`) for body or UI text — reserve it for hero numbers
 
 ---
 
@@ -707,14 +709,14 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 | Code / mono | `--font-family-code` | `fontFamilyCode` | `Space Mono` |
 
 ### Example Component Prompts
-- **Model Card**: "`--white` card, border `1px solid --border`, radius `--radius-lg`. Title `--text-lg` `--font-family-en` `--font-weight-medium`, color `--neutral-900`. Type badge: pill `--radius-full`, `--secondary-500` text, `--secondary-50` bg, `1px solid --secondary-100` border. Metric row: `--text-xs` `--font-family-code` `--neutral-500`. Hover: border `1px solid --border-primary`."
-- **Hero Section**: "Full-width section on `--white`. Headline `--text-4xl` `--font-family-en` `--font-weight-extrabold`, letter-spacing `-0.03rem`, color `--neutral-900`. Subhead `--text-lg` `--font-weight-normal`, color `--neutral-500`. CTA: `--primary-500` bg, `--white` text, `--radius-md`, `spacing-2` `spacing-5` padding."
+- **Model Card**: "`--white` card, border `1px solid --border`, radius `--radius-lg`. Title `--text-lg` `--font-family-en` `500`, color `--neutral-900`. Type badge: pill `--radius-full`, `--secondary-500` text, `--secondary-50` bg, `1px solid --secondary-100` border. Metric row: `--text-xs` `--font-family-code` `--neutral-500`. Hover: border `1px solid --border-primary`."
+- **Hero Section**: "Full-width section on `--white`. Headline `--text-4xl` `--font-family-en` `800`, letter-spacing `-0.03rem`, color `--neutral-900`. Subhead `--text-lg` `400`, color `--neutral-500`. CTA: `--primary-500` bg, `--white` text, `--radius-md`, `spacing-2` `spacing-5` padding."
 - **Status Badge**: "Pill badge, `--radius-full`, `4px 10px` padding. Running: `--primary-500` text + `--border-primary` border, `rgba(143,195,31,0.1)` background. Error: `--error` text + `--border-error` border, `rgba(220,38,38,0.1)` background."
 - **Code Block**: "`--neutral-100` background, `1px solid --border`, `--radius-md`, `spacing-4` padding. Text `--text-sm` `--font-family-code` `--neutral-900`. Keyword accent: `--secondary-500`."
 - **Navigation**: "Sticky nav on `--white`, `1px solid --border` bottom border. Logo left. Nav items use Nav Button Default type (`197×42px`): text `--neutral-500`, transparent bg, hover text `--neutral-900` + `--neutral-100` bg. Active: Nav Button Primary type, text `--primary-500`, bg `rgba(143,195,31,0.1)`. Right-aligned CTA: Primary text button Large (`42px`)."
 - **Sidebar**: "Fixed sidebar on `--neutral-50`, `1px solid --border` right border. Nav items: Nav Button Default Left-icon (`197×42px`). Active: Nav Button Primary Left-icon, text `--primary-500`, bg `rgba(143,195,31,0.1)`. Toolbar icons: Nav Icon Button Default or Secondary (`36×36px`)."
-- **Confirm Pop-up**: "`--white` pop-up (`422px`, `--radius-lg`, `--shadow-2xl`, border `1px solid --border`). Top Bar Style 1 (`36px`, `--neutral-50` bg, border-bottom `--border-regular`, title `--font-family-en` `--font-weight-medium` `13px` `--neutral-600`, close MingCute `close-line` `28×28px`). Content `spacing-6` padding. Bottom Bar Style 1 (`48px`, `justify-end`, Cancel `72px` `--neutral-50`/border, Confirm `72px` `--primary-500`/`--white`, both `32px` height `10px` radius)."
-- **Destructive Pop-up**: "`--white` pop-up, no top bar. Content centered: MingCute `warning-line` `28×28px` `--error`, title `--font-weight-medium` `13px` `--neutral-900`, subtitle `--font-weight-normal` `13px` `--error`. Bottom Bar Style 2-1 (`72px`, centered, Cancel `128px` neutral, Delete `128px` `--error`/`--white`)."
+- **Confirm Pop-up**: "`--white` pop-up (`422px`, `--radius-lg`, `--shadow-2xl`, border `1px solid --border`). Top Bar Style 1 (`36px`, `--neutral-50` bg, border-bottom `--border-regular`, title `--font-family-en` `500` `13px` `--neutral-600`, close MingCute `close-line` `28×28px`). Content `spacing-6` padding. Bottom Bar Style 1 (`48px`, `justify-end`, Cancel `72px` `--neutral-50`/border, Confirm `72px` `--primary-500`/`--white`, both `32px` height `10px` radius)."
+- **Destructive Pop-up**: "`--white` pop-up, no top bar. Content centered: MingCute `warning-line` `28×28px` `--error`, title `500` `13px` `--neutral-900`, subtitle `400` `13px` `--error`. Bottom Bar Style 2-1 (`72px`, centered, Cancel `128px` neutral, Delete `128px` `--error`/`--white`)."
 
 ### Iteration Guide
 1. Page and card base is `--white`; use `--neutral-50` for recessed chrome (inputs, sidebar, modal bars)
