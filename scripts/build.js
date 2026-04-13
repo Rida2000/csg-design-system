@@ -61,11 +61,15 @@ function isComponentSection(h2) { return /^4\./.test(h2); }
 // ─── rendering helpers ────────────────────────────────────────────────────────
 
 function renderColorTable(headers, rows) {
+  // Find columns dynamically (supports Token|Value|Role and Token|Mobile|Value|Role)
+  const headerTexts = headers.map(h => cellText(h).toLowerCase().replace(/\*\*/g,''));
+  const valIdx = headerTexts.indexOf('value');
+  const roleIdx = headerTexts.indexOf('role');
   let html = '<div class="swatch-grid">';
   for (const row of rows) {
     const token = cellText(row[0]).replace(/`/g, '');
-    const value = cellText(row[1]).replace(/`/g, '');
-    const role  = cellText(row[2]).replace(/`/g, '');
+    const value = cellText(row[valIdx >= 0 ? valIdx : 1]).replace(/`/g, '');
+    const role  = cellText(row[roleIdx >= 0 ? roleIdx : row.length - 1]).replace(/`/g, '');
     const color = extractColor(value);
     const swatchStyle = color
       ? `background:${color};`
@@ -82,12 +86,15 @@ function renderColorTable(headers, rows) {
   return html;
 }
 
-function renderTypeScaleTable(rows) {
+function renderTypeScaleTable(headers, rows) {
+  const headerTexts = headers.map(h => cellText(h).toLowerCase().replace(/\*\*/g,''));
+  const sizeIdx = headerTexts.indexOf('size');
+  const spIdx = headerTexts.findIndex(h => h.includes('spacing'));
   let html = '<div class="type-scale">';
   for (const row of rows) {
     const token   = cellText(row[0]).replace(/`/g, '');
-    const sizeRaw = cellText(row[1]).replace(/`/g, '');
-    const spacing = cellText(row[2]).replace(/`/g, '');
+    const sizeRaw = cellText(row[sizeIdx >= 0 ? sizeIdx : 1]).replace(/`/g, '');
+    const spacing = cellText(row[spIdx >= 0 ? spIdx : 2]).replace(/`/g, '');
     // parse rem or px
     const remMatch = sizeRaw.match(/([\d.]+)rem/);
     const pxMatch  = sizeRaw.match(/([\d.]+)px/);
@@ -288,7 +295,7 @@ function build() {
         bodyHtml += renderColorTable(headers, rows);
         swatchCount += rows.length;
       } else if (isTypeSection(currentH2) && currentH3.includes('Type Scale')) {
-        bodyHtml += renderTypeScaleTable(rows);
+        bodyHtml += renderTypeScaleTable(headers, rows);
         specimenCount += rows.length;
       } else if (isTypeSection(currentH2) && currentH3.includes('Type Hierarchy')) {
         bodyHtml += renderTypeHierarchyTable(rows);

@@ -26,119 +26,119 @@ Surface hierarchy is built with neutral grays: `--white` for cards and container
 ## 2. Color Palette & Roles
 
 ### Primary (Lime Green — Action & Status)
-| Token | Value | Role |
-|-------|-------|------|
-| `--primary-50` | `#F5FCE8` | Tint backgrounds, success fill |
-| `--primary-100` | `#E8F8C8` | Hover backgrounds on light surfaces |
-| `--primary-200` | `#D4F394` | Active/pressed tints |
-| `--primary-300` | `#BDED60` | Progress bars, subtle accents |
-| `--primary-400` | `#A8E03C` | Hover state for primary elements |
-| `--primary-450` | `#A3D830` | Mid-hover |
-| `--primary-500` | `#8FC31F` | **Primary CTA, interactive accent** |
-| `--primary-600` | `#76A219` | Active/pressed primary |
-| `--primary-700` | `#5D8113` | Dark text on light primary bg |
-| `--primary-800` | `#44600D` | Deep emphasis |
-| `--primary-900` | `#2B3F08` | Near-black green, high-contrast text |
+| Token | Mobile | Value | Role |
+|-------|--------|-------|------|
+| `--primary-50` | `primary50` | `#F5FCE8` | Tint backgrounds, success fill |
+| `--primary-100` | `primary100` | `#E8F8C8` | Hover backgrounds on light surfaces |
+| `--primary-200` | `primary200` | `#D4F394` | Active/pressed tints |
+| `--primary-300` | `primary300` | `#BDED60` | Progress bars, subtle accents |
+| `--primary-400` | `primary400` | `#A8E03C` | Hover state for primary elements |
+| `--primary-450` | `primary450` | `#A3D830` | Mid-hover |
+| `--primary-500` | `primary500` | `#8FC31F` | **Primary CTA, interactive accent** |
+| `--primary-600` | `primary600` | `#76A219` | Active/pressed primary |
+| `--primary-700` | `primary700` | `#5D8113` | Dark text on light primary bg |
+| `--primary-800` | `primary800` | `#44600D` | Deep emphasis |
+| `--primary-900` | `primary900` | `#2B3F08` | Near-black green, high-contrast text |
 
 ### Secondary (Deep Teal — Accents & Dark Text)
-| Token | Value | Role |
-|-------|-------|------|
-| `--secondary-50` | `#E6F1F3` | Tinted chip/tag backgrounds |
-| `--secondary-100` | `#CCE3E7` | Hover tint on teal-accented elements |
-| `--secondary-200` | `#99C7CF` | Inactive chip text, muted teal accents |
-| `--secondary-300` | `#66ABB7` | Decorative borders, secondary icons |
-| `--secondary-400` | `#338F9F` | Secondary interactive elements, info state |
-| `--secondary-450` | `#045E77` | Mid-tier teal accent |
-| `--secondary-500` | `#003A4A` | **Primary dark text, section headings** |
-| `--secondary-600` | `#002E3B` | Pressed/active dark text |
-| `--secondary-700` | `#00232C` | Deep accent text |
-| `--secondary-800` | `#00171E` | Near-black teal, maximum contrast text |
-| `--secondary-900` | `#000C0F` | Absolute darkest — use sparingly |
+| Token | Mobile | Value | Role |
+|-------|--------|-------|------|
+| `--secondary-50` | `secondary50` | `#E6F1F3` | Tinted chip/tag backgrounds |
+| `--secondary-100` | `secondary100` | `#CCE3E7` | Hover tint on teal-accented elements |
+| `--secondary-200` | `secondary200` | `#99C7CF` | Inactive chip text, muted teal accents |
+| `--secondary-300` | `secondary300` | `#66ABB7` | Decorative borders, secondary icons |
+| `--secondary-400` | `secondary400` | `#338F9F` | Secondary interactive elements, info state |
+| `--secondary-450` | `secondary450` | `#045E77` | Mid-tier teal accent |
+| `--secondary-500` | `secondary500` | `#003A4A` | **Primary dark text, section headings** |
+| `--secondary-600` | `secondary600` | `#002E3B` | Pressed/active dark text |
+| `--secondary-700` | `secondary700` | `#00232C` | Deep accent text |
+| `--secondary-800` | `secondary800` | `#00171E` | Near-black teal, maximum contrast text |
+| `--secondary-900` | `secondary900` | `#000C0F` | Absolute darkest — use sparingly |
 
 ### Neutral (Pure Gray — Surfaces & Text)
-| Token | Value | Role |
-|-------|-------|------|
-| `--neutral-50` | `#FAFAFA` | Recessed chrome: nav bars, input bg, modal header/footer |
-| `--neutral-100` | `#F5F5F5` | Subtle hover tint on white surfaces |
-| `--neutral-200` | `#E5E5E5` | Default border, card dividers |
-| `--neutral-300` | `#D4D4D4` | Medium borders, disabled button bg |
-| `--neutral-400` | `#A3A3A3` | Placeholder text, disabled text |
-| `--neutral-500` | `#737373` | Secondary / meta text |
-| `--neutral-600` | `#525252` | Caption text, labels |
-| `--neutral-700` | `#404040` | Body text |
-| `--neutral-800` | `#262626` | Strong body text |
-| `--neutral-900` | `#171717` | Primary heading text |
-| `--white` | `#FFFFFF` | Page background, card surfaces |
-| `--black` | `#000000` | Pure black — avoid in UI, use `#171717` instead |
+| Token | Mobile | Value | Role |
+|-------|--------|-------|------|
+| `--neutral-50` | `neutral50` | `#FAFAFA` | Recessed chrome: nav bars, input bg, modal header/footer |
+| `--neutral-100` | `neutral100` | `#F5F5F5` | Subtle hover tint on white surfaces |
+| `--neutral-200` | `neutral200` | `#E5E5E5` | Default border, card dividers |
+| `--neutral-300` | `neutral300` | `#D4D4D4` | Medium borders, disabled button bg |
+| `--neutral-400` | `neutral400` | `#A3A3A3` | Placeholder text, disabled text |
+| `--neutral-500` | `neutral500` | `#737373` | Secondary / meta text |
+| `--neutral-600` | `neutral600` | `#525252` | Caption text, labels |
+| `--neutral-700` | `neutral700` | `#404040` | Body text |
+| `--neutral-800` | `neutral800` | `#262626` | Strong body text |
+| `--neutral-900` | `neutral900` | `#171717` | Primary heading text |
+| `--white` | `white` | `#FFFFFF` | Page background, card surfaces |
+| `--black` | `black` | `#000000` | Pure black — avoid in UI, use `--neutral-900` instead |
 
 ### Semantic Colors
-| Token | Value | Role |
-|-------|-------|------|
-| `--success` | `#8FC31F` | Matches primary-500 — model loaded, inference OK |
-| `--success-light` | `#A8E03C` | Success hover |
-| `--success-dark` | `#76A219` | Success active/pressed |
-| `--warning` | `#FF9500` | Throttling, resource alerts |
-| `--warning-light` | `#FFB340` | Warning hover |
-| `--warning-dark` | `#CC7700` | Warning active |
-| `--error` | `#DC2626` | Error state, failed inference |
-| `--error-light` | `#EF4444` | Error hover |
-| `--error-dark` | `#B91C1C` | Error active |
-| `--info` | `#003A4A` | Matches secondary-500 |
-| `--info-light` | `#338F9F` | Info hover |
-| `--info-dark` | `#002E3B` | Info active |
+| Token | Mobile | Value | Role |
+|-------|--------|-------|------|
+| `--success` | `success` | `#8FC31F` | Matches primary-500 — model loaded, inference OK |
+| `--success-light` | `successLight` | `#A8E03C` | Success hover |
+| `--success-dark` | `successDark` | `#76A219` | Success active/pressed |
+| `--warning` | `warning` | `#FF9500` | Throttling, resource alerts |
+| `--warning-light` | `warningLight` | `#FFB340` | Warning hover |
+| `--warning-dark` | `warningDark` | `#CC7700` | Warning active |
+| `--error` | `error` | `#DC2626` | Error state, failed inference |
+| `--error-light` | `errorLight` | `#EF4444` | Error hover |
+| `--error-dark` | `errorDark` | `#B91C1C` | Error active |
+| `--info` | `info` | `#003A4A` | Matches secondary-500 |
+| `--info-light` | `infoLight` | `#338F9F` | Info hover |
+| `--info-dark` | `infoDark` | `#002E3B` | Info active |
 
 ### Border Colors
-| Token | Value | Role |
-|-------|-------|------|
-| `--border-light` | `#F5F5F5` | Subtle internal dividers |
-| `--border` | `#E5E5E5` | Default card/container border |
-| `--border-regular` | `#D9D9D9` | Modal/pop-up chrome borders, input borders |
-| `--border-medium` | `#D4D4D4` | Moderate emphasis borders |
-| `--border-dark` | `#A3A3A3` | Strong interactive borders |
-| `--border-primary` | `#8FC31F` | Active/selected/focus state |
-| `--border-secondary` | `#003A4A` | Teal-accented borders |
-| `--border-success` | `#8FC31F` | Success outlined elements |
-| `--border-warning` | `#FF9500` | Warning outlined elements |
-| `--border-error` | `#DC2626` | Error outlined elements |
+| Token | Mobile | Value | Role |
+|-------|--------|-------|------|
+| `--border-light` | `borderLight` | `#F5F5F5` | Subtle internal dividers |
+| `--border` | `border` | `#E5E5E5` | Default card/container border |
+| `--border-regular` | `borderRegular` | `#D9D9D9` | Modal/pop-up chrome borders, input borders |
+| `--border-medium` | `borderMedium` | `#D4D4D4` | Moderate emphasis borders |
+| `--border-dark` | `borderDark` | `#A3A3A3` | Strong interactive borders |
+| `--border-primary` | `borderPrimary` | `#8FC31F` | Active/selected/focus state |
+| `--border-secondary` | `borderSecondary` | `#003A4A` | Teal-accented borders |
+| `--border-success` | `borderSuccess` | `#8FC31F` | Success outlined elements |
+| `--border-warning` | `borderWarning` | `#FF9500` | Warning outlined elements |
+| `--border-error` | `borderError` | `#DC2626` | Error outlined elements |
 
 ### Semantic Surface Colors
-| Token | Value | Role |
-|-------|-------|------|
-| `--semantic-error-bg-light` | `#FFF1F1` | Error/validation inline alert background (light surface only) |
+| Token | Mobile | Value | Role |
+|-------|--------|-------|------|
+| `--semantic-error-bg-light` | `semanticErrorBgLight` | `#FFF1F1` | Error/validation inline alert background (light surface only) |
 
 ---
 
 ## 3. Typography Rules
 
 ### Font Families
-| Token | Value | Use |
-|-------|-------|-----|
-| `--font-family-en` | `'Space Grotesk', ui-sans-serif, system-ui` | All EN UI, headings, body |
-| `--font-family-cn` | `'Noto Sans SC', sans-serif` | All CN UI and content |
-| `--font-family-code` | `'Space Mono', ui-monospace, monospace` | Code, model IDs, terminal output, slugs |
+| Token | Mobile | Value | Use |
+|-------|--------|-------|-----|
+| `--font-family-en` | `fontFamilyEn` | `'Space Grotesk', ui-sans-serif, system-ui` | All EN UI, headings, body |
+| `--font-family-cn` | `fontFamilyCn` | `'Noto Sans SC', sans-serif` | All CN UI and content |
+| `--font-family-code` | `fontFamilyCode` | `'Space Mono', ui-monospace, monospace` | Code, model IDs, terminal output, slugs |
 
 ### Font Weights
-| Token | Value | Use |
-|-------|-------|-----|
-| `--font-weight-light` | `300` | Subtle labels, decorative text |
-| `--font-weight-normal` | `400` | Body, captions, UI labels |
-| `--font-weight-medium` | `500` | Card titles, nav links |
-| `--font-weight-semibold` | `600` | Section headings, strong emphasis |
-| `--font-weight-bold` | `700` | Display headings, hero text |
-| `--font-weight-extrabold` | `800` | Maximum-impact hero, stat numbers |
+| Token | Mobile | Value | Use |
+|-------|--------|-------|-----|
+| `--font-weight-light` | `fontWeightLight` | `300` | Subtle labels, decorative text |
+| `--font-weight-normal` | `fontWeightNormal` | `400` | Body, captions, UI labels |
+| `--font-weight-medium` | `fontWeightMedium` | `500` | Card titles, nav links |
+| `--font-weight-semibold` | `fontWeightSemibold` | `600` | Section headings, strong emphasis |
+| `--font-weight-bold` | `fontWeightBold` | `700` | Display headings, hero text |
+| `--font-weight-extrabold` | `fontWeightExtrabold` | `800` | Maximum-impact hero, stat numbers |
 
 ### Type Scale
-| Token | Size | Letter Spacing | Use |
-|-------|------|---------------|-----|
-| `--text-xs` | `0.625rem` / `10px` | normal | Micro labels, badges |
-| `--text-xs` | `0.75rem` / `12px` | normal | Captions, timestamps |
-| `--text-sm` | `0.875rem` / `14px` | normal | Secondary body, card meta |
-| `--text-base` | `1rem` / `16px` | normal | Primary body text |
-| `--text-lg` | `1.125rem` / `18px` | normal | Lead text, intro paragraphs |
-| `--text-xl` | `1.375rem` / `22px` | `-0.01rem` | Card headings, sub-headings |
-| `--text-2xl` | `1.875rem` / `30px` | `-0.01rem` | Section headings |
-| `--text-3xl` | `2.25rem` / `36px` | `-0.02rem` | Page headings |
-| `--text-4xl` | `3rem` / `48px` | `-0.03rem` | Hero headings, stat numbers |
+| Token | Mobile | Size | Letter Spacing | Use |
+|-------|--------|------|---------------|-----|
+| `--text-xs` | `textXs` | `0.625rem` / `10px` | normal | Micro labels, badges |
+| `--text-xs` | `textXs` | `0.75rem` / `12px` | normal | Captions, timestamps |
+| `--text-sm` | `textSm` | `0.875rem` / `14px` | normal | Secondary body, card meta |
+| `--text-base` | `textBase` | `1rem` / `16px` | normal | Primary body text |
+| `--text-lg` | `textLg` | `1.125rem` / `18px` | normal | Lead text, intro paragraphs |
+| `--text-xl` | `textXl` | `1.375rem` / `22px` | `-0.01rem` | Card headings, sub-headings |
+| `--text-2xl` | `text2xl` | `1.875rem` / `30px` | `-0.01rem` | Section headings |
+| `--text-3xl` | `text3xl` | `2.25rem` / `36px` | `-0.02rem` | Page headings |
+| `--text-4xl` | `text4xl` | `3rem` / `48px` | `-0.03rem` | Hero headings, stat numbers |
 
 ### Type Hierarchy
 | Role | Size | Weight | Spacing | Font |
@@ -599,14 +599,14 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 - Base unit: `4px`
 - Scale: `4px`, `8px`, `12px`, `16px`, `20px`, `24px`, `32px`, `40px`, `48px`, `64px`, `80px`, `96px`, `128px`
 
-| Token | Value | Use |
-|-------|-------|-----|
-| `spacing-1` | `0.25rem` / `4px` | Title padding-left, label-to-right-content gap |
-| `spacing-2` | `0.5rem` / `8px` | Label-to-input gap, badge gaps, button padding unit |
-| `spacing-3` | `0.75rem` / `12px` | Input-to-input gap, card inner padding |
-| `spacing-4` | `1rem` / `16px` | Standard gap, form fields, code block padding |
-| `spacing-5` | `1.25rem` / `20px` | Button horizontal padding |
-| `spacing-6` | `1.5rem` / `24px` | Button-to-input-group gap, section inner padding, card padding |
+| Token | Mobile | Value | Use |
+|-------|--------|-------|-----|
+| `spacing-1` | `spacing1` | `0.25rem` / `4px` | Title padding-left, label-to-right-content gap |
+| `spacing-2` | `spacing2` | `0.5rem` / `8px` | Label-to-input gap, badge gaps, button padding unit |
+| `spacing-3` | `spacing3` | `0.75rem` / `12px` | Input-to-input gap, card inner padding |
+| `spacing-4` | `spacing4` | `1rem` / `16px` | Standard gap, form fields, code block padding |
+| `spacing-5` | `spacing5` | `1.25rem` / `20px` | Button horizontal padding |
+| `spacing-6` | `spacing6` | `1.5rem` / `24px` | Button-to-input-group gap, section inner padding, card padding |
 
 ### Grid & Container
 - Max content width: `1280px` (centered)
@@ -616,15 +616,15 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 - Section padding: `64px` vertical desktop, `40px` mobile
 
 ### Border Radius Scale
-| Token | Value | Use |
-|-------|-------|-----|
-| `--radius-none` | `0` | Sharp technical UI, table rows |
-| `--radius-sm` | `4px` | Badges, tiny chips, code tokens |
-| `--radius-md` | `8px` | Buttons, inputs, standard cards |
-| `--radius-lg` | `12px` | Model cards, panels |
-| `--radius-xl` | `16px` | Featured cards, hero containers |
-| `--radius-2xl` | `24px` | Full-bleed modal sheets |
-| `--radius-full` | `9999px` | Tags, category pills, toggles |
+| Token | Mobile | Value | Use |
+|-------|--------|-------|-----|
+| `--radius-none` | `radiusNone` | `0` | Sharp technical UI, table rows |
+| `--radius-sm` | `radiusSm` | `4px` | Badges, tiny chips, code tokens |
+| `--radius-md` | `radiusMd` | `8px` | Buttons, inputs, standard cards |
+| `--radius-lg` | `radiusLg` | `12px` | Model cards, panels |
+| `--radius-xl` | `radiusXl` | `16px` | Featured cards, hero containers |
+| `--radius-2xl` | `radius2xl` | `24px` | Full-bleed modal sheets |
+| `--radius-full` | `radiusFull` | `9999px` | Tags, category pills, toggles |
 
 ---
 
@@ -691,20 +691,20 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 ## 9. Agent Prompt Guide
 
 ### Quick Color Reference
-| Purpose | Token | Value |
-|---------|-------|-------|
-| Page / card background | `--white` | `#FFFFFF` |
-| Recessed chrome (inputs, nav, modal bars) | `--neutral-50` | `#FAFAFA` |
-| Default border | `--border` | `#E5E5E5` |
-| Input / modal border | `--border-regular` | `#D9D9D9` |
-| Active / focus border | `--border-primary` | `#8FC31F` |
-| Primary CTA bg | `--primary-500` | `#8FC31F` |
-| Heading text | `--neutral-900` | `#171717` |
-| Body text | `--neutral-700` | `#404040` |
-| Secondary / meta text | `--neutral-600` | `#525252` |
-| Placeholder / disabled | `--neutral-400` | `#A3A3A3` |
-| Dark accent / teal heading | `--secondary-500` | `#003A4A` |
-| Code / mono | `--font-family-code` | `Space Mono` |
+| Purpose | Token | Mobile | Value |
+|---------|-------|--------|-------|
+| Page / card background | `--white` | `white` | `#FFFFFF` |
+| Recessed chrome (inputs, nav, modal bars) | `--neutral-50` | `neutral50` | `#FAFAFA` |
+| Default border | `--border` | `border` | `#E5E5E5` |
+| Input / modal border | `--border-regular` | `borderRegular` | `#D9D9D9` |
+| Active / focus border | `--border-primary` | `borderPrimary` | `#8FC31F` |
+| Primary CTA bg | `--primary-500` | `primary500` | `#8FC31F` |
+| Heading text | `--neutral-900` | `neutral900` | `#171717` |
+| Body text | `--neutral-700` | `neutral700` | `#404040` |
+| Secondary / meta text | `--neutral-600` | `neutral600` | `#525252` |
+| Placeholder / disabled | `--neutral-400` | `neutral400` | `#A3A3A3` |
+| Dark accent / teal heading | `--secondary-500` | `secondary500` | `#003A4A` |
+| Code / mono | `--font-family-code` | `fontFamilyCode` | `Space Mono` |
 
 ### Example Component Prompts
 - **Model Card**: "`--white` card, border `1px solid --border`, radius `--radius-lg`. Title `--text-lg` `--font-family-en` `--font-weight-medium`, color `--neutral-900`. Type badge: pill `--radius-full`, `--secondary-500` text, `--secondary-50` bg, `1px solid --secondary-100` border. Metric row: `--text-xs` `--font-family-code` `--neutral-500`. Hover: border `1px solid --border-primary`."
