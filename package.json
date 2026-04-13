@@ -2,6 +2,10 @@
   "name": "csg-design-system",
   "version": "1.0.0",
   "description": "CSG Design System — SenseCraft AI visual design spec, team commands, and Claude Code agents",
+  "figma": {
+    "version": "1.0.0",
+    "lastSyncedAt": "2026-04-13"
+  },
   "scripts": {
     "build": "node scripts/build.js",
     "figma:sync": "node scripts/figma-sync.js",

@@ -3,11 +3,57 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 const { marked } = require('marked');
 
 const ROOT = path.join(__dirname, '..');
 const DESIGN_MD = path.join(ROOT, 'DESIGN.md');
 const OUT_FILE = path.join(ROOT, 'docs', 'index.html');
+const README = path.join(ROOT, 'README.md');
+const PKG = path.join(ROOT, 'package.json');
+
+// ─── version metadata ────────────────────────────────────────────────────────
+
+function getMetadata() {
+  const pkg = JSON.parse(fs.readFileSync(PKG, 'utf8'));
+  const figmaVersion = pkg.figma?.version || '—';
+  const figmaSyncedAt = pkg.figma?.lastSyncedAt || '—';
+
+  // Last update = git log on DESIGN.md
+  let lastUpdate = '—';
+  try {
+    lastUpdate = execSync(
+      'git log -1 --format=%cI -- DESIGN.md',
+      { cwd: ROOT, encoding: 'utf8' }
+    ).trim();
+    // Format to human-readable: "2026-04-13 14:32 UTC"
+    if (lastUpdate) {
+      const d = new Date(lastUpdate);
+      const pad = (n) => String(n).padStart(2, '0');
+      lastUpdate = `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC`;
+    }
+  } catch (e) {
+    lastUpdate = 'uncommitted';
+  }
+
+  return { figmaVersion, figmaSyncedAt, lastUpdate };
+}
+
+function updateReadme(meta) {
+  if (!fs.existsSync(README)) return;
+  const content = fs.readFileSync(README, 'utf8');
+  const block = `<!-- csg:meta-start -->
+**Figma Version:** \`${meta.figmaVersion}\` · **Last Synced from Figma:** \`${meta.figmaSyncedAt}\` · **Last Updated:** \`${meta.lastUpdate}\`
+<!-- csg:meta-end -->`;
+  const markerRegex = /<!-- csg:meta-start -->[\s\S]*?<!-- csg:meta-end -->/;
+  if (markerRegex.test(content)) {
+    const updated = content.replace(markerRegex, block);
+    if (updated !== content) {
+      fs.writeFileSync(README, updated, 'utf8');
+      console.log('  README metadata updated');
+    }
+  }
+}
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -266,6 +312,7 @@ const COMPONENT_DEMOS = {
 // ─── main build ───────────────────────────────────────────────────────────────
 
 function build() {
+  const meta = getMetadata();
   const md = fs.readFileSync(DESIGN_MD, 'utf8');
   const tokens = marked.lexer(md);
 
@@ -453,6 +500,43 @@ body{
 }
 .sidebar-header p{
   font-size:0.75rem;color:var(--neutral-500);margin-top:2px;
+}
+.sidebar-meta{
+  margin-top:0.75rem;padding-top:0.75rem;
+  border-top:1px solid var(--border-light);
+  display:flex;flex-direction:column;gap:3px;
+}
+.sidebar-meta > div{
+  font-size:0.65rem;color:var(--neutral-500);
+  display:flex;align-items:center;gap:4px;
+}
+.sidebar-meta code{
+  font-size:0.65rem;background:transparent;padding:0;
+  color:var(--neutral-700);
+}
+.sidebar-meta .meta-label{
+  text-transform:uppercase;letter-spacing:0.05em;
+  color:var(--neutral-400);font-size:0.6rem;
+  min-width:45px;
+}
+
+/* ── Top metadata banner (main content) ────────────────── */
+.top-meta{
+  display:flex;gap:2rem;flex-wrap:wrap;
+  padding:0.75rem 1rem;margin:0 0 2rem;
+  background:var(--neutral-50);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  font-size:0.8rem;
+}
+.top-meta .meta-item{display:flex;flex-direction:column;gap:2px}
+.top-meta .meta-label{
+  font-size:0.65rem;text-transform:uppercase;
+  letter-spacing:0.05em;color:var(--neutral-500);
+}
+.top-meta code{
+  background:transparent;padding:0;
+  color:var(--secondary-500);font-size:0.8rem;
 }
 .nav-link{
   display:block;padding:0.3rem 1.25rem;
@@ -705,11 +789,21 @@ tr:hover td{background:var(--neutral-50)}
   <div class="sidebar-header">
     <h1>CSG Design System</h1>
     <p>SenseCraft AI</p>
+    <div class="sidebar-meta">
+      <div><span class="meta-label">Figma</span> <code>${escapeHtml(meta.figmaVersion)}</code></div>
+      <div><span class="meta-label">Synced</span> <code>${escapeHtml(meta.figmaSyncedAt)}</code></div>
+      <div><span class="meta-label">Updated</span> <code>${escapeHtml(meta.lastUpdate)}</code></div>
+    </div>
   </div>
   ${sidebarHtml}
 </nav>
 
 <main class="main">
+  <div class="top-meta">
+    <div class="meta-item"><span class="meta-label">Figma Version</span><code>${escapeHtml(meta.figmaVersion)}</code></div>
+    <div class="meta-item"><span class="meta-label">Last Synced from Figma</span><code>${escapeHtml(meta.figmaSyncedAt)}</code></div>
+    <div class="meta-item"><span class="meta-label">Last Updated</span><code>${escapeHtml(meta.lastUpdate)}</code></div>
+  </div>
   ${bodyHtml}
 </main>
 
@@ -737,8 +831,11 @@ headings.forEach(h => { if (h.id) observer.observe(h); });
 
   fs.mkdirSync(path.join(ROOT, 'docs'), { recursive: true });
   fs.writeFileSync(OUT_FILE, html, 'utf8');
+  updateReadme(meta);
 
   console.log(`Built: ${OUT_FILE}`);
+  console.log(`  Figma version  : ${meta.figmaVersion}`);
+  console.log(`  Last updated   : ${meta.lastUpdate}`);
   console.log(`  Color swatches : ${swatchCount}`);
   console.log(`  Type specimens : ${specimenCount}`);
   console.log(`  Component secs : ${componentCount}`);

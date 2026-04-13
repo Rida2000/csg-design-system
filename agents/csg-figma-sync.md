@@ -130,7 +130,10 @@ Check shadow values against Figma effects
 6. **Generate both CSS and Mobile token names** for every new variable
 7. **Flag breaking changes** (renames, restructures) separately from non-breaking changes (value updates, additions)
 8. **Update the Section 9 Agent Prompt Guide** if key colors or specs changed
-9. After updating DESIGN.md, remind the user to run `npm run build` to regenerate the website
+9. **Bump the Figma metadata in `package.json`**:
+   - `figma.version` — increment when Figma variables/components changed (patch for value changes, minor for additions, major for renames/restructures)
+   - `figma.lastSyncedAt` — set to today's date in `YYYY-MM-DD` format
+10. After updating DESIGN.md, remind the user to run `npm run build` to regenerate the website and README metadata
 
 ## Workflow
 
