@@ -26,11 +26,12 @@ function getMetadata() {
       'git log -1 --format=%cI -- DESIGN.md',
       { cwd: ROOT, encoding: 'utf8' }
     ).trim();
-    // Format to human-readable: "2026-04-13 14:32 UTC"
+    // Format to human-readable in Beijing time (CST, UTC+8): "2026-04-13 22:32 CST"
     if (lastUpdate) {
       const d = new Date(lastUpdate);
+      const bj = new Date(d.getTime() + 8 * 60 * 60 * 1000);
       const pad = (n) => String(n).padStart(2, '0');
-      lastUpdate = `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC`;
+      lastUpdate = `${bj.getUTCFullYear()}-${pad(bj.getUTCMonth()+1)}-${pad(bj.getUTCDate())} ${pad(bj.getUTCHours())}:${pad(bj.getUTCMinutes())} CST`;
     }
   } catch (e) {
     lastUpdate = 'uncommitted';
