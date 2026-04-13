@@ -4,21 +4,21 @@
 
 > **This design system defines the light mode theme only.** Dark mode is not currently in scope.
 
-SenseCraft AI presents a clean, precise aesthetic on a light neutral foundation. The interface sits on white (`#FFFFFF`) and near-white (`#FAFAFA`) surfaces that keep content legible and professional without clinical coldness. The deep teal secondary palette (`#003A4A`) provides typographic weight and structural accents, while the lime-green primary (`#8FC31F`) acts as the activation signal — used selectively for CTAs, active states, and status indicators.
+SenseCraft AI presents a clean, precise aesthetic on a light neutral foundation. The interface sits on white (`--white`) and near-white (`--neutral-50`) surfaces that keep content legible and professional without clinical coldness. The deep teal secondary palette (`--secondary-500`) provides typographic weight and structural accents, while the lime-green primary (`--primary-500`) acts as the activation signal — used selectively for CTAs, active states, and status indicators.
 
-The primary font is **Space Grotesk**, a geometric sans-serif with a technical edge and subtle character. **Noto Sans SC** serves all Chinese-language content at identical scale and weight. **Space Mono** handles all code, terminal output, and model identifiers.
+The primary font is **Space Grotesk** (`--font-family-en`), a geometric sans-serif with a technical edge and subtle character. **Noto Sans SC** (`--font-family-cn`) serves all Chinese-language content at identical scale and weight. **Space Mono** (`--font-family-code`) handles all code, terminal output, and model identifiers.
 
-Surface hierarchy is built with neutral grays: `#FFFFFF` for cards and containers, `#FAFAFA` for recessed chrome (nav bars, input backgrounds, modal headers/footers), with `#E5E5E5`–`#D9D9D9` borders to separate them. Shadows are reserved exclusively for floating layers (dropdowns, modals).
+Surface hierarchy is built with neutral grays: `--white` for cards and containers, `--neutral-50` for recessed chrome (nav bars, input backgrounds, modal headers/footers), with `--border` / `--border-regular` borders to separate them. Shadows are reserved exclusively for floating layers (dropdowns, modals).
 
 **Key Characteristics:**
-- **Light mode only** — page background `#FFFFFF`, recessed chrome `#FAFAFA`
-- Lime-green primary (`#8FC31F`) as the activation color — CTAs, active states, status
-- Deep teal secondary (`#003A4A`) for headings, structural accents, dark text elements
-- Space Grotesk for EN, Noto Sans SC for CN, Space Mono for code/terminal
-- Neutral gray scale (`#FAFAFA`–`#171717`) for surface and text hierarchy
-- Border-defined surfaces — `#E5E5E5`/`#D9D9D9` borders carry containment; shadows only for floating UI
-- Border radius system from `4px` (tight chrome) to `9999px` (tags/pills)
-- Semantic color set: green success, amber warning, red error, teal info
+- **Light mode only** — page background `--white`, recessed chrome `--neutral-50`
+- Lime-green primary (`--primary-500`) as the activation color — CTAs, active states, status
+- Deep teal secondary (`--secondary-500`) for headings, structural accents, dark text elements
+- `--font-family-en` for EN, `--font-family-cn` for CN, `--font-family-code` for code/terminal
+- Neutral gray scale (`--neutral-50`–`--neutral-900`) for surface and text hierarchy
+- Border-defined surfaces — `--border` / `--border-regular` borders carry containment; shadows only for floating UI
+- Border radius system from `--radius-sm` (tight chrome) to `--radius-full` (tags/pills)
+- Semantic color set: green `--success`, amber `--warning`, red `--error`, teal `--info`
 - **All icons use the [MingCute icon pack](https://www.mingcute.com/)** — no other icon library
 
 ---
@@ -172,22 +172,22 @@ Components are sourced from the CSG Design System (Figma). All sizes are exact f
 #### Sizes
 | Size | Height | Label size | Use |
 |------|--------|-----------|-----|
-| Small | `28px` | `14px` | Compact toolbars, inline actions |
-| Default | `36px` | `14px` | Standard UI actions |
-| Large | `42px` | `14px` | Primary page CTAs |
+| Small | `28px` | `--text-sm` (`14px`) | Compact toolbars, inline actions |
+| Default | `36px` | `--text-sm` (`14px`) | Standard UI actions |
+| Large | `42px` | `--text-sm` (`14px`) | Primary page CTAs |
 
 #### Types & States
 All button types share the same size system and support: **Default**, **Hover**, **Pressed**, **Disabled** states, and optional **Icon Left** / **Icon Right** layouts.
 
 | Type | Use Case | Light Surface Style |
 |------|----------|---------------------|
-| **Primary** | Main CTA — Deploy, Run, Save | `#8FC31F` bg, `#FFFFFF` text; hover `#A8E03C`; pressed `#76A219` |
-| **Default** | General action — Edit, View, Filter | `#FAFAFA` bg, `1px solid #D9D9D9` border, `#404040` text; hover border `#A3A3A3` |
-| **Highlight** | Contextual emphasis — Upgrade, Featured | `#F5FCE8` bg, `1px solid #8FC31F` border, `#003A4A` text; hover bg `#E8F8C8` |
+| **Primary** | Main CTA — Deploy, Run, Save | `--primary-500` bg, `--white` text; hover `--primary-400`; pressed `--primary-600` |
+| **Default** | General action — Edit, View, Filter | `--neutral-50` bg, `1px solid --border-regular` border, `--neutral-700` text; hover border `--border-dark` |
+| **Highlight** | Contextual emphasis — Upgrade, Featured | `--primary-50` bg, `1px solid --border-primary` border, `--secondary-500` text; hover bg `--primary-100` |
 | **Sensitive** | Confirmation step — Apply, Confirm | Neutral fill; requires user acknowledgement flow |
-| **Destructive** | Delete, Remove, Wipe | `#DC2626` bg, `#FFFFFF` text; hover `#B91C1C`; pressed `#991B1B` |
-| **Ghost** | Tertiary / minimal chrome | Transparent, `1px solid #D9D9D9` border; hover border `#A3A3A3` |
-| **Link** | Inline text actions | No bg/border; underline on hover; text `#8FC31F` |
+| **Destructive** | Delete, Remove, Wipe | `--error` bg, `--white` text; hover `--error-dark`; pressed `#991B1B` |
+| **Ghost** | Tertiary / minimal chrome | Transparent, `1px solid --border-regular` border; hover border `--border-dark` |
+| **Link** | Inline text actions | No bg/border; underline on hover; text `--primary-500` |
 
 #### Disabled State (all types)
 - Opacity: `0.4`
@@ -210,13 +210,13 @@ Supports same states as Text Button (Default / Hover / Pressed / Disabled).
 
 | Type | Style |
 |------|-------|
-| **Default** | `#FAFAFA` bg, `1px solid #D9D9D9` border, icon `#404040`; hover border `#A3A3A3` |
-| **Primary** | `#8FC31F` bg, icon `#FFFFFF`; hover `#A8E03C` |
-| **Highlight** | `#F5FCE8` bg, `1px solid #8FC31F` border, icon `#003A4A`; hover bg `#E8F8C8` |
-| **Secondary** | `#F5F5F5` bg, no border, icon `#737373`; hover icon `#404040` |
+| **Default** | `--neutral-50` bg, `1px solid --border-regular` border, icon `--neutral-700`; hover border `--border-dark` |
+| **Primary** | `--primary-500` bg, icon `--white`; hover `--primary-400` |
+| **Highlight** | `--primary-50` bg, `1px solid --border-primary` border, icon `--secondary-500`; hover bg `--primary-100` |
+| **Secondary** | `--neutral-100` bg, no border, icon `--neutral-500`; hover icon `--neutral-700` |
 | **Sensitive** | Neutral fill; requires confirmation |
-| **Destructive** | `#DC2626` bg, icon `#FFFFFF`; hover `#B91C1C` |
-| **Ghost** | Transparent, no border at rest; `1px solid #D9D9D9` border on hover |
+| **Destructive** | `--error` bg, icon `--white`; hover `--error-dark` |
+| **Ghost** | Transparent, no border at rest; `1px solid --border-regular` border on hover |
 
 - Radius: `--radius-md` (`8px`) for Default/Large; `--radius-sm` (`4px`) for Small
 - Icon color inherits from the type's text/icon token
@@ -240,22 +240,22 @@ Supports same states as Text Button (Default / Hover / Pressed / Disabled).
 #### States
 | State | Border | Text |
 |-------|--------|------|
-| Default | `1px solid #D9D9D9` | `#404040` |
-| Placeholder | `1px solid #D9D9D9` | `#A3A3A3` |
-| Focus | `1px solid #8FC31F` | `#404040` |
-| Error | `1px solid #DC2626` | `#404040` |
-| Disabled | `1px solid #E5E5E5` | `#A3A3A3`, opacity `0.5` |
+| Default | `1px solid --border-regular` | `--neutral-700` |
+| Placeholder | `1px solid --border-regular` | `--neutral-400` |
+| Focus | `1px solid --border-primary` | `--neutral-700` |
+| Error | `1px solid --border-error` | `--neutral-700` |
+| Disabled | `1px solid --border` | `--neutral-400`, opacity `0.5` |
 
 #### Specs
-- Background: `#FAFAFA`
+- Background: `--neutral-50`
 - Radius: `--radius-md` (`8px`)
-- Padding: `0 12px` (horizontal)
-- Label: `14px` Space Grotesk `400`, above input, gap `8px`
-- Character counter (e.g. `2/16`): `12px` `#737373`, trailing right
-- Gap between stacked inputs: `12px`
-- Gap between label and input: `8px`
-- Gap between button and input group: `24px`
-- Use `Space Mono` for inputs accepting model names, slugs, IDs, or commands
+- Padding: `0` `spacing-3` (`12px`) horizontal
+- Label: `--text-sm` (`14px`) `--font-family-en` `--font-weight-normal`, above input, gap `spacing-2` (`8px`)
+- Character counter (e.g. `2/16`): `--text-xs` (`12px`) `--neutral-500`, trailing right
+- Gap between stacked inputs: `spacing-3` (`12px`)
+- Gap between label and input: `spacing-2` (`8px`)
+- Gap between button and input group: `spacing-6` (`24px`)
+- Use `--font-family-code` for inputs accepting model names, slugs, IDs, or commands
 
 ---
 
@@ -278,15 +278,15 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 | **Default** | Icon=No / Left / Right × Default, Hover, Pressed, Disabled |
 | **Primary** | Same — used for selected/active item |
 | **Destructive** | Same — used for delete/remove options |
-| **Separator** | Height `8px`, full-width horizontal rule |
+| **Separator** | Height `spacing-2` (`8px`), full-width horizontal rule |
 | **Title** | Height `28px`, section label in muted text |
 
 #### Menu Container
-- Background: `#FFFFFF`
-- Border: `1px solid #E5E5E5`
+- Background: `--white`
+- Border: `1px solid --border`
 - Radius: `--radius-md` (`8px`)
 - Shadow: `--shadow-md` (floating surface)
-- Padding: `4px` top/bottom
+- Padding: `spacing-1` (`4px`) top/bottom
 
 ---
 
@@ -294,11 +294,11 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 
 - Container row: `344×41px`
 - Radio control: `71×17px`
-- Label: `14px` Space Grotesk `400`, `8px` gap from control
+- Label: `--text-sm` (`14px`) `--font-family-en` `--font-weight-normal`, `spacing-2` (`8px`) gap from control
 
 | State | Appearance |
 |-------|-----------|
-| Selected, Enabled | Filled circle `#8FC31F` |
+| Selected, Enabled | Filled circle `--primary-500` |
 | Unselected, Enabled | Empty circle, border `--border-medium` |
 | Selected, Disabled | Filled circle, opacity `0.4` |
 | Unselected, Disabled | Empty circle, opacity `0.4` |
@@ -313,10 +313,10 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 
 | State | Appearance |
 |-------|-----------|
-| ON, Enabled | Track `#8FC31F`, thumb white |
-| OFF, Enabled | Track `#003A4A`, thumb `#737373` |
-| ON, Disabled | Track `#76A219`, opacity `0.4` |
-| OFF, Disabled | Track `#002E3B`, opacity `0.4` |
+| ON, Enabled | Track `--primary-500`, thumb `--white` |
+| OFF, Enabled | Track `--secondary-500`, thumb `--neutral-500` |
+| ON, Disabled | Track `--primary-600`, opacity `0.4` |
+| OFF, Disabled | Track `--secondary-600`, opacity `0.4` |
 
 ---
 
@@ -324,11 +324,11 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 
 - Container row: `368×44px`
 - Checkbox control: `77×20px`
-- Label: `14px` Space Grotesk `400`, `8px` gap from box
+- Label: `--text-sm` (`14px`) `--font-family-en` `--font-weight-normal`, `spacing-2` (`8px`) gap from box
 
 | State | Appearance |
 |-------|-----------|
-| Checked, Enabled | Filled box `#8FC31F`, white checkmark |
+| Checked, Enabled | Filled box `--primary-500`, `--white` checkmark |
 | Unchecked, Enabled | Empty box, border `--border-medium` |
 | Checked, Disabled | Filled box, opacity `0.4` |
 | Unchecked, Disabled | Empty box, opacity `0.4` |
@@ -338,51 +338,51 @@ Same as Text Input: Default / Placeholder / Focus / Error / Disabled
 ### 4.8 Cards & Containers
 
 **Standard Card**
-- Background: `#FFFFFF`
-- Border: `1px solid #E5E5E5`
-- Radius: `12px`
-- Inner padding: `24px`
-- Hover: border `1px solid #D4D4D4`
+- Background: `--white`
+- Border: `1px solid --border`
+- Radius: `--radius-lg` (`12px`)
+- Inner padding: `spacing-6` (`24px`)
+- Hover: border `1px solid --border-medium`
 
 **Model Card (Domain-Specific)**
-- Background: `#FFFFFF`
-- Border: `1px solid #E5E5E5`
-- Radius: `12px`
-- Type badge: pill `9999px`, `#003A4A` text, `#E6F1F3` bg, `1px solid #CCE3E7` border
-- Title: `1.125rem` Space Grotesk `500`, `#171717`
-- Meta (params, file size, format): `0.75rem` Space Mono `400`, `#737373`
-- Hover: border `1px solid #8FC31F`
-- Featured: border `1px solid #8FC31F`
+- Background: `--white`
+- Border: `1px solid --border`
+- Radius: `--radius-lg` (`12px`)
+- Type badge: pill `--radius-full`, `--secondary-500` text, `--secondary-50` bg, `1px solid --secondary-100` border
+- Title: `--text-lg` (`1.125rem`) `--font-family-en` `--font-weight-medium`, `--neutral-900`
+- Meta (params, file size, format): `--text-xs` (`0.75rem`) `--font-family-code` `--font-weight-normal`, `--neutral-500`
+- Hover: border `1px solid --border-primary`
+- Featured: border `1px solid --border-primary`
 
 **Featured Card**
-- Radius: `16px`
-- Background: `#FFFFFF`
-- Border: `1px solid #8FC31F`
+- Radius: `--radius-xl` (`16px`)
+- Background: `--white`
+- Border: `1px solid --border-primary`
 
 ---
 
 ### 4.9 Badges & Status Indicators
 
-- Shape: pill (`9999px`), padding `4px 10px`, font `12px` Space Grotesk `500`
+- Shape: pill (`--radius-full`), padding `4px 10px`, font `--text-xs` (`12px`) `--font-family-en` `--font-weight-medium`
 
 | Status | Text | Border | Background |
 |--------|------|--------|------------|
-| Running / Active | `#8FC31F` | `1px solid #8FC31F` | `rgba(143,195,31,0.1)` |
-| Warning | `#FF9500` | `1px solid #FF9500` | `rgba(255,149,0,0.1)` |
-| Error | `#DC2626` | `1px solid #DC2626` | `rgba(220,38,38,0.1)` |
-| Inactive | `#A3A3A3` | `1px solid #404040` | `rgba(163,163,163,0.1)` |
-| Info | `#338F9F` | `1px solid #003A4A` | `rgba(51,143,159,0.1)` |
+| Running / Active | `--primary-500` | `1px solid --border-primary` | `rgba(143,195,31,0.1)` |
+| Warning | `--warning` | `1px solid --border-warning` | `rgba(255,149,0,0.1)` |
+| Error | `--error` | `1px solid --border-error` | `rgba(220,38,38,0.1)` |
+| Inactive | `--neutral-400` | `1px solid --neutral-700` | `rgba(163,163,163,0.1)` |
+| Info | `--secondary-400` | `1px solid --border-secondary` | `rgba(51,143,159,0.1)` |
 
 ---
 
 ### 4.10 Navigation Bar
 
-- Background: `#FFFFFF`
-- Border-bottom: `1px solid #E5E5E5`
+- Background: `--white`
+- Border-bottom: `1px solid --border`
 - Nav links: use **Nav Button** components (see 4.12 below)
-- Active link: Primary type Nav Button (`#8FC31F` text, `rgba(143,195,31,0.1)` bg)
+- Active link: Primary type Nav Button (`--primary-500` text, `rgba(143,195,31,0.1)` bg)
 - CTA: Primary text button (Large, `42px`), right-aligned
-- Mobile: hamburger Nav Icon Button (Default size, `36×36px`); full-screen overlay on `#FFFFFF`
+- Mobile: hamburger Nav Icon Button (Default size, `36×36px`); full-screen overlay on `--white`
 
 ---
 
@@ -405,12 +405,12 @@ All types support icon positions **Left**, **Right**, and **Center**, and all fo
 
 | Type | Use in Navigation | Style Guidance |
 |------|-------------------|---------------|
-| **Default** | Standard nav item (inactive) | Transparent bg; text `#737373`; hover text `#171717` + `#F5F5F5` bg tint |
-| **Highlight** | Contextual call-to-action in nav (e.g. "Upgrade", "New") | `#F5FCE8` bg, `1px solid #8FC31F` border, `#003A4A` text; hover bg `#E8F8C8` |
-| **Primary** | Active / selected nav item | `#8FC31F` text; `rgba(143,195,31,0.1)` bg tint |
+| **Default** | Standard nav item (inactive) | Transparent bg; text `--neutral-500`; hover text `--neutral-900` + `--neutral-100` bg tint |
+| **Highlight** | Contextual call-to-action in nav (e.g. "Upgrade", "New") | `--primary-50` bg, `1px solid --border-primary` border, `--secondary-500` text; hover bg `--primary-100` |
+| **Primary** | Active / selected nav item | `--primary-500` text; `rgba(143,195,31,0.1)` bg tint |
 | **Sensitive** | Confirmation-required nav action | Neutral fill; requires confirmation before navigating away |
-| **Destructive** | Dangerous nav action (e.g. "Delete Workspace") | `#DC2626` text; hover `rgba(220,38,38,0.06)` bg |
-| **Ghost** | Minimal nav item, no fill or border at rest | Transparent; `1px solid #D9D9D9` border on hover; text `#737373` → `#404040` |
+| **Destructive** | Dangerous nav action (e.g. "Delete Workspace") | `--error` text; hover `rgba(220,38,38,0.06)` bg |
+| **Ghost** | Minimal nav item, no fill or border at rest | Transparent; `1px solid --border-regular` border on hover; text `--neutral-500` → `--neutral-700` |
 
 #### Icon Layout
 | Position | Description |
@@ -441,12 +441,12 @@ All types support: **Default**, **Hover**, **Pressed**, **Disabled**.
 
 | Type | Style Guidance |
 |------|---------------|
-| **Default** | Transparent bg; icon `#737373`; hover `#F5F5F5` bg + icon `#404040` |
-| **Highlight** | `#F5FCE8` bg, `1px solid #8FC31F` border; icon `#003A4A`; hover bg `#E8F8C8` |
-| **Primary** | `#8FC31F` bg; icon `#FFFFFF`; hover `#A8E03C` bg |
-| **Secondary** | `#F5F5F5` bg; icon `#737373`; hover icon `#404040` — used for secondary nav chrome |
-| **Destructive** | Icon `#DC2626`; hover `rgba(220,38,38,0.06)` bg |
-| **Ghost** | No bg or border at rest; `1px solid #D9D9D9` border on hover only |
+| **Default** | Transparent bg; icon `--neutral-500`; hover `--neutral-100` bg + icon `--neutral-700` |
+| **Highlight** | `--primary-50` bg, `1px solid --border-primary` border; icon `--secondary-500`; hover bg `--primary-100` |
+| **Primary** | `--primary-500` bg; icon `--white`; hover `--primary-400` bg |
+| **Secondary** | `--neutral-100` bg; icon `--neutral-500`; hover icon `--neutral-700` — used for secondary nav chrome |
+| **Destructive** | Icon `--error`; hover `rgba(220,38,38,0.06)` bg |
+| **Ghost** | No bg or border at rest; `1px solid --border-regular` border on hover only |
 
 > **Nav Icon Button vs Icon Button (4.2):** Nav Icon Button is designed for navigation chrome contexts. It gains a **Secondary** type (for toolbar chrome) and drops the **Sensitive** type. Use Nav Icon Button for anything inside nav bars, sidebars, or toolbars; use Icon Button for actions within content areas.
 
@@ -488,10 +488,10 @@ All icons across the entire SenseCraft AI interface must come from the MingCute 
 Pop-ups are modal dialogs that appear centered over the page. They are used for confirmations, destructive actions, and multi-step flows requiring focused user input.
 
 #### Container
-- Background: `white` (`#FFFFFF`) — pop-ups always use a **light surface**, regardless of page theme
-- Border: `1px solid #E5E5E5`
-- Border radius: `12px` (`--round-corner/md`)
-- Shadow: `0px 10px 24px -6px rgba(0,0,0,0.15)` (Shadow/2XL)
+- Background: `--white` — pop-ups always use a **light surface**, regardless of page theme
+- Border: `1px solid --border`
+- Border radius: `--radius-lg` (`12px`)
+- Shadow: `--shadow-2xl`
 - Width: `422px` standard; scales to full-width on mobile
 - Overflow: `hidden` (clips children to radius)
 - Structure: **Top Bar** (optional) → **Content** → **Bottom Bar** (optional)
@@ -500,7 +500,7 @@ Pop-ups are modal dialogs that appear centered over the page. They are used for 
 
 #### Top Bar (顶栏)
 
-Two styles, both `h-[36px]`, full width, `p-[4px]`.
+Two styles, both `h-[36px]`, full width, `p-[spacing-1]`.
 
 | Style | Layout | Use |
 |-------|--------|-----|
@@ -508,32 +508,32 @@ Two styles, both `h-[36px]`, full width, `p-[4px]`.
 | **Style 2** | Title centered only | Confirmation dialogs where close is not available |
 
 **Specs:**
-- Background: `#FAFAFA` (`--neutral-50`)
-- Border-bottom: `1px solid #D9D9D9` (`--border-regular`) — Style 1 only
-- Title: Space Grotesk Medium, `13px` (`--size-sm`), `#525252` (`--neutral-600`), `8px` horizontal padding
+- Background: `--neutral-50`
+- Border-bottom: `1px solid --border-regular` — Style 1 only
+- Title: `--font-family-en` `--font-weight-medium`, `13px`, `--neutral-600`, `spacing-2` (`8px`) horizontal padding
 - Close button (Style 1 only): Nav Icon Button Default (`28×28px`), `close-line` MingCute icon, `14×14px`
 
 ---
 
 #### Content Area (弹窗内容)
 
-- Padding: `24px`
-- Gap between elements: `16px`
-- Body text: Space Grotesk Regular, `13px`, `#000000` or `#404040`; mixed weight allowed (Regular for context, Medium for key phrases)
+- Padding: `spacing-6` (`24px`)
+- Gap between elements: `spacing-4` (`16px`)
+- Body text: `--font-family-en` `--font-weight-normal`, `13px`, `--neutral-700`; mixed weight allowed (`--font-weight-normal` for context, `--font-weight-medium` for key phrases)
 
 **Inline validation alert:**
-- Background: `#FFF1F1` (`--semantic-error-bg-light`)
-- Border: `1px solid #DC2626` (`--border-error`)
-- Border radius: `12px`
+- Background: `--semantic-error-bg-light`
+- Border: `1px solid --border-error`
+- Border radius: `--radius-lg` (`12px`)
 - Padding: `10px`
 - Icon: `warning-line` MingCute, `20×20px`
-- Text: Space Grotesk Regular, `12px`, `#DC2626`
+- Text: `--font-family-en` `--font-weight-normal`, `--text-xs` (`12px`), `--error`
 
 ---
 
 #### Bottom Bar (底栏)
 
-Three styles, all full width, `p-[8px]`, button height `32px`, button radius `10px` (`--round-corner`).
+Three styles, all full width, `p-[spacing-2]`, button height `32px`, button radius `10px`.
 
 | Style | Height | Layout | Button widths | Use |
 |-------|--------|--------|---------------|-----|
@@ -542,10 +542,10 @@ Three styles, all full width, `p-[8px]`, button height `32px`, button radius `10
 | **Style 2-2** | `72px` | `justify-center` | `128px` single | Single primary action — centered |
 
 **Button specs inside Bottom Bar:**
-- Cancel button: `bg-[#FAFAFA]`, `border 1px solid #D9D9D9`, text `#404040` (`--neutral-700`), Space Grotesk Medium `16px`
-- Confirm button: `bg-[#8FC31F]` (`--primary-500`), text white, Space Grotesk Medium `16px`
-- Delete button: `bg-[#DC2626]` (`--semantic-error`), text white, Space Grotesk Medium `16px`
-- Disabled Confirm: `bg-[#D4D4D4]` (`--neutral-300`), text `#A3A3A3` (`--neutral-400`) — used when required fields are incomplete
+- Cancel button: `--neutral-50` bg, `1px solid --border-regular` border, text `--neutral-700`, `--font-family-en` `--font-weight-medium` `--text-base` (`16px`)
+- Confirm button: `--primary-500` bg, text `--white`, `--font-family-en` `--font-weight-medium` `--text-base` (`16px`)
+- Delete button: `--error` bg, text `--white`, `--font-family-en` `--font-weight-medium` `--text-base` (`16px`)
+- Disabled Confirm: `--neutral-300` bg, text `--neutral-400` — used when required fields are incomplete
 
 ---
 
@@ -559,7 +559,7 @@ Top Bar Style 1 (title + close)
     Checkbox with agreement terms
     Inline validation alert (if errors present)
 Bottom Bar Style 1 (Cancel 72px | Confirm/Publish 72px, right-aligned)
-  → Confirm disabled (#D4D4D4) until checkbox checked
+  → Confirm disabled (--neutral-300) until checkbox checked
 ```
 
 **Use Case 2 — Destructive confirmation (e.g. Delete)**
@@ -568,7 +568,7 @@ No Top Bar
   Content (centered):
     warning-fill icon 28×28px
     Title: Space Grotesk Medium 13px, black
-    Subtitle: Space Grotesk Regular 13px, #DC2626
+    Subtitle: --font-family-en --font-weight-normal 13px, --error
 Bottom Bar Style 2-1 (Cancel 128px | Delete 128px, centered)
 ```
 
@@ -583,13 +583,13 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 
 ### 4.11 Code Blocks / Terminal Output
 
-- Background: `#F5F5F5`
-- Text: `#171717` (Space Mono `14px`)
-- Border: `1px solid #E5E5E5`
-- Radius: `8px`
-- Padding: `16px`
-- Keyword/value accent: `#003A4A`
-- Comment: `#A3A3A3`
+- Background: `--neutral-100`
+- Text: `--neutral-900` (`--font-family-code` `--text-sm` / `14px`)
+- Border: `1px solid --border`
+- Radius: `--radius-md` (`8px`)
+- Padding: `spacing-4` (`16px`)
+- Keyword/value accent: `--secondary-500`
+- Comment: `--neutral-400`
 
 ---
 
@@ -632,16 +632,16 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 
 | Level | Treatment | Use |
 |-------|-----------|-----|
-| Flat (0) | No shadow, `#FFFFFF` bg | Page base surface, cards |
-| Recessed (1) | `#FAFAFA` bg + `1px solid #E5E5E5` border | Input fields, nav chrome, modal header/footer |
-| Raised (2) | `#FFFFFF` bg + `1px solid #E5E5E5` border | Standard cards, panels |
-| Elevated (3) | `#FFFFFF` bg + `1px solid #E5E5E5` border + `--shadow-sm` | Dropdown menus, tooltips |
-| Modal (4) | `0px 10px 24px -6px rgba(0,0,0,0.15)` (`--shadow-2xl`) | Pop-ups, dialogs |
-| Focus | `0 0 0 2px #8FC31F` | Keyboard focus on inputs/buttons |
+| Flat (0) | No shadow, `--white` bg | Page base surface, cards |
+| Recessed (1) | `--neutral-50` bg + `1px solid --border` | Input fields, nav chrome, modal header/footer |
+| Raised (2) | `--white` bg + `1px solid --border` | Standard cards, panels |
+| Elevated (3) | `--white` bg + `1px solid --border` + `--shadow-sm` | Dropdown menus, tooltips |
+| Modal (4) | `--shadow-2xl` | Pop-ups, dialogs |
+| Focus | `0 0 0 2px --border-primary` | Keyboard focus on inputs/buttons |
 
 **Confirmed shadow value from Figma:** `--shadow-2xl: 0px 10px 24px -6px rgba(0,0,0,0.15)` — used for pop-up / modal containers.
 
-**Shadow Philosophy**: On light surfaces, elevation is expressed first through background tone (`#FFFFFF` vs `#FAFAFA`) and border presence, then through shadow for floating layers. Reserve shadow for dropdowns and modals only — cards and panels use borders alone.
+**Shadow Philosophy**: On light surfaces, elevation is expressed first through background tone (`--white` vs `--neutral-50`) and border presence, then through shadow for floating layers. Reserve shadow for dropdowns and modals only — cards and panels use borders alone.
 
 ---
 
@@ -649,24 +649,24 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 
 ### Do
 - Use MingCute icon pack exclusively — default to `*-line`; only use `*-fill` when semantically necessary
-- Use `#FFFFFF` for page and card surfaces; `#FAFAFA` for recessed chrome (inputs, nav bars, modal header/footer)
-- Use `#8FC31F` (primary-500) sparingly — it's the activation signal, not a fill color
-- Use Space Mono for all model identifiers, metrics, benchmark values, and code
-- Use border color changes (`--border-primary: #8FC31F`) to show selected/active card state
-- Apply negative letter-spacing at heading sizes (`-0.03rem` at `3rem`)
+- Use `--white` for page and card surfaces; `--neutral-50` for recessed chrome (inputs, nav bars, modal header/footer)
+- Use `--primary-500` sparingly — it's the activation signal, not a fill color
+- Use `--font-family-code` for all model identifiers, metrics, benchmark values, and code
+- Use border color changes (`--border-primary`) to show selected/active card state
+- Apply negative letter-spacing at heading sizes (`-0.03rem` at `--text-4xl`)
 - Use semantic color tokens (`--success`, `--error`, `--warning`) for all status indicators
-- Use `9999px` radius for tag pills and category filters only
-- Express elevation through surface tone (`#FFFFFF` vs `#FAFAFA`) before reaching for shadows
+- Use `--radius-full` for tag pills and category filters only
+- Express elevation through surface tone (`--white` vs `--neutral-50`) before reaching for shadows
 
 ### Don't
 - Don't use Heroicons, Lucide, Phosphor, or any icon set other than MingCute
 - Don't use `*-fill` icons by default — only when `-line` is semantically insufficient
-- Don't use `#8FC31F` as a large fill or background color — buttons and active states only
-- Don't use dark secondary tones (`#003A4A`, `#00171E`, `#000C0F`) as surface backgrounds — these are text and accent colors in light mode
-- Don't use Space Grotesk for code, model names, or terminal output — Space Mono only
+- Don't use `--primary-500` as a large fill or background color — buttons and active states only
+- Don't use dark secondary tones (`--secondary-500`, `--secondary-800`, `--secondary-900`) as surface backgrounds — these are text and accent colors in light mode
+- Don't use `--font-family-en` for code, model names, or terminal output — `--font-family-code` only
 - Don't mix CN and EN fonts in the same line — use one family per text run
-- Don't add shadows to cards or panels — borders (`#E5E5E5`) carry containment
-- Don't use `font-weight-extrabold` (`800`) for body or UI text — reserve it for hero numbers
+- Don't add shadows to cards or panels — borders (`--border`) carry containment
+- Don't use `--font-weight-extrabold` (`800`) for body or UI text — reserve it for hero numbers
 
 ---
 
@@ -707,21 +707,21 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 | Code / mono | `--font-family-code` | `Space Mono` |
 
 ### Example Component Prompts
-- **Model Card**: "White card (`#FFFFFF`), border `1px solid #E5E5E5`, radius `12px`. Title `1.125rem` Space Grotesk weight `500`, color `#171717`. Type badge: pill `9999px`, `#003A4A` text, `#E6F1F3` bg, `1px solid #CCE3E7` border. Metric row: `0.75rem` Space Mono `#737373`. Hover: border `1px solid #8FC31F`."
-- **Hero Section**: "Full-width section on `#FFFFFF`. Headline `3rem` Space Grotesk weight `800`, letter-spacing `-0.03rem`, color `#171717`. Subhead `1.125rem` weight `400`, color `#737373`. CTA: `#8FC31F` bg, `#FFFFFF` text, `8px` radius, `8px 20px` padding."
-- **Status Badge**: "Pill badge, `9999px` radius, `4px 10px` padding. Running: `#8FC31F` text + border, `rgba(143,195,31,0.1)` background. Error: `#DC2626` text + border, `rgba(220,38,38,0.1)` background."
-- **Code Block**: "`#F5F5F5` background, `1px solid #E5E5E5` border, `8px` radius, `16px` padding. Text `0.875rem` Space Mono `#171717`. Keyword accent: `#003A4A`."
-- **Navigation**: "Sticky nav on `#FFFFFF`, `1px solid #E5E5E5` bottom border. Logo left. Nav items use Nav Button Default type (`197×42px`): text `#737373`, transparent bg, hover text `#171717` + `#F5F5F5` bg. Active: Nav Button Primary type, text `#8FC31F`, bg `rgba(143,195,31,0.1)`. Right-aligned CTA: Primary text button Large (`42px`)."
-- **Sidebar**: "Fixed sidebar on `#FAFAFA`, `1px solid #E5E5E5` right border. Nav items: Nav Button Default Left-icon (`197×42px`). Active: Nav Button Primary Left-icon, text `#8FC31F`, bg `rgba(143,195,31,0.1)`. Toolbar icons: Nav Icon Button Default or Secondary (`36×36px`)."
-- **Confirm Pop-up**: "White pop-up (`422px`, `12px` radius, shadow `0px 10px 24px -6px rgba(0,0,0,0.15)`, border `1px solid #E5E5E5`). Top Bar Style 1 (`36px`, `#FAFAFA` bg, border-bottom `#D9D9D9`, title Space Grotesk Medium `13px` `#525252`, close MingCute `close-line` `28×28px`). Content `24px` padding. Bottom Bar Style 1 (`48px`, `justify-end`, Cancel `72px` `#FAFAFA`/border, Confirm `72px` `#8FC31F`/white, both `32px` height `10px` radius)."
-- **Destructive Pop-up**: "White pop-up, no top bar. Content centered: MingCute `warning-line` `28×28px` `#DC2626`, title Medium `13px` `#171717`, subtitle Regular `13px` `#DC2626`. Bottom Bar Style 2-1 (`72px`, centered, Cancel `128px` neutral, Delete `128px` `#DC2626`/white)."
+- **Model Card**: "`--white` card, border `1px solid --border`, radius `--radius-lg`. Title `--text-lg` `--font-family-en` `--font-weight-medium`, color `--neutral-900`. Type badge: pill `--radius-full`, `--secondary-500` text, `--secondary-50` bg, `1px solid --secondary-100` border. Metric row: `--text-xs` `--font-family-code` `--neutral-500`. Hover: border `1px solid --border-primary`."
+- **Hero Section**: "Full-width section on `--white`. Headline `--text-4xl` `--font-family-en` `--font-weight-extrabold`, letter-spacing `-0.03rem`, color `--neutral-900`. Subhead `--text-lg` `--font-weight-normal`, color `--neutral-500`. CTA: `--primary-500` bg, `--white` text, `--radius-md`, `spacing-2` `spacing-5` padding."
+- **Status Badge**: "Pill badge, `--radius-full`, `4px 10px` padding. Running: `--primary-500` text + `--border-primary` border, `rgba(143,195,31,0.1)` background. Error: `--error` text + `--border-error` border, `rgba(220,38,38,0.1)` background."
+- **Code Block**: "`--neutral-100` background, `1px solid --border`, `--radius-md`, `spacing-4` padding. Text `--text-sm` `--font-family-code` `--neutral-900`. Keyword accent: `--secondary-500`."
+- **Navigation**: "Sticky nav on `--white`, `1px solid --border` bottom border. Logo left. Nav items use Nav Button Default type (`197×42px`): text `--neutral-500`, transparent bg, hover text `--neutral-900` + `--neutral-100` bg. Active: Nav Button Primary type, text `--primary-500`, bg `rgba(143,195,31,0.1)`. Right-aligned CTA: Primary text button Large (`42px`)."
+- **Sidebar**: "Fixed sidebar on `--neutral-50`, `1px solid --border` right border. Nav items: Nav Button Default Left-icon (`197×42px`). Active: Nav Button Primary Left-icon, text `--primary-500`, bg `rgba(143,195,31,0.1)`. Toolbar icons: Nav Icon Button Default or Secondary (`36×36px`)."
+- **Confirm Pop-up**: "`--white` pop-up (`422px`, `--radius-lg`, `--shadow-2xl`, border `1px solid --border`). Top Bar Style 1 (`36px`, `--neutral-50` bg, border-bottom `--border-regular`, title `--font-family-en` `--font-weight-medium` `13px` `--neutral-600`, close MingCute `close-line` `28×28px`). Content `spacing-6` padding. Bottom Bar Style 1 (`48px`, `justify-end`, Cancel `72px` `--neutral-50`/border, Confirm `72px` `--primary-500`/`--white`, both `32px` height `10px` radius)."
+- **Destructive Pop-up**: "`--white` pop-up, no top bar. Content centered: MingCute `warning-line` `28×28px` `--error`, title `--font-weight-medium` `13px` `--neutral-900`, subtitle `--font-weight-normal` `13px` `--error`. Bottom Bar Style 2-1 (`72px`, centered, Cancel `128px` neutral, Delete `128px` `--error`/`--white`)."
 
 ### Iteration Guide
-1. Page and card base is `#FFFFFF`; use `#FAFAFA` for recessed chrome (inputs, sidebar, modal bars)
-2. Borders do the work: `#E5E5E5` for cards, `#D9D9D9` for inputs and modal chrome
-3. `#8FC31F` activates the page — one CTA, one active state, one status indicator at a time
-4. `#003A4A` (secondary-500) is your dark accent for headings and teal-branded text elements
-5. Every model identifier, metric, or version string uses Space Mono
-6. Letter-spacing tightens with size: `-0.03rem` at `48px`, `-0.02rem` at `36px`, `-0.01rem` at `22–30px`, normal below
-7. Status colors are semantic tokens — never hard-code `#DC2626` for error; use `--error`
-8. For bilingual pages: Space Grotesk and Noto Sans SC at matching sizes — no size reduction for CN
+1. Page and card base is `--white`; use `--neutral-50` for recessed chrome (inputs, sidebar, modal bars)
+2. Borders do the work: `--border` for cards, `--border-regular` for inputs and modal chrome
+3. `--primary-500` activates the page — one CTA, one active state, one status indicator at a time
+4. `--secondary-500` is your dark accent for headings and teal-branded text elements
+5. Every model identifier, metric, or version string uses `--font-family-code`
+6. Letter-spacing tightens with size: `-0.03rem` at `--text-4xl`, `-0.02rem` at `--text-3xl`, `-0.01rem` at `--text-xl`–`--text-2xl`, normal below
+7. Status colors are semantic tokens — never hard-code hex for error; use `--error`
+8. For bilingual pages: `--font-family-en` and `--font-family-cn` at matching sizes — no size reduction for CN
