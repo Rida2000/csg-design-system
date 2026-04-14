@@ -14,13 +14,11 @@ The single source of truth for **SenseCraft AI** — bridging what designers bui
 
 ## Get Started
 
-Run this in your project root (requires [GitHub CLI](https://cli.github.com) — `gh auth login` first):
+Run this in your project root:
 
 ```bash
-bash <(gh api "repos/Rida2000/csg-design-system/contents/scripts/install.sh?ref=main" --jq '.content' | base64 -d)
+curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh | bash
 ```
-
-> **Note:** Quote the URL. Zsh (macOS default) treats `?` as a glob pattern and will fail with `no matches found` otherwise.
 
 It asks which tool you use and installs the right files:
 
@@ -148,7 +146,7 @@ Run `/mcp` in Claude Code, select `figma`, authenticate. Or add manually:
 
 ```bash
 # One command installs DESIGN.md + all 7 Claude Code agents
-echo 1 | bash <(gh api "repos/Rida2000/csg-design-system/contents/scripts/install.sh?ref=main" --jq '.content' | base64 -d)
+echo 1 | bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh)
 ```
 
 Restart Claude Code. Type `/agents` to see them.
