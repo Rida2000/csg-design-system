@@ -119,15 +119,31 @@ install_codex() {
 
 # ── Interactive menu ──────────────────────────────────────────────────────────
 
-echo "Which tool(s) do you use?"
-echo ""
-echo "  1) Claude Code"
-echo "  2) Cursor"
-echo "  3) Codex (OpenAI)"
-echo "  4) All of the above"
-echo ""
-printf "Enter choice [1-4]: "
-read -r choice
+# Allow non-interactive installs via env var: `CHOICE=1 curl ... | bash`
+choice="${CHOICE:-}"
+
+if [ -z "$choice" ]; then
+  echo "Which tool(s) do you use?"
+  echo ""
+  echo "  1) Claude Code"
+  echo "  2) Cursor"
+  echo "  3) Codex (OpenAI)"
+  echo "  4) All of the above"
+  echo ""
+  printf "Enter choice [1-4]: "
+
+  # When piped via `curl ... | bash`, stdin is the script itself — `read`
+  # would hit EOF. Read from the controlling terminal instead.
+  if [ -t 0 ]; then
+    read -r choice
+  elif [ -r /dev/tty ]; then
+    read -r choice < /dev/tty
+  else
+    echo ""
+    echo "  No terminal available. Set CHOICE=1..4 for non-interactive install."
+    choice=""
+  fi
+fi
 
 install_design_md
 

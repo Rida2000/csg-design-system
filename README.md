@@ -146,7 +146,7 @@ Run `/mcp` in Claude Code, select `figma`, authenticate. Or add manually:
 
 ```bash
 # One command installs DESIGN.md + all 7 Claude Code agents
-echo 1 | bash <(curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh)
+CHOICE=1 curl -fsSL https://raw.githubusercontent.com/Rida2000/csg-design-system/main/scripts/install.sh | bash
 ```
 
 Restart Claude Code. Type `/agents` to see them.
