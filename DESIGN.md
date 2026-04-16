@@ -211,20 +211,21 @@ All button types share the same size system and support: **Default**, **Hover**,
 | Large | `42×42px` | `20×20px` | Primary icon CTAs |
 
 #### Types & States
-Supports same states as Text Button (Default / Hover / Pressed / Disabled).
+All types support **Default**, **Hover**, **Pressed**, **Disabled** states.
 
-| Type | Style |
-|------|-------|
-| **Default** | `--neutral-50` bg, `1px solid --border-regular` border, icon `--neutral-700`; hover border `--border-dark` |
-| **Primary** | `--primary-500` bg, icon `--white`; hover `--primary-400` |
-| **Highlight** | `--primary-50` bg, `1px solid --border-primary` border, icon `--secondary-500`; hover bg `--primary-100` |
-| **Secondary** | `--neutral-100` bg, no border, icon `--neutral-500`; hover icon `--neutral-700` |
-| **Sensitive** | Neutral fill; requires confirmation |
-| **Destructive** | `--error` bg, icon `--white`; hover `--error-dark` |
-| **Ghost** | Transparent, no border at rest; `1px solid --border-regular` border on hover |
+| Type | Default | Hover | Pressed | Disabled |
+|------|---------|-------|---------|----------|
+| **Default** | `--neutral-50` bg, `1px solid --border-regular`, icon `--neutral-700` | `--neutral-100` bg, `1px solid --border-regular` | `--neutral-200` bg, `1px solid --border-regular` | `--neutral-100` bg, `1px solid --border`, icon `--neutral-300` |
+| **Primary** | `--primary-500` bg, no border, icon `--white` | `--primary-450` bg | `--primary-600` bg | `--neutral-300` bg, `1px solid --border-regular`, icon `--neutral-400` |
+| **Highlight** | `--neutral-50` bg, `1px solid --border-regular`, icon `--neutral-700` | `--primary-50` bg, `1px solid --border-primary`, icon `--primary-600` | `--primary-100` bg, `1px solid --border-primary`, icon `--primary-600` | `--neutral-100` bg, `1px solid --border-regular`, icon `--neutral-300` |
+| **Secondary** | `--secondary-500` bg, no border, icon `--white` | `--secondary-450` bg | `--secondary-600` bg | `--neutral-100` bg, `1px solid --border`, icon `--neutral-300` |
+| **Destructive** | `--error` bg, no border, icon `--white` | `--error-light` bg | `--error-dark` bg | `--neutral-300` bg, `1px solid --border`, icon `--neutral-400` |
+| **Ghost** | Transparent, no border, icon `--neutral-700` | `--neutral-100` bg | `--neutral-200` bg | Transparent, icon `--neutral-300` |
+| **Sensitive** | `--neutral-50` bg, `1px solid --border-regular`, icon `--neutral-700` | `--semantic-error-bg-light` bg, `1px solid --error`, icon `--error` | `#FFE0E0` bg, `1px solid --error`, icon `--error` | `--neutral-100` bg, `1px solid --border`, icon `--neutral-300` |
 
+#### Specs
 - Radius: `--radius-lg` (`12px`) for Default/Large; `--radius-sm` (`4px`) for Small
-- Icon color inherits from the type's text/icon token
+- Icon color inherits from the type's state as shown in the table above
 
 ---
 
