@@ -24,7 +24,7 @@ It asks which tool you use and installs the right files:
 
 | You pick | What gets installed |
 |----------|-------------------|
-| **Claude Code** | `DESIGN.md` + 7 agents in `~/.claude/agents/` |
+| **Claude Code** | `DESIGN.md` + 8 agents in `~/.claude/agents/` |
 | **Cursor** | `DESIGN.md` + `.cursorrules` + `.cursor/rules/*.mdc` |
 | **Codex** | `DESIGN.md` + `AGENTS.md` |
 | **All** | Everything above |

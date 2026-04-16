@@ -1,6 +1,6 @@
 # CSG Design System — Claude Code Agents
 
-Three agents for maintaining and using the CSG Design System in Claude Code.
+Agents for maintaining and using the CSG Design System in Claude Code.
 
 ## Install
 
@@ -54,6 +54,18 @@ Checks: hardcoded colors, wrong icon libraries, wrong fonts, off-spec border rad
 - "Review `src/components/Button/Button.tsx` and `Button.module.css`"
 - "Check this component for design system compliance"
 - "Audit the nav bar implementation against the design spec"
+
+---
+
+### `csg-tokenizer`
+**Use when:** Migrating an existing project to use CSG Design System tokens.
+
+Scans the full codebase to detect the tech stack and styling approach, imports the complete token set from `DESIGN.md`, then systematically replaces hardcoded colors, fonts, radii, and spacing with the corresponding tokens. Generates a migration report at the end.
+
+**Example prompts:**
+- "Tokenize this project with the CSG design system"
+- "Replace all hardcoded colors with CSG tokens"
+- "Migrate this React app to use CSG design tokens"
 
 ---
 

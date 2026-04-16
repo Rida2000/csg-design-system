@@ -74,6 +74,7 @@ install_claude() {
     "csg-component-builder.md"
     "csg-design-reviewer.md"
     "csg-figma-sync.md"
+    "csg-tokenizer.md"
     "design-bridge.md"
     "csg-frontend-developer.md"
     "csg-ui-designer.md"
@@ -197,6 +198,6 @@ if [ -f ".git/HEAD" ] || [ -f ".git" ]; then
 fi
 
 echo ""
-echo "Done! DESIGN.md is your single source of truth."
+echo "Done! CSG Design System is now added to your project. Start swapping your styles by using /agents csg-tokenizer."
 echo "View the visual spec: https://rida2000.github.io/csg-design-system/"
 echo ""
