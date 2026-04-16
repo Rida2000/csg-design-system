@@ -98,7 +98,7 @@ body{
   padding:0.75rem 1rem;margin:0.75rem 0 2.5rem;
   background:var(--neutral-50);
   border:1px solid var(--border);
-  border-radius:var(--radius-md);
+  border-radius:var(--radius-lg);
   font-size:0.8rem;
 }
 .top-meta .meta-item{display:flex;flex-direction:column;gap:2px}
@@ -146,7 +146,7 @@ code{
 }
 pre{
   background:var(--neutral-100);border:1px solid var(--border);
-  border-radius:var(--radius-md);padding:1rem;overflow-x:auto;
+  border-radius:var(--radius-lg);padding:1rem;overflow-x:auto;
   font-family:var(--font-family-code);font-size:0.8125rem;
   color:var(--neutral-900);
 }
@@ -185,7 +185,7 @@ tr:hover td{background:var(--neutral-50)}
   border-bottom:1px solid var(--border-light);
 }
 .swatch{
-  width:36px;height:36px;border-radius:var(--radius-md);
+  width:36px;height:36px;border-radius:var(--radius-lg);
   border:1px solid var(--border-medium);flex-shrink:0;
 }
 .token-names{display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -233,25 +233,25 @@ tr:hover td{background:var(--neutral-50)}
 
 /* Buttons */
 .demo-btn-primary{
-  height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
+  height:36px;padding:0 16px;border-radius:var(--radius-lg);border:none;
   background:var(--primary-500);color:#fff;font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
 }
 .demo-btn-primary:hover{background:var(--primary-400)}
 .demo-btn-default{
-  height:36px;padding:0 16px;border-radius:var(--radius-md);
+  height:36px;padding:0 16px;border-radius:var(--radius-lg);
   background:var(--neutral-50);border:1px solid var(--border-regular);
   color:var(--neutral-700);font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
 }
 .demo-btn-default:hover{border-color:var(--border-dark)}
 .demo-btn-destructive{
-  height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
+  height:36px;padding:0 16px;border-radius:var(--radius-lg);border:none;
   background:var(--error);color:#fff;font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
 }
 .demo-btn-ghost{
-  height:36px;padding:0 16px;border-radius:var(--radius-md);
+  height:36px;padding:0 16px;border-radius:var(--radius-lg);
   background:transparent;border:1px solid var(--border-regular);
   color:var(--neutral-700);font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
@@ -264,8 +264,8 @@ tr:hover td{background:var(--neutral-50)}
 
 /* Text input */
 .demo-input{
-  height:42px;width:270px;background:var(--neutral-50);
-  border:1px solid var(--border-regular);border-radius:var(--radius-md);
+  height:42px;width:270px;background:var(--white);
+  border:1px solid var(--border-regular);border-radius:var(--radius-lg);
   padding:0 12px;font-family:var(--font-family-en);font-size:14px;
   color:var(--neutral-700);outline:none;
 }
@@ -321,7 +321,7 @@ tr:hover td{background:var(--neutral-50)}
 
 /* Code block demo */
 .demo-code{
-  background:var(--neutral-100);border:1px solid var(--border);border-radius:var(--radius-md);
+  background:var(--neutral-100);border:1px solid var(--border);border-radius:var(--radius-lg);
   padding:16px;font-family:var(--font-family-code);font-size:14px;
   color:var(--neutral-900);line-height:1.6;
 }
@@ -1165,14 +1165,15 @@ tr:hover td{background:var(--neutral-50)}
       <button class="demo-btn-primary" disabled style="opacity:0.4;cursor:not-allowed">Disabled</button>
     </div></div><h4 id="types-states">Types &amp; States</h4>
 <p>All button types share the same size system and support: <strong>Default</strong>, <strong>Hover</strong>, <strong>Pressed</strong>, <strong>Disabled</strong> states, and optional <strong>Icon Left</strong> / <strong>Icon Right</strong> layouts.</p>
-<div class="table-wrap"><table><thead><tr><th>Type<th>Use Case<th>Light Surface Style</tr></thead><tbody><tr><td><strong>Primary</strong></td><td>Main CTA — Deploy, Run, Save</td><td><code>--primary-500</code> bg, <code>--white</code> text; hover <code>--primary-400</code>; pressed <code>--primary-600</code></td></tr><tr><td><strong>Default</strong></td><td>General action — Edit, View, Filter</td><td><code>--neutral-50</code> bg, <code>1px solid --border-regular</code> border, <code>--neutral-700</code> text; hover border <code>--border-dark</code></td></tr><tr><td><strong>Highlight</strong></td><td>Contextual emphasis — Upgrade, Featured</td><td><code>--primary-50</code> bg, <code>1px solid --border-primary</code> border, <code>--secondary-500</code> text; hover bg <code>--primary-100</code></td></tr><tr><td><strong>Sensitive</strong></td><td>Confirmation step — Apply, Confirm</td><td>Neutral fill; requires user acknowledgement flow</td></tr><tr><td><strong>Destructive</strong></td><td>Delete, Remove, Wipe</td><td><code>--error</code> bg, <code>--white</code> text; hover <code>--error-dark</code>; pressed <code>#991B1B</code></td></tr><tr><td><strong>Ghost</strong></td><td>Tertiary / minimal chrome</td><td>Transparent, <code>1px solid --border-regular</code> border; hover border <code>--border-dark</code></td></tr><tr><td><strong>Link</strong></td><td>Inline text actions</td><td>No bg/border; underline on hover; text <code>--primary-500</code></td></tr></tbody></table></div><h4 id="disabled-state-all-types">Disabled State (all types)</h4>
+<div class="table-wrap"><table><thead><tr><th>Type<th>Use Case<th>Light Surface Style</tr></thead><tbody><tr><td><strong>Primary</strong></td><td>Main CTA — Deploy, Run, Save</td><td><code>--primary-500</code> bg, <code>--white</code> text; hover <code>--primary-400</code>; pressed <code>--primary-600</code></td></tr><tr><td><strong>Default</strong></td><td>General action — Edit, View, Filter</td><td><code>--neutral-50</code> bg, <code>1px solid --border-regular</code> border, <code>--neutral-700</code> text; hover border <code>--border-dark</code></td></tr><tr><td><strong>Highlight</strong></td><td>Contextual emphasis — Upgrade, Featured</td><td><code>--primary-50</code> bg, <code>1px solid --border-primary</code> border, <code>--secondary-500</code> text; hover bg <code>--primary-100</code></td></tr><tr><td><strong>Sensitive</strong></td><td>Confirmation step — Apply, Confirm</td><td>Neutral fill; requires user acknowledgement flow</td></tr><tr><td><strong>Destructive</strong></td><td>Delete, Remove, Wipe</td><td><code>--error</code> bg, <code>--white</code> text; hover <code>--error-dark</code>; pressed <code>#991B1B</code></td></tr><tr><td><strong>Ghost</strong></td><td>Tertiary / minimal chrome</td><td>Transparent, <code>1px solid --border-regular</code> border; hover border <code>--border-dark</code></td></tr><tr><td><strong>Link</strong></td><td>Inline text actions</td><td>No bg/border; underline on hover; text <code>--primary-500</code></td></tr></tbody></table></div><h4 id="specs-41">Specs</h4>
+<ul><li>Radius: <code>--radius-lg</code> (<code>12px</code>)</li></ul><h4 id="disabled-state-all-types">Disabled State (all types)</h4>
 <ul><li>Opacity: <code>0.4</code></li><li><code>cursor: not-allowed</code></li><li>No hover/pressed response</li></ul>
 <hr/>
 <h3 id="42-icon-button">4.2 Icon Button (图标按钮)</h3>
 <h4 id="sizes">Sizes</h4>
 <div class="table-wrap"><table><thead><tr><th>Size<th>Button<th>Icon inside<th>Use</tr></thead><tbody><tr><td>Small</td><td><code>28×28px</code></td><td><code>14×14px</code></td><td>Dense toolbars, row actions</td></tr><tr><td>Default</td><td><code>36×36px</code></td><td><code>18×18px</code></td><td>Standard icon actions</td></tr><tr><td>Large</td><td><code>42×42px</code></td><td><code>20×20px</code></td><td>Primary icon CTAs</td></tr></tbody></table></div><h4 id="types-states">Types &amp; States</h4>
 <p>Supports same states as Text Button (Default / Hover / Pressed / Disabled).</p>
-<div class="table-wrap"><table><thead><tr><th>Type<th>Style</tr></thead><tbody><tr><td><strong>Default</strong></td><td><code>--neutral-50</code> bg, <code>1px solid --border-regular</code> border, icon <code>--neutral-700</code>; hover border <code>--border-dark</code></td></tr><tr><td><strong>Primary</strong></td><td><code>--primary-500</code> bg, icon <code>--white</code>; hover <code>--primary-400</code></td></tr><tr><td><strong>Highlight</strong></td><td><code>--primary-50</code> bg, <code>1px solid --border-primary</code> border, icon <code>--secondary-500</code>; hover bg <code>--primary-100</code></td></tr><tr><td><strong>Secondary</strong></td><td><code>--neutral-100</code> bg, no border, icon <code>--neutral-500</code>; hover icon <code>--neutral-700</code></td></tr><tr><td><strong>Sensitive</strong></td><td>Neutral fill; requires confirmation</td></tr><tr><td><strong>Destructive</strong></td><td><code>--error</code> bg, icon <code>--white</code>; hover <code>--error-dark</code></td></tr><tr><td><strong>Ghost</strong></td><td>Transparent, no border at rest; <code>1px solid --border-regular</code> border on hover</td></tr></tbody></table></div><ul><li>Radius: <code>--radius-md</code> (<code>8px</code>) for Default/Large; <code>--radius-sm</code> (<code>4px</code>) for Small</li><li>Icon color inherits from the type&#39;s text/icon token</li></ul>
+<div class="table-wrap"><table><thead><tr><th>Type<th>Style</tr></thead><tbody><tr><td><strong>Default</strong></td><td><code>--neutral-50</code> bg, <code>1px solid --border-regular</code> border, icon <code>--neutral-700</code>; hover border <code>--border-dark</code></td></tr><tr><td><strong>Primary</strong></td><td><code>--primary-500</code> bg, icon <code>--white</code>; hover <code>--primary-400</code></td></tr><tr><td><strong>Highlight</strong></td><td><code>--primary-50</code> bg, <code>1px solid --border-primary</code> border, icon <code>--secondary-500</code>; hover bg <code>--primary-100</code></td></tr><tr><td><strong>Secondary</strong></td><td><code>--neutral-100</code> bg, no border, icon <code>--neutral-500</code>; hover icon <code>--neutral-700</code></td></tr><tr><td><strong>Sensitive</strong></td><td>Neutral fill; requires confirmation</td></tr><tr><td><strong>Destructive</strong></td><td><code>--error</code> bg, icon <code>--white</code>; hover <code>--error-dark</code></td></tr><tr><td><strong>Ghost</strong></td><td>Transparent, no border at rest; <code>1px solid --border-regular</code> border on hover</td></tr></tbody></table></div><ul><li>Radius: <code>--radius-lg</code> (<code>12px</code>) for Default/Large; <code>--radius-sm</code> (<code>4px</code>) for Small</li><li>Icon color inherits from the type&#39;s text/icon token</li></ul>
 <hr/>
 <h3 id="43-text-input">4.3 Text Input (文字输入框)</h3>
 <h4 id="dimensions">Dimensions</h4>
@@ -1186,7 +1187,7 @@ tr:hover td{background:var(--neutral-50)}
       <input class="demo-input" disabled placeholder="Disabled input" style="opacity:0.5;cursor:not-allowed"/>
     </div></div><h4 id="states">States</h4>
 <div class="table-wrap"><table><thead><tr><th>State<th>Border<th>Text</tr></thead><tbody><tr><td>Default</td><td><code>1px solid --border-regular</code></td><td><code>--neutral-700</code></td></tr><tr><td>Placeholder</td><td><code>1px solid --border-regular</code></td><td><code>--neutral-400</code></td></tr><tr><td>Focus</td><td><code>1px solid --primary-450</code>, <code>box-shadow: 0 0 5px -2px --primary-500</code></td><td><code>--neutral-700</code></td></tr><tr><td>Error</td><td><code>1px solid --border-error</code></td><td><code>--neutral-700</code></td></tr><tr><td>Disabled</td><td><code>1px solid --border</code></td><td><code>--neutral-400</code>, opacity <code>0.5</code></td></tr></tbody></table></div><h4 id="specs">Specs</h4>
-<ul><li>Background: <code>--neutral-50</code></li><li>Radius: <code>--radius-md</code> (<code>8px</code>)</li><li>Padding: <code>0</code> <code>spacing-3</code> (<code>12px</code>) horizontal</li><li>Label: <code>--text-sm</code> (<code>14px</code>) <code>--font-family-en</code> <code>400</code>, above input, gap <code>spacing-2</code> (<code>8px</code>)</li><li>Character counter (e.g. <code>2/16</code>): <code>--text-xs</code> (<code>12px</code>) <code>--neutral-500</code>, trailing right</li><li>Gap between stacked inputs: <code>spacing-3</code> (<code>12px</code>)</li><li>Gap between label and input: <code>spacing-2</code> (<code>8px</code>)</li><li>Gap between button and input group: <code>spacing-6</code> (<code>24px</code>)</li><li>Use <code>--font-family-code</code> for inputs accepting model names, slugs, IDs, or commands</li></ul>
+<ul><li>Background: <code>--white</code> (default and focus states)</li><li>Radius: <code>--radius-lg</code> (<code>12px</code>)</li><li>Padding: <code>0</code> <code>spacing-3</code> (<code>12px</code>) horizontal</li><li>Label: <code>--text-sm</code> (<code>14px</code>) <code>--font-family-en</code> <code>400</code>, above input, gap <code>spacing-2</code> (<code>8px</code>)</li><li>Character counter (e.g. <code>2/16</code>): <code>--text-xs</code> (<code>12px</code>) <code>--neutral-500</code>, trailing right</li><li>Gap between stacked inputs: <code>spacing-3</code> (<code>12px</code>)</li><li>Gap between label and input: <code>spacing-2</code> (<code>8px</code>)</li><li>Gap between button and input group: <code>spacing-6</code> (<code>24px</code>)</li><li>Use <code>--font-family-code</code> for inputs accepting model names, slugs, IDs, or commands</li></ul>
 <hr/>
 <h3 id="44-dropdown">4.4 Dropdown (下拉菜单)</h3>
 <h4 id="trigger-box">Trigger Box</h4>
@@ -1335,7 +1336,7 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)</code></pre>
 <div class="table-wrap"><table><thead><tr><th>Token<th>Mobile<th>Value<th>Use</tr></thead><tbody><tr><td><code>spacing-1</code></td><td><code>spacing1</code></td><td><code>0.25rem</code> / <code>4px</code></td><td>Title padding-left, label-to-right-content gap</td></tr><tr><td><code>spacing-2</code></td><td><code>spacing2</code></td><td><code>0.5rem</code> / <code>8px</code></td><td>Label-to-input gap, badge gaps, button padding unit</td></tr><tr><td><code>spacing-3</code></td><td><code>spacing3</code></td><td><code>0.75rem</code> / <code>12px</code></td><td>Input-to-input gap, card inner padding</td></tr><tr><td><code>spacing-4</code></td><td><code>spacing4</code></td><td><code>1rem</code> / <code>16px</code></td><td>Standard gap, form fields, code block padding</td></tr><tr><td><code>spacing-5</code></td><td><code>spacing5</code></td><td><code>1.25rem</code> / <code>20px</code></td><td>Button horizontal padding</td></tr><tr><td><code>spacing-6</code></td><td><code>spacing6</code></td><td><code>1.5rem</code> / <code>24px</code></td><td>Button-to-input-group gap, section inner padding, card padding</td></tr></tbody></table></div><h3 id="grid-container">Grid &amp; Container</h3>
 <ul><li>Max content width: <code>1280px</code> (centered)</li><li>Sidebar layouts: fixed <code>240px</code> nav + fluid content</li><li>Model card grid: 3–4 columns on desktop, 2 on tablet, 1 on mobile</li><li>Hero: full-width with <code>96px</code> vertical padding</li><li>Section padding: <code>64px</code> vertical desktop, <code>40px</code> mobile</li></ul>
 <h3 id="border-radius-scale">Border Radius Scale</h3>
-<div class="table-wrap"><table><thead><tr><th>Token<th>Mobile<th>Value<th>Use</tr></thead><tbody><tr><td><code>--radius-none</code></td><td><code>radiusNone</code></td><td><code>0</code></td><td>Sharp technical UI, table rows</td></tr><tr><td><code>--radius-sm</code></td><td><code>radiusSm</code></td><td><code>4px</code></td><td>Badges, tiny chips, code tokens</td></tr><tr><td><code>--radius-md</code></td><td><code>radiusMd</code></td><td><code>8px</code></td><td>Buttons, inputs, standard cards</td></tr><tr><td><code>--radius-lg</code></td><td><code>radiusLg</code></td><td><code>12px</code></td><td>Model cards, panels</td></tr><tr><td><code>--radius-xl</code></td><td><code>radiusXl</code></td><td><code>16px</code></td><td>Featured cards, hero containers</td></tr><tr><td><code>--radius-2xl</code></td><td><code>radius2xl</code></td><td><code>24px</code></td><td>Full-bleed modal sheets</td></tr><tr><td><code>--radius-full</code></td><td><code>radiusFull</code></td><td><code>9999px</code></td><td>Tags, category pills, toggles</td></tr></tbody></table></div><hr/>
+<div class="table-wrap"><table><thead><tr><th>Token<th>Mobile<th>Value<th>Use</tr></thead><tbody><tr><td><code>--radius-none</code></td><td><code>radiusNone</code></td><td><code>0</code></td><td>Sharp technical UI, table rows</td></tr><tr><td><code>--radius-sm</code></td><td><code>radiusSm</code></td><td><code>4px</code></td><td>Badges, tiny chips, code tokens</td></tr><tr><td><code>--radius-md</code></td><td><code>radiusMd</code></td><td><code>8px</code></td><td>Dropdown menus, code blocks, standard cards</td></tr><tr><td><code>--radius-lg</code></td><td><code>radiusLg</code></td><td><code>12px</code></td><td>Buttons, inputs, model cards, panels</td></tr><tr><td><code>--radius-xl</code></td><td><code>radiusXl</code></td><td><code>16px</code></td><td>Featured cards, hero containers</td></tr><tr><td><code>--radius-2xl</code></td><td><code>radius2xl</code></td><td><code>24px</code></td><td>Full-bleed modal sheets</td></tr><tr><td><code>--radius-full</code></td><td><code>radiusFull</code></td><td><code>9999px</code></td><td>Tags, category pills, toggles</td></tr></tbody></table></div><hr/>
 <h2 id="6-depth-elevation" class="section-heading">6. Depth &amp; Elevation</h2>
 <div class="table-wrap"><table><thead><tr><th>Level<th>Treatment<th>Use</tr></thead><tbody><tr><td>Flat (0)</td><td>No shadow, <code>--white</code> bg</td><td>Page base surface, cards</td></tr><tr><td>Recessed (1)</td><td><code>--neutral-50</code> bg + <code>1px solid --border</code></td><td>Input fields, nav chrome, modal header/footer</td></tr><tr><td>Raised (2)</td><td><code>--white</code> bg + <code>1px solid --border</code></td><td>Standard cards, panels</td></tr><tr><td>Elevated (3)</td><td><code>--white</code> bg + <code>1px solid --border</code> + <code>--shadow-sm</code></td><td>Dropdown menus, tooltips</td></tr><tr><td>Modal (4)</td><td><code>--shadow-2xl</code></td><td>Pop-ups, dialogs</td></tr><tr><td>Focus</td><td><code>0 0 5px -2px --primary-500</code></td><td>Keyboard focus glow on inputs/buttons</td></tr></tbody></table></div><p><strong>Confirmed shadow value from Figma:</strong> <code>--shadow-2xl: 0px 10px 24px -6px rgba(0,0,0,0.15)</code> — used for pop-up / modal containers.</p>
 <p><strong>Shadow Philosophy</strong>: On light surfaces, elevation is expressed first through background tone (<code>--white</code> vs <code>--neutral-50</code>) and border presence, then through shadow for floating layers. Reserve shadow for dropdowns and modals only — cards and panels use borders alone.</p>

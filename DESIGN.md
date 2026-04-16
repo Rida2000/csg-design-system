@@ -191,6 +191,9 @@ All button types share the same size system and support: **Default**, **Hover**,
 | **Ghost** | Tertiary / minimal chrome | Transparent, `1px solid --border-regular` border; hover border `--border-dark` |
 | **Link** | Inline text actions | No bg/border; underline on hover; text `--primary-500` |
 
+#### Specs
+- Radius: `--radius-lg` (`12px`)
+
 #### Disabled State (all types)
 - Opacity: `0.4`
 - `cursor: not-allowed`
@@ -220,7 +223,7 @@ Supports same states as Text Button (Default / Hover / Pressed / Disabled).
 | **Destructive** | `--error` bg, icon `--white`; hover `--error-dark` |
 | **Ghost** | Transparent, no border at rest; `1px solid --border-regular` border on hover |
 
-- Radius: `--radius-md` (`8px`) for Default/Large; `--radius-sm` (`4px`) for Small
+- Radius: `--radius-lg` (`12px`) for Default/Large; `--radius-sm` (`4px`) for Small
 - Icon color inherits from the type's text/icon token
 
 ---
@@ -249,8 +252,8 @@ Supports same states as Text Button (Default / Hover / Pressed / Disabled).
 | Disabled | `1px solid --border` | `--neutral-400`, opacity `0.5` |
 
 #### Specs
-- Background: `--neutral-50`
-- Radius: `--radius-md` (`8px`)
+- Background: `--white` (default and focus states)
+- Radius: `--radius-lg` (`12px`)
 - Padding: `0` `spacing-3` (`12px`) horizontal
 - Label: `--text-sm` (`14px`) `--font-family-en` `400`, above input, gap `spacing-2` (`8px`)
 - Character counter (e.g. `2/16`): `--text-xs` (`12px`) `--neutral-500`, trailing right
@@ -622,8 +625,8 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 |-------|--------|-------|-----|
 | `--radius-none` | `radiusNone` | `0` | Sharp technical UI, table rows |
 | `--radius-sm` | `radiusSm` | `4px` | Badges, tiny chips, code tokens |
-| `--radius-md` | `radiusMd` | `8px` | Buttons, inputs, standard cards |
-| `--radius-lg` | `radiusLg` | `12px` | Model cards, panels |
+| `--radius-md` | `radiusMd` | `8px` | Dropdown menus, code blocks, standard cards |
+| `--radius-lg` | `radiusLg` | `12px` | Buttons, inputs, model cards, panels |
 | `--radius-xl` | `radiusXl` | `16px` | Featured cards, hero containers |
 | `--radius-2xl` | `radius2xl` | `24px` | Full-bleed modal sheets |
 | `--radius-full` | `radiusFull` | `9999px` | Tags, category pills, toggles |

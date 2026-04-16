@@ -55,7 +55,7 @@ import { Icon } from '@iconify/react'
 
 ### Border radius
 - `--radius-sm: 4px` — small chips, badges
-- `--radius-md: 8px` — buttons, inputs
+- `--radius-lg: 12px` — buttons, inputs
 - `--radius-lg: 12px` — cards, panels
 - `--radius-xl: 16px` — featured cards
 - `--radius-full: 9999px` — pills, toggles
@@ -69,8 +69,8 @@ import { Icon } from '@iconify/react'
 
 **Text Button types:** Primary, Default, Highlight, Sensitive, Destructive, Ghost, Link
 
-**Text Input:** 42px height, `#FAFAFA` bg, `1px solid #D9D9D9` border, 8px radius
-- Focus border: `1px solid #8FC31F`
+**Text Input:** 42px height, `#FFFFFF` bg, `1px solid #D9D9D9` border, 12px radius
+- Focus border: `1px solid #A3D830`, glow `0 0 5px -2px #8FC31F`
 - Error border: `1px solid #DC2626`
 - Disabled: opacity 0.5
 
@@ -102,7 +102,7 @@ export function ComponentName({ ...props }: ComponentNameProps) {
 .button {
   height: 36px;
   background-color: var(--primary-500);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   font-family: var(--font-family-en);
 }
 ```
