@@ -25,25 +25,49 @@ Scan the entire project to understand the tech stack:
 
 ### Phase 2: Token Import
 
-Import the CSG Design System tokens into the project's styling infrastructure:
+Import the CSG Design System tokens **as variables** into the project's styling infrastructure. Tokens must always be defined as variables — never as raw values — so every usage site references the variable, not the literal value.
 
-**For CSS / CSS Modules / SCSS / Less projects:**
-- Create or update a root-level token file (e.g., `tokens.css`, `_tokens.scss`) with all CSS custom properties from `DESIGN.md`
-- Add the import to the project's entry point stylesheet or `index.css` / `main.css`
-- Structure as a `:root` block with all color, typography, spacing, radius, border, and shadow tokens
+**For CSS / CSS Modules projects:**
+- Create or update a root-level `tokens.css` with all tokens as CSS custom properties in a `:root` block
+- Add the import to the project's entry point stylesheet (`index.css` / `main.css`)
+- Example: `--primary-500: #8FC31F;` → used as `var(--primary-500)`
+
+**For SCSS / SASS projects:**
+- Create a `_tokens.scss` partial with both SCSS variables and CSS custom properties
+- SCSS variables: `$primary-500: #8FC31F;`
+- CSS custom properties in `:root`: `--primary-500: #{$primary-500};`
+- Import the partial in the project's main SCSS entry point
+- Prefer CSS custom properties (`var(--primary-500)`) in component styles; use SCSS variables only in SCSS expressions (e.g., `darken($primary-500, 10%)`)
+
+**For Less projects:**
+- Create a `tokens.less` with Less variables: `@primary-500: #8FC31F;`
+- Also generate CSS custom properties in `:root` mapped from the Less variables
+- Import in the project's main Less entry point
 
 **For Tailwind projects:**
 - Extend `tailwind.config.js` / `tailwind.config.ts` with the CSG token values mapped to Tailwind's theme keys (colors, fontFamily, borderRadius, spacing, boxShadow)
+- Use semantic names matching the token names: `primary-500`, `secondary-500`, `neutral-700`, etc.
+- Example: `bg-primary-500`, `text-neutral-700`, `rounded-lg`, `border-border-regular`
 
 **For styled-components / Emotion projects:**
-- Create a `theme.ts` or `theme.js` exporting the token values as a theme object
+- Create a `theme.ts` or `theme.js` exporting all token values as a typed theme object
 - Ensure the `ThemeProvider` wraps the app if not already present
+- Example: `color: ${({ theme }) => theme.primary500}`
 
-**For React Native / Flutter / mobile projects:**
-- Create a tokens file in the platform's idiom (e.g., `tokens.ts` for RN, `tokens.dart` for Flutter)
+**For React Native projects:**
+- Create a `tokens.ts` exporting a typed constants object: `export const tokens = { primary500: '#8FC31F', ... } as const`
+- Import and reference: `color: tokens.primary500`
+
+**For Flutter projects:**
+- Create a `tokens.dart` with a class of static const values: `static const Color primary500 = Color(0xFF8FC31F);`
+- Import and reference: `color: Tokens.primary500`
+
+**For SwiftUI / iOS projects:**
+- Create a `Tokens.swift` with a `Color` extension or enum
+- Example: `static let primary500 = Color(hex: "8FC31F")`
 
 **For any other approach:**
-- Adapt to the project's convention. Ask the user if the right approach is unclear.
+- Adapt to the project's convention, but always define tokens as named variables/constants — never leave raw values scattered in code. Ask the user if the right approach is unclear.
 
 Always read `DESIGN.md` to get the full, current token set. The token categories are:
 - **Colors:** Primary (50–900), Secondary (50–900), Neutral (50–900 + white/black), Semantic (success, warning, error, info + light/dark variants), Border variants
@@ -122,8 +146,10 @@ After all replacements, generate a summary report:
 
 1. **Always read `DESIGN.md` first** — it is the single source of truth for all token names and values
 2. **Never invent tokens** — only use tokens defined in `DESIGN.md`
-3. **Preserve visual appearance** — the UI should look the same (or closer to spec) after migration, never worse
-4. **One file at a time** — make replacements file by file so changes are reviewable
-5. **Don't touch functionality** — only replace style values, never change component logic, layout structure, or behavior
-6. **Ask before ambiguous changes** — if a color could map to multiple tokens, ask the user which role it serves
-7. **Respect existing systems** — if the project already has a token/theme system, integrate with it rather than creating a parallel one
+3. **Strictly use variables** — every element described in `DESIGN.md` (colors, typography, radii, spacing, borders, shadows) **must** be referenced through its variable form, never as a raw value. After migration, there should be zero hardcoded values for any property that has a corresponding token in `DESIGN.md`. The only place raw hex/px values should appear is in the token definition file itself.
+4. **Preserve visual appearance** — the UI should look the same (or closer to spec) after migration, never worse
+5. **One file at a time** — make replacements file by file so changes are reviewable
+6. **Don't touch functionality** — only replace style values, never change component logic, layout structure, or behavior
+7. **Ask before ambiguous changes** — if a color could map to multiple tokens, ask the user which role it serves
+8. **Respect existing systems** — if the project already has a token/theme system, integrate with it rather than creating a parallel one
+9. **Validate after migration** — after all replacements, grep the codebase for any remaining hardcoded values that match token values from `DESIGN.md`. If any are found, replace them or document why they were intentionally skipped

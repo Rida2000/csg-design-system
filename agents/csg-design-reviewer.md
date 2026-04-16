@@ -81,7 +81,7 @@ Must use only these values (or CSS variables):
 ### Elevation & shadows
 - **FAIL**: Adding `box-shadow` to cards or panels — borders carry containment (`1px solid #E5E5E5`)
 - **PASS**: Shadow `0px 10px 24px -6px rgba(0,0,0,0.15)` on modal/pop-up containers only
-- **PASS**: Shadow `0 0 0 2px #8FC31F` for keyboard focus rings only
+- **PASS**: Shadow `0 0 5px -2px #8FC31F` for keyboard focus rings only
 - **WARN**: Shadow on elements that are not modals, dropdowns, or focus rings
 
 ### Component dimensions (from DESIGN.md)

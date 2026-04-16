@@ -244,7 +244,7 @@ Supports same states as Text Button (Default / Hover / Pressed / Disabled).
 |-------|--------|------|
 | Default | `1px solid --border-regular` | `--neutral-700` |
 | Placeholder | `1px solid --border-regular` | `--neutral-400` |
-| Focus | `1px solid --border-primary` | `--neutral-700` |
+| Focus | `1px solid --primary-450`, `box-shadow: 0 0 5px -2px --primary-500` | `--neutral-700` |
 | Error | `1px solid --border-error` | `--neutral-700` |
 | Disabled | `1px solid --border` | `--neutral-400`, opacity `0.5` |
 
@@ -639,7 +639,7 @@ Bottom Bar Style 2-2 (single Confirm/Continue 128px, centered)
 | Raised (2) | `--white` bg + `1px solid --border` | Standard cards, panels |
 | Elevated (3) | `--white` bg + `1px solid --border` + `--shadow-sm` | Dropdown menus, tooltips |
 | Modal (4) | `--shadow-2xl` | Pop-ups, dialogs |
-| Focus | `0 0 0 2px --border-primary` | Keyboard focus on inputs/buttons |
+| Focus | `0 0 5px -2px --primary-500` | Keyboard focus glow on inputs/buttons |
 
 **Confirmed shadow value from Figma:** `--shadow-2xl: 0px 10px 24px -6px rgba(0,0,0,0.15)` — used for pop-up / modal containers.
 
