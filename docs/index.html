@@ -98,7 +98,7 @@ body{
   padding:0.75rem 1rem;margin:0.75rem 0 2.5rem;
   background:var(--neutral-50);
   border:1px solid var(--border);
-  border-radius:var(--radius-lg);
+  border-radius:var(--radius-md);
   font-size:0.8rem;
 }
 .top-meta .meta-item{display:flex;flex-direction:column;gap:2px}
@@ -146,7 +146,7 @@ code{
 }
 pre{
   background:var(--neutral-100);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:1rem;overflow-x:auto;
+  border-radius:var(--radius-md);padding:1rem;overflow-x:auto;
   font-family:var(--font-family-code);font-size:0.8125rem;
   color:var(--neutral-900);
 }
@@ -185,7 +185,7 @@ tr:hover td{background:var(--neutral-50)}
   border-bottom:1px solid var(--border-light);
 }
 .swatch{
-  width:36px;height:36px;border-radius:var(--radius-lg);
+  width:36px;height:36px;border-radius:var(--radius-md);
   border:1px solid var(--border-medium);flex-shrink:0;
 }
 .token-names{display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -233,25 +233,25 @@ tr:hover td{background:var(--neutral-50)}
 
 /* Buttons */
 .demo-btn-primary{
-  height:36px;padding:0 16px;border-radius:var(--radius-lg);border:none;
+  height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
   background:var(--primary-500);color:#fff;font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
 }
 .demo-btn-primary:hover{background:var(--primary-400)}
 .demo-btn-default{
-  height:36px;padding:0 16px;border-radius:var(--radius-lg);
+  height:36px;padding:0 16px;border-radius:var(--radius-md);
   background:var(--neutral-50);border:1px solid var(--border-regular);
   color:var(--neutral-700);font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
 }
 .demo-btn-default:hover{border-color:var(--border-dark)}
 .demo-btn-destructive{
-  height:36px;padding:0 16px;border-radius:var(--radius-lg);border:none;
+  height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
   background:var(--error);color:#fff;font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
 }
 .demo-btn-ghost{
-  height:36px;padding:0 16px;border-radius:var(--radius-lg);
+  height:36px;padding:0 16px;border-radius:var(--radius-md);
   background:transparent;border:1px solid var(--border-regular);
   color:var(--neutral-700);font-family:var(--font-family-en);
   font-size:14px;font-weight:500;cursor:pointer;
@@ -264,8 +264,8 @@ tr:hover td{background:var(--neutral-50)}
 
 /* Text input */
 .demo-input{
-  height:42px;width:270px;background:var(--white);
-  border:1px solid var(--border-regular);border-radius:var(--radius-lg);
+  height:42px;width:270px;background:var(--neutral-50);
+  border:1px solid var(--border-regular);border-radius:var(--radius-md);
   padding:0 12px;font-family:var(--font-family-en);font-size:14px;
   color:var(--neutral-700);outline:none;
 }
@@ -321,7 +321,7 @@ tr:hover td{background:var(--neutral-50)}
 
 /* Code block demo */
 .demo-code{
-  background:var(--neutral-100);border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--neutral-100);border:1px solid var(--border);border-radius:var(--radius-md);
   padding:16px;font-family:var(--font-family-code);font-size:14px;
   color:var(--neutral-900);line-height:1.6;
 }
@@ -364,7 +364,7 @@ tr:hover td{background:var(--neutral-50)}
     <div class="sidebar-meta">
       <div><span class="meta-label">Figma</span> <code>1.0.0</code></div>
       <div><span class="meta-label">Synced</span> <code>2026-04-13</code></div>
-      <div><span class="meta-label">Updated</span> <code>2026-04-16 12:53 CST</code></div>
+      <div><span class="meta-label">Updated</span> <code>2026-04-16 13:23 CST</code></div>
     </div>
   </div>
   <a href="#design-system-sensecraft-ai" class="nav-link nav-d1">Design System — SenseCraft AI</a>
@@ -421,7 +421,7 @@ tr:hover td{background:var(--neutral-50)}
 <div class="top-meta">
           <div class="meta-item"><span class="meta-label">Figma Version</span><code>1.0.0</code></div>
           <div class="meta-item"><span class="meta-label">Last Synced from Figma</span><code>2026-04-13</code></div>
-          <div class="meta-item"><span class="meta-label">Last Updated</span><code>2026-04-16 12:53 CST</code></div>
+          <div class="meta-item"><span class="meta-label">Last Updated</span><code>2026-04-16 13:23 CST</code></div>
         </div>
 <h2 id="1-visual-theme-atmosphere" class="section-heading">1. Visual Theme &amp; Atmosphere</h2>
 <blockquote><strong>This design system defines the light mode theme only.</strong> Dark mode is not currently in scope.</blockquote>
@@ -1165,8 +1165,9 @@ tr:hover td{background:var(--neutral-50)}
       <button class="demo-btn-primary" disabled style="opacity:0.4;cursor:not-allowed">Disabled</button>
     </div></div><h4 id="types-states">Types &amp; States</h4>
 <p>All button types share the same size system and support: <strong>Default</strong>, <strong>Hover</strong>, <strong>Pressed</strong>, <strong>Disabled</strong> states, and optional <strong>Icon Left</strong> / <strong>Icon Right</strong> layouts.</p>
-<div class="table-wrap"><table><thead><tr><th>Type<th>Use Case<th>Light Surface Style</tr></thead><tbody><tr><td><strong>Primary</strong></td><td>Main CTA — Deploy, Run, Save</td><td><code>--primary-500</code> bg, <code>--white</code> text; hover <code>--primary-400</code>; pressed <code>--primary-600</code></td></tr><tr><td><strong>Default</strong></td><td>General action — Edit, View, Filter</td><td><code>--neutral-50</code> bg, <code>1px solid --border-regular</code> border, <code>--neutral-700</code> text; hover border <code>--border-dark</code></td></tr><tr><td><strong>Highlight</strong></td><td>Contextual emphasis — Upgrade, Featured</td><td><code>--primary-50</code> bg, <code>1px solid --border-primary</code> border, <code>--secondary-500</code> text; hover bg <code>--primary-100</code></td></tr><tr><td><strong>Sensitive</strong></td><td>Confirmation step — Apply, Confirm</td><td>Neutral fill; requires user acknowledgement flow</td></tr><tr><td><strong>Destructive</strong></td><td>Delete, Remove, Wipe</td><td><code>--error</code> bg, <code>--white</code> text; hover <code>--error-dark</code>; pressed <code>#991B1B</code></td></tr><tr><td><strong>Ghost</strong></td><td>Tertiary / minimal chrome</td><td>Transparent, <code>1px solid --border-regular</code> border; hover border <code>--border-dark</code></td></tr><tr><td><strong>Link</strong></td><td>Inline text actions</td><td>No bg/border; underline on hover; text <code>--primary-500</code></td></tr></tbody></table></div><h4 id="specs-41">Specs</h4>
-<ul><li>Radius: <code>--radius-lg</code> (<code>12px</code>)</li></ul><h4 id="disabled-state-all-types">Disabled State (all types)</h4>
+<div class="table-wrap"><table><thead><tr><th>Type<th>Use Case<th>Light Surface Style</tr></thead><tbody><tr><td><strong>Primary</strong></td><td>Main CTA — Deploy, Run, Save</td><td><code>--primary-500</code> bg, <code>--white</code> text; hover <code>--primary-400</code>; pressed <code>--primary-600</code></td></tr><tr><td><strong>Default</strong></td><td>General action — Edit, View, Filter</td><td><code>--neutral-50</code> bg, <code>1px solid --border-regular</code> border, <code>--neutral-700</code> text; hover border <code>--border-dark</code></td></tr><tr><td><strong>Highlight</strong></td><td>Contextual emphasis — Upgrade, Featured</td><td><code>--primary-50</code> bg, <code>1px solid --border-primary</code> border, <code>--secondary-500</code> text; hover bg <code>--primary-100</code></td></tr><tr><td><strong>Sensitive</strong></td><td>Confirmation step — Apply, Confirm</td><td>Neutral fill; requires user acknowledgement flow</td></tr><tr><td><strong>Destructive</strong></td><td>Delete, Remove, Wipe</td><td><code>--error</code> bg, <code>--white</code> text; hover <code>--error-dark</code>; pressed <code>#991B1B</code></td></tr><tr><td><strong>Ghost</strong></td><td>Tertiary / minimal chrome</td><td>Transparent, <code>1px solid --border-regular</code> border; hover border <code>--border-dark</code></td></tr><tr><td><strong>Link</strong></td><td>Inline text actions</td><td>No bg/border; underline on hover; text <code>--primary-500</code></td></tr></tbody></table></div><h4 id="specs">Specs</h4>
+<ul><li>Radius: <code>--radius-lg</code> (<code>12px</code>)</li></ul>
+<h4 id="disabled-state-all-types">Disabled State (all types)</h4>
 <ul><li>Opacity: <code>0.4</code></li><li><code>cursor: not-allowed</code></li><li>No hover/pressed response</li></ul>
 <hr/>
 <h3 id="42-icon-button">4.2 Icon Button (图标按钮)</h3>
