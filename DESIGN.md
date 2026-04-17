@@ -23,6 +23,40 @@ Surface hierarchy is built with neutral grays: `--white` for cards and container
 
 ---
 
+## 1.1 SenseCraft Logotype
+
+The SenseCraft logotype is a custom wordmark — **not a font**. It is composed of vector paths spelling "SenseCraft" as a single horizontal mark. The word "Sense" and "Craft" are visually continuous with no separator.
+
+#### Variants
+
+| Variant | Use | Colors |
+|---------|-----|--------|
+| **Duel** | Primary brand mark on white/light surfaces | "Sense" in `#77BA2A` (primary green), "Craft" in `#003B4B` (secondary teal) |
+| **Mono-bright** | On dark or photographic backgrounds | All paths `#FFFFFF` (white) |
+| **Mono-dark** | On white/light surfaces (single-color contexts) | All paths `#003B4B` (secondary teal) |
+| **Mono-primary** | Accent contexts, marketing materials | All paths `#77BA2A` (primary green) |
+
+#### Dimensions
+- Native size: `1323 × 200px` (aspect ratio ≈ 6.6:1)
+- The logotype is horizontal only — there is no stacked/vertical variant
+
+#### Usage Rules
+- **Never modify the logotype** — do not stretch, rotate, recolor outside the defined variants, add effects, or rasterize at low resolution
+- **Clear space**: maintain a minimum clear zone equal to the height of the letter "e" in "Sense" on all sides
+- **Minimum width**: `120px` on screen to preserve legibility
+- Use **Duel** as the default whenever possible; fall back to mono variants only when background contrast requires it
+- On dark backgrounds, use **Mono-bright**; on light backgrounds, use **Duel** or **Mono-dark**
+- Do not place the logotype on busy or low-contrast backgrounds
+
+#### Asset Files
+SVG exports are in `assets/logo/`:
+- `sensecraft-duel.svg`
+- `sensecraft-mono-bright.svg`
+- `sensecraft-mono-dark.svg`
+- `sensecraft-mono-primary.svg`
+
+---
+
 ## 2. Color Palette & Roles
 
 ### Primary (Lime Green — Action & Status)
