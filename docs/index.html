@@ -364,11 +364,12 @@ tr:hover td{background:var(--neutral-50)}
     <div class="sidebar-meta">
       <div><span class="meta-label">Figma</span> <code>1.0.0</code></div>
       <div><span class="meta-label">Synced</span> <code>2026-04-13</code></div>
-      <div><span class="meta-label">Updated</span> <code>2026-04-16 14:33 CST</code></div>
+      <div><span class="meta-label">Updated</span> <code>2026-04-17 10:04 CST</code></div>
     </div>
   </div>
   <a href="#design-system-sensecraft-ai" class="nav-link nav-d1">Design System — SenseCraft AI</a>
 <a href="#1-visual-theme-atmosphere" class="nav-link nav-d2">1. Visual Theme &amp; Atmosphere</a>
+<a href="#11-sensecraft-logotype" class="nav-link nav-d2">1.1 SenseCraft Logotype</a>
 <a href="#2-color-palette-roles" class="nav-link nav-d2">2. Color Palette &amp; Roles</a>
 <a href="#primary-lime-green-action-status" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Primary (Lime Green — Action &amp; Status)</a>
 <a href="#secondary-deep-teal-accents-dark-text" class="nav-link nav-d3" style="padding-left:1.25rem;font-size:0.8rem">Secondary (Deep Teal — Accents &amp; Dark Text)</a>
@@ -421,7 +422,7 @@ tr:hover td{background:var(--neutral-50)}
 <div class="top-meta">
           <div class="meta-item"><span class="meta-label">Figma Version</span><code>1.0.0</code></div>
           <div class="meta-item"><span class="meta-label">Last Synced from Figma</span><code>2026-04-13</code></div>
-          <div class="meta-item"><span class="meta-label">Last Updated</span><code>2026-04-16 14:33 CST</code></div>
+          <div class="meta-item"><span class="meta-label">Last Updated</span><code>2026-04-17 10:04 CST</code></div>
         </div>
 <h2 id="1-visual-theme-atmosphere" class="section-heading">1. Visual Theme &amp; Atmosphere</h2>
 <blockquote><strong>This design system defines the light mode theme only.</strong> Dark mode is not currently in scope.</blockquote>
@@ -430,6 +431,17 @@ tr:hover td{background:var(--neutral-50)}
 <p>Surface hierarchy is built with neutral grays: <code>--white</code> for cards and containers, <code>--neutral-50</code> for recessed chrome (nav bars, input backgrounds, modal headers/footers), with <code>--border</code> / <code>--border-regular</code> borders to separate them. Shadows are reserved exclusively for floating layers (dropdowns, modals).</p>
 <p><strong>Key Characteristics:</strong></p>
 <ul><li><strong>Light mode only</strong> — page background <code>--white</code>, recessed chrome <code>--neutral-50</code></li><li>Lime-green primary (<code>--primary-500</code>) as the activation color — CTAs, active states, status</li><li>Deep teal secondary (<code>--secondary-500</code>) for headings, structural accents, dark text elements</li><li><code>--font-family-en</code> for EN, <code>--font-family-cn</code> for CN, <code>--font-family-code</code> for code/terminal</li><li>Neutral gray scale (<code>--neutral-50</code>–<code>--neutral-900</code>) for surface and text hierarchy</li><li>Border-defined surfaces — <code>--border</code> / <code>--border-regular</code> borders carry containment; shadows only for floating UI</li><li>Border radius system from <code>--radius-sm</code> (tight chrome) to <code>--radius-full</code> (tags/pills)</li><li>Semantic color set: green <code>--success</code>, amber <code>--warning</code>, red <code>--error</code>, teal <code>--info</code></li><li><strong>All icons use the <a href="https://www.mingcute.com/">MingCute icon pack</a></strong> — no other icon library</li></ul>
+<hr/>
+<h2 id="11-sensecraft-logotype" class="section-heading">1.1 SenseCraft Logotype</h2>
+<p>The SenseCraft logotype is a custom wordmark — <strong>not a font</strong>. It is composed of vector paths spelling &quot;SenseCraft&quot; as a single horizontal mark. The word &quot;Sense&quot; and &quot;Craft&quot; are visually continuous with no separator.</p>
+<h4 id="variants">Variants</h4>
+<div class="table-wrap"><table><thead><tr><th>Variant<th>Use<th>Colors</tr></thead><tbody><tr><td><strong>Duel</strong></td><td>Primary brand mark on white/light surfaces</td><td>"Sense" in <code>#77BA2A</code> (primary green), "Craft" in <code>#003B4B</code> (secondary teal)</td></tr><tr><td><strong>Mono-bright</strong></td><td>On dark or photographic backgrounds</td><td>All paths <code>#FFFFFF</code> (white)</td></tr><tr><td><strong>Mono-dark</strong></td><td>On white/light surfaces (single-color contexts)</td><td>All paths <code>#003B4B</code> (secondary teal)</td></tr><tr><td><strong>Mono-primary</strong></td><td>Accent contexts, marketing materials</td><td>All paths <code>#77BA2A</code> (primary green)</td></tr></tbody></table></div><h4 id="dimensions">Dimensions</h4>
+<ul><li>Native size: <code>1323 × 200px</code> (aspect ratio ≈ 6.6:1)</li><li>The logotype is horizontal only — there is no stacked/vertical variant</li></ul>
+<h4 id="usage-rules">Usage Rules</h4>
+<ul><li><strong>Never modify the logotype</strong> — do not stretch, rotate, recolor outside the defined variants, add effects, or rasterize at low resolution</li><li><strong>Clear space</strong>: maintain a minimum clear zone equal to the height of the letter &quot;e&quot; in &quot;Sense&quot; on all sides</li><li><strong>Minimum width</strong>: <code>120px</code> on screen to preserve legibility</li><li>Use <strong>Duel</strong> as the default whenever possible; fall back to mono variants only when background contrast requires it</li><li>On dark backgrounds, use <strong>Mono-bright</strong>; on light backgrounds, use <strong>Duel</strong> or <strong>Mono-dark</strong></li><li>Do not place the logotype on busy or low-contrast backgrounds</li></ul>
+<h4 id="asset-files">Asset Files</h4>
+<p>SVG exports are in <code>assets/logo/</code>:</p>
+<ul><li><code>sensecraft-duel.svg</code></li><li><code>sensecraft-mono-bright.svg</code></li><li><code>sensecraft-mono-dark.svg</code></li><li><code>sensecraft-mono-primary.svg</code></li></ul>
 <hr/>
 <h2 id="2-color-palette-roles" class="section-heading">2. Color Palette &amp; Roles</h2>
 <h3 id="primary-lime-green-action-status">Primary (Lime Green — Action &amp; Status)</h3>
