@@ -69,11 +69,15 @@ install_logo_assets() {
     "sensecraft-mono-bright.svg"
     "sensecraft-mono-dark.svg"
     "sensecraft-mono-primary.svg"
+    "sensecraft-duel.png"
+    "sensecraft-mono-bright.png"
+    "sensecraft-mono-dark.png"
+    "sensecraft-mono-primary.png"
   )
   for name in "${logos[@]}"; do
     download_file "assets/logo/$name" "./assets/logo/$name"
   done
-  echo "  Done: assets/logo/ (4 SVG variants)"
+  echo "  Done: assets/logo/ (4 SVG + 4 PNG variants)"
 }
 
 # ── Step 2: Tool-specific setup ───────────────────────────────────────────────

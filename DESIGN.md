@@ -49,11 +49,14 @@ The SenseCraft logotype is a custom wordmark — **not a font**. It is composed 
 - Do not place the logotype on busy or low-contrast backgrounds
 
 #### Asset Files
-SVG exports are in `assets/logo/`:
-- `sensecraft-duel.svg`
-- `sensecraft-mono-bright.svg`
-- `sensecraft-mono-dark.svg`
-- `sensecraft-mono-primary.svg`
+Both SVG and PNG exports are in `assets/logo/`. Use SVG for web/digital, PNG for legacy contexts (slide decks, image-only platforms):
+
+| Variant | SVG | PNG |
+|---------|-----|-----|
+| Duel | `sensecraft-duel.svg` | `sensecraft-duel.png` |
+| Mono-bright | `sensecraft-mono-bright.svg` | `sensecraft-mono-bright.png` |
+| Mono-dark | `sensecraft-mono-dark.svg` | `sensecraft-mono-dark.png` |
+| Mono-primary | `sensecraft-mono-primary.svg` | `sensecraft-mono-primary.png` |
 
 ---
 
