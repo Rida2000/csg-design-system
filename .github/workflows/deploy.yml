@@ -6,6 +6,7 @@ on:
     paths:
       - 'DESIGN.md'
       - 'scripts/build.js'
+      - 'assets/**'
 
 permissions:
   contents: write

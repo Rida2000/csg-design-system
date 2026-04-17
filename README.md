@@ -1,7 +1,7 @@
 # CSG Design System
 
 <!-- csg:meta-start -->
-**Figma Version:** `1.0.0` · **Last Synced from Figma:** `2026-04-13` · **Last Updated:** `2026-04-13 13:48 CST`
+**Figma Version:** `1.0.1` · **Last Synced from Figma:** `2026-04-17` · **Last Updated:** `2026-04-17 10:04 CST`
 <!-- csg:meta-end -->
 
 The single source of truth for **SenseCraft AI** — bridging what designers build in Figma with what developers ship in code.

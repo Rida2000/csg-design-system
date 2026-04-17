@@ -231,6 +231,29 @@ tr:hover td{background:var(--neutral-50)}
 .demo-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .demo-strip.demo-col{flex-direction:column;align-items:flex-start}
 
+/* Logo gallery */
+.logo-gallery{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1rem;margin:1.5rem 0;
+}
+.logo-card{
+  display:flex;flex-direction:column;border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;background:var(--white);
+}
+.logo-preview{
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem 1.5rem;min-height:120px;
+}
+.logo-preview img{max-width:100%;height:auto;max-height:48px;display:block}
+.logo-preview-light{background:var(--white)}
+.logo-preview-dark{background:var(--secondary-500)}
+.logo-label{
+  padding:0.625rem 1rem;font-size:0.8125rem;color:var(--neutral-600);
+  border-top:1px solid var(--border);background:var(--neutral-50);
+  font-family:var(--font-family-en);
+}
+.logo-label strong{color:var(--neutral-900);font-weight:500}
+
 /* Buttons */
 .demo-btn-primary{
   height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
@@ -362,8 +385,8 @@ tr:hover td{background:var(--neutral-50)}
     <h1>CSG Design System</h1>
     <p>SenseCraft AI</p>
     <div class="sidebar-meta">
-      <div><span class="meta-label">Figma</span> <code>1.0.0</code></div>
-      <div><span class="meta-label">Synced</span> <code>2026-04-13</code></div>
+      <div><span class="meta-label">Figma</span> <code>1.0.1</code></div>
+      <div><span class="meta-label">Synced</span> <code>2026-04-17</code></div>
       <div><span class="meta-label">Updated</span> <code>2026-04-17 10:04 CST</code></div>
     </div>
   </div>
@@ -420,8 +443,8 @@ tr:hover td{background:var(--neutral-50)}
 <main class="main">
   <h1 id="design-system-sensecraft-ai" class="section-heading">Design System — SenseCraft AI</h1>
 <div class="top-meta">
-          <div class="meta-item"><span class="meta-label">Figma Version</span><code>1.0.0</code></div>
-          <div class="meta-item"><span class="meta-label">Last Synced from Figma</span><code>2026-04-13</code></div>
+          <div class="meta-item"><span class="meta-label">Figma Version</span><code>1.0.1</code></div>
+          <div class="meta-item"><span class="meta-label">Last Synced from Figma</span><code>2026-04-17</code></div>
           <div class="meta-item"><span class="meta-label">Last Updated</span><code>2026-04-17 10:04 CST</code></div>
         </div>
 <h2 id="1-visual-theme-atmosphere" class="section-heading">1. Visual Theme &amp; Atmosphere</h2>
@@ -433,7 +456,25 @@ tr:hover td{background:var(--neutral-50)}
 <ul><li><strong>Light mode only</strong> — page background <code>--white</code>, recessed chrome <code>--neutral-50</code></li><li>Lime-green primary (<code>--primary-500</code>) as the activation color — CTAs, active states, status</li><li>Deep teal secondary (<code>--secondary-500</code>) for headings, structural accents, dark text elements</li><li><code>--font-family-en</code> for EN, <code>--font-family-cn</code> for CN, <code>--font-family-code</code> for code/terminal</li><li>Neutral gray scale (<code>--neutral-50</code>–<code>--neutral-900</code>) for surface and text hierarchy</li><li>Border-defined surfaces — <code>--border</code> / <code>--border-regular</code> borders carry containment; shadows only for floating UI</li><li>Border radius system from <code>--radius-sm</code> (tight chrome) to <code>--radius-full</code> (tags/pills)</li><li>Semantic color set: green <code>--success</code>, amber <code>--warning</code>, red <code>--error</code>, teal <code>--info</code></li><li><strong>All icons use the <a href="https://www.mingcute.com/">MingCute icon pack</a></strong> — no other icon library</li></ul>
 <hr/>
 <h2 id="11-sensecraft-logotype" class="section-heading">1.1 SenseCraft Logotype</h2>
-<p>The SenseCraft logotype is a custom wordmark — <strong>not a font</strong>. It is composed of vector paths spelling &quot;SenseCraft&quot; as a single horizontal mark. The word &quot;Sense&quot; and &quot;Craft&quot; are visually continuous with no separator.</p>
+
+    <div class="logo-gallery">
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-light"><img src="assets/logo/sensecraft-duel.svg" alt="SenseCraft logotype — Duel variant" /></div>
+        <div class="logo-label"><strong>Duel</strong> · primary brand mark</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-light"><img src="assets/logo/sensecraft-mono-dark.svg" alt="SenseCraft logotype — Mono Dark variant" /></div>
+        <div class="logo-label"><strong>Mono-dark</strong> · for light surfaces</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-light"><img src="assets/logo/sensecraft-mono-primary.svg" alt="SenseCraft logotype — Mono Primary variant" /></div>
+        <div class="logo-label"><strong>Mono-primary</strong> · accent contexts</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-dark"><img src="assets/logo/sensecraft-mono-bright.svg" alt="SenseCraft logotype — Mono Bright variant" /></div>
+        <div class="logo-label"><strong>Mono-bright</strong> · for dark surfaces</div>
+      </div>
+    </div><p>The SenseCraft logotype is a custom wordmark — <strong>not a font</strong>. It is composed of vector paths spelling &quot;SenseCraft&quot; as a single horizontal mark. The word &quot;Sense&quot; and &quot;Craft&quot; are visually continuous with no separator.</p>
 <h4 id="variants">Variants</h4>
 <div class="table-wrap"><table><thead><tr><th>Variant<th>Use<th>Colors</tr></thead><tbody><tr><td><strong>Duel</strong></td><td>Primary brand mark on white/light surfaces</td><td>"Sense" in <code>#77BA2A</code> (primary green), "Craft" in <code>#003B4B</code> (secondary teal)</td></tr><tr><td><strong>Mono-bright</strong></td><td>On dark or photographic backgrounds</td><td>All paths <code>#FFFFFF</code> (white)</td></tr><tr><td><strong>Mono-dark</strong></td><td>On white/light surfaces (single-color contexts)</td><td>All paths <code>#003B4B</code> (secondary teal)</td></tr><tr><td><strong>Mono-primary</strong></td><td>Accent contexts, marketing materials</td><td>All paths <code>#77BA2A</code> (primary green)</td></tr></tbody></table></div><h4 id="dimensions">Dimensions</h4>
 <ul><li>Native size: <code>1323 × 200px</code> (aspect ratio ≈ 6.6:1)</li><li>The logotype is horizontal only — there is no stacked/vertical variant</li></ul>

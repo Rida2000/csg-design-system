@@ -58,6 +58,23 @@ function updateReadme(meta) {
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
+function copyAssetsToDocs() {
+  const srcDir = path.join(ROOT, 'assets');
+  const dstDir = path.join(ROOT, 'docs', 'assets');
+  if (!fs.existsSync(srcDir)) return;
+  copyDirRecursive(srcDir, dstDir);
+}
+
+function copyDirRecursive(src, dst) {
+  fs.mkdirSync(dst, { recursive: true });
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const s = path.join(src, entry.name);
+    const d = path.join(dst, entry.name);
+    if (entry.isDirectory()) copyDirRecursive(s, d);
+    else fs.copyFileSync(s, d);
+  }
+}
+
 function escapeHtml(str) {
   return str
     .replace(/&/g, '&amp;')
@@ -227,6 +244,29 @@ function renderStandardTable(headers, rows) {
   return html;
 }
 
+// Section-level demos keyed by heading slug — injected right after the heading
+const SECTION_DEMOS = {
+  '11-sensecraft-logotype': `
+    <div class="logo-gallery">
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-light"><img src="assets/logo/sensecraft-duel.svg" alt="SenseCraft logotype — Duel variant" /></div>
+        <div class="logo-label"><strong>Duel</strong> · primary brand mark</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-light"><img src="assets/logo/sensecraft-mono-dark.svg" alt="SenseCraft logotype — Mono Dark variant" /></div>
+        <div class="logo-label"><strong>Mono-dark</strong> · for light surfaces</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-light"><img src="assets/logo/sensecraft-mono-primary.svg" alt="SenseCraft logotype — Mono Primary variant" /></div>
+        <div class="logo-label"><strong>Mono-primary</strong> · accent contexts</div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-preview logo-preview-dark"><img src="assets/logo/sensecraft-mono-bright.svg" alt="SenseCraft logotype — Mono Bright variant" /></div>
+        <div class="logo-label"><strong>Mono-bright</strong> · for dark surfaces</div>
+      </div>
+    </div>`,
+};
+
 // Component demo snippets keyed by component heading slug
 const COMPONENT_DEMOS = {
   '41-text-button': `
@@ -352,6 +392,11 @@ function build() {
         </div>\n`;
       }
       if (isComponentSection(text)) componentCount++;
+
+      // Inject section-level demos (e.g., logotype gallery) right after the heading
+      if (SECTION_DEMOS[id]) {
+        bodyHtml += SECTION_DEMOS[id];
+      }
       continue;
     }
 
@@ -668,6 +713,29 @@ tr:hover td{background:var(--neutral-50)}
 .demo-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .demo-strip.demo-col{flex-direction:column;align-items:flex-start}
 
+/* Logo gallery */
+.logo-gallery{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1rem;margin:1.5rem 0;
+}
+.logo-card{
+  display:flex;flex-direction:column;border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;background:var(--white);
+}
+.logo-preview{
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem 1.5rem;min-height:120px;
+}
+.logo-preview img{max-width:100%;height:auto;max-height:48px;display:block}
+.logo-preview-light{background:var(--white)}
+.logo-preview-dark{background:var(--secondary-500)}
+.logo-label{
+  padding:0.625rem 1rem;font-size:0.8125rem;color:var(--neutral-600);
+  border-top:1px solid var(--border);background:var(--neutral-50);
+  font-family:var(--font-family-en);
+}
+.logo-label strong{color:var(--neutral-900);font-weight:500}
+
 /* Buttons */
 .demo-btn-primary{
   height:36px;padding:0 16px;border-radius:var(--radius-md);border:none;
@@ -835,6 +903,10 @@ headings.forEach(h => { if (h.id) observer.observe(h); });
 
   fs.mkdirSync(path.join(ROOT, 'docs'), { recursive: true });
   fs.writeFileSync(OUT_FILE, html, 'utf8');
+
+  // Copy static assets (logo SVGs, etc.) into docs/ for GitHub Pages
+  copyAssetsToDocs();
+
   updateReadme(meta);
 
   console.log(`Built: ${OUT_FILE}`);

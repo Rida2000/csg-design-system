@@ -61,6 +61,21 @@ install_design_md() {
   echo "  Done: DESIGN.md"
 }
 
+install_logo_assets() {
+  echo "  Installing SenseCraft logotype assets..."
+  mkdir -p "./assets/logo"
+  local logos=(
+    "sensecraft-duel.svg"
+    "sensecraft-mono-bright.svg"
+    "sensecraft-mono-dark.svg"
+    "sensecraft-mono-primary.svg"
+  )
+  for name in "${logos[@]}"; do
+    download_file "assets/logo/$name" "./assets/logo/$name"
+  done
+  echo "  Done: assets/logo/ (4 SVG variants)"
+}
+
 # ── Step 2: Tool-specific setup ───────────────────────────────────────────────
 
 install_claude() {
@@ -147,6 +162,7 @@ if [ -z "$choice" ]; then
 fi
 
 install_design_md
+install_logo_assets
 
 case "$choice" in
   1) install_claude ;;
@@ -177,6 +193,7 @@ if [ -f ".git/HEAD" ] || [ -f ".git" ]; then
   echo "Updating .gitignore..."
   # Always added
   add_to_gitignore "DESIGN.md"
+  add_to_gitignore "assets/logo/"
 
   # Tool-specific
   case "$choice" in
