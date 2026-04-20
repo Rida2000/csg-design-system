@@ -58,6 +58,28 @@ Both SVG and PNG exports are in `assets/logo/`. Use SVG for web/digital, PNG for
 | Mono-dark | `sensecraft-mono-dark.svg` | `sensecraft-mono-dark.png` |
 | Mono-primary | `sensecraft-mono-primary.svg` | `sensecraft-mono-primary.png` |
 
+#### Brand Mark: Logotype + Label Text Lockup
+
+A horizontal lockup pairing the SenseCraft logotype SVG with an accompanying label (e.g. "Account", "Studio", product names, or other platform identifiers).
+
+**Container**
+- `display: flex; align-items: center`
+- `gap: $spacing-2` (8px)
+
+**Logotype image**
+- `height: 16px; width: auto` (preserves SVG aspect ratio)
+- `display: block; flex-shrink: 0`
+- Use `sensecraft-mono-dark.svg` on white/light backgrounds
+- Use `sensecraft-mono-bright.svg` on dark/coloured backgrounds
+
+**Label text**
+- `font-family: $font-family-en`
+- `font-size: $text-xl` (22px); mobile breakpoint ≤480px: `$text-lg` (18px) — only needed where the layout reflows at mobile widths
+- `font-weight: 500`
+- `color: $primary-500`
+- `letter-spacing: -0.01rem`
+- `position: relative; top: 0.5px` — optical baseline correction to align the text cap-height with the logotype's visual centre
+
 ---
 
 ## 2. Color Palette & Roles
